@@ -1,0 +1,479 @@
+{
+  "extent": [
+    47.2,
+    26
+  ],
+  "floorAreaM2": 1227.2,
+  "areaMultiple": 10.0,
+  "orders": 5,
+  "checkpoints": 30,
+  "passed": 4,
+  "total": 4,
+  "trials": [
+    {
+      "seed": 0,
+      "status": "done",
+      "seconds": 1070.52,
+      "last": "回水验收已验收",
+      "completedOrders": [
+        "pump",
+        "filter",
+        "heat",
+        "spare",
+        "return"
+      ],
+      "metrics": {
+        "grasps": 4,
+        "placements": 3,
+        "samples": 3,
+        "buttonMm": 31.68157658486355,
+        "doorDegrees": 44.77434255088711,
+        "maxGripN": 33.62567996567351,
+        "maxProbeN": 53.57567165691266,
+        "policyCalls": 6279,
+        "gaitPolicyCalls": 50954,
+        "reroutes": 0,
+        "aisleDetours": 11,
+        "yieldFrames": 0,
+        "basketPickups": 2,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 1758,
+        "messages": 40,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1",
+        "verifiedFilter": "F1",
+        "selectedPortal": "east",
+        "requestedSpare": "seal",
+        "cargoLoads": 1,
+        "spareMassG": 422.0,
+        "spareDelivered": true,
+        "validatedSwitches": {
+          "filter_F1": 30.57,
+          "return_check": 30.57
+        },
+        "acceptedReturn": true,
+        "modelledFloor": {
+          "revision": 1034,
+          "coverage": 0.9308,
+          "zones": {
+            "pump": 0.754,
+            "filter": 0.9859,
+            "heat": 0.984,
+            "spare": 0.8036,
+            "return": 0.984
+          },
+          "go2Scans": 1106,
+          "g1Scans": 0,
+          "seconds": 344.0
+        },
+        "mappedRoutes": [
+          {
+            "area": "filter",
+            "revision": 1034,
+            "legs": 1
+          },
+          {
+            "area": "heat",
+            "revision": 1455,
+            "legs": 1
+          }
+        ]
+      },
+      "phases": 30,
+      "stairs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "portals": {
+        "west": "blocked",
+        "east": "clear"
+      },
+      "lowerObservedCells": {
+        "pump": 1487,
+        "filter": 1687,
+        "heat": 2709,
+        "spare": 1347,
+        "return": 1296
+      },
+      "upperObservedCells": 350,
+      "passed": true
+    },
+    {
+      "seed": 11,
+      "status": "done",
+      "seconds": 1063.2,
+      "last": "回水验收已验收",
+      "completedOrders": [
+        "pump",
+        "filter",
+        "heat",
+        "spare",
+        "return"
+      ],
+      "metrics": {
+        "grasps": 4,
+        "placements": 3,
+        "samples": 3,
+        "buttonMm": 31.681589907568572,
+        "doorDegrees": 44.77606746761845,
+        "maxGripN": 33.63685009855438,
+        "maxProbeN": 53.575732769051136,
+        "policyCalls": 5992,
+        "gaitPolicyCalls": 50588,
+        "reroutes": 1,
+        "aisleDetours": 11,
+        "yieldFrames": 0,
+        "basketPickups": 2,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 1826,
+        "messages": 40,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3",
+        "verifiedFilter": "F1",
+        "selectedPortal": "west",
+        "requestedSpare": "screen",
+        "cargoLoads": 1,
+        "spareMassG": 422.0,
+        "spareDelivered": true,
+        "validatedSwitches": {
+          "filter_F1": 30.57,
+          "return_check": 30.57
+        },
+        "acceptedReturn": true,
+        "modelledFloor": {
+          "revision": 1039,
+          "coverage": 0.9309,
+          "zones": {
+            "pump": 0.754,
+            "filter": 0.9859,
+            "heat": 0.9847,
+            "spare": 0.8036,
+            "return": 0.984
+          },
+          "go2Scans": 1106,
+          "g1Scans": 0,
+          "seconds": 344.0
+        },
+        "mappedRoutes": [
+          {
+            "area": "filter",
+            "revision": 1039,
+            "legs": 1
+          },
+          {
+            "area": "heat",
+            "revision": 1504,
+            "legs": 1
+          }
+        ]
+      },
+      "phases": 30,
+      "stairs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "portals": {
+        "west": "clear",
+        "east": "blocked"
+      },
+      "lowerObservedCells": {
+        "pump": 1490,
+        "filter": 1687,
+        "heat": 2709,
+        "spare": 1348,
+        "return": 1295
+      },
+      "upperObservedCells": 358,
+      "passed": true
+    },
+    {
+      "seed": 14,
+      "status": "done",
+      "seconds": 1074.82,
+      "last": "回水验收已验收",
+      "completedOrders": [
+        "pump",
+        "filter",
+        "heat",
+        "spare",
+        "return"
+      ],
+      "metrics": {
+        "grasps": 4,
+        "placements": 3,
+        "samples": 3,
+        "buttonMm": 31.681584608322705,
+        "doorDegrees": 44.77434255088711,
+        "maxGripN": 33.63196021486279,
+        "maxProbeN": 53.57560494083372,
+        "policyCalls": 6342,
+        "gaitPolicyCalls": 51106,
+        "reroutes": 1,
+        "aisleDetours": 11,
+        "yieldFrames": 0,
+        "basketPickups": 2,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 1791,
+        "messages": 40,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1",
+        "verifiedFilter": "F1",
+        "selectedPortal": "west",
+        "requestedSpare": "seal",
+        "cargoLoads": 1,
+        "spareMassG": 422.0,
+        "spareDelivered": true,
+        "validatedSwitches": {
+          "filter_F1": 30.57,
+          "return_check": 30.57
+        },
+        "acceptedReturn": true,
+        "modelledFloor": {
+          "revision": 1039,
+          "coverage": 0.9309,
+          "zones": {
+            "pump": 0.754,
+            "filter": 0.9859,
+            "heat": 0.9847,
+            "spare": 0.8036,
+            "return": 0.984
+          },
+          "go2Scans": 1106,
+          "g1Scans": 0,
+          "seconds": 344.0
+        },
+        "mappedRoutes": [
+          {
+            "area": "filter",
+            "revision": 1039,
+            "legs": 1
+          },
+          {
+            "area": "heat",
+            "revision": 1462,
+            "legs": 1
+          }
+        ]
+      },
+      "phases": 30,
+      "stairs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "portals": {
+        "west": "clear",
+        "east": "blocked"
+      },
+      "lowerObservedCells": {
+        "pump": 1490,
+        "filter": 1686,
+        "heat": 2709,
+        "spare": 1347,
+        "return": 1296
+      },
+      "upperObservedCells": 350,
+      "passed": true
+    },
+    {
+      "seed": 17,
+      "status": "done",
+      "seconds": 1061.6,
+      "last": "回水验收已验收",
+      "completedOrders": [
+        "pump",
+        "filter",
+        "heat",
+        "spare",
+        "return"
+      ],
+      "metrics": {
+        "grasps": 4,
+        "placements": 3,
+        "samples": 3,
+        "buttonMm": 31.680487850453513,
+        "doorDegrees": 44.77608249359551,
+        "maxGripN": 33.631422712955896,
+        "maxProbeN": 53.56831080974588,
+        "policyCalls": 5923,
+        "gaitPolicyCalls": 50445,
+        "reroutes": 2,
+        "aisleDetours": 11,
+        "yieldFrames": 0,
+        "basketPickups": 2,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 1794,
+        "messages": 40,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2",
+        "verifiedFilter": "F2",
+        "selectedPortal": "east",
+        "requestedSpare": "screen",
+        "cargoLoads": 1,
+        "spareMassG": 422.0,
+        "spareDelivered": true,
+        "validatedSwitches": {
+          "filter_F2": 30.57,
+          "return_check": 30.57
+        },
+        "acceptedReturn": true,
+        "modelledFloor": {
+          "revision": 1034,
+          "coverage": 0.9308,
+          "zones": {
+            "pump": 0.754,
+            "filter": 0.9859,
+            "heat": 0.984,
+            "spare": 0.8036,
+            "return": 0.984
+          },
+          "go2Scans": 1106,
+          "g1Scans": 0,
+          "seconds": 344.0
+        },
+        "mappedRoutes": [
+          {
+            "area": "filter",
+            "revision": 1034,
+            "legs": 1
+          },
+          {
+            "area": "heat",
+            "revision": 1481,
+            "legs": 1
+          }
+        ]
+      },
+      "phases": 30,
+      "stairs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "portals": {
+        "west": "blocked",
+        "east": "clear"
+      },
+      "lowerObservedCells": {
+        "pump": 1493,
+        "filter": 1686,
+        "heat": 2709,
+        "spare": 1348,
+        "return": 1295
+      },
+      "upperObservedCells": 354,
+      "passed": true
+    }
+  ],
+  "faultTrials": [
+    {
+      "seed": 17,
+      "status": "fault",
+      "seconds": 345.0,
+      "last": "G1 未收到回执 · Go2 下层占用地图",
+      "completedOrders": [],
+      "dropped": "floor_map",
+      "passed": true
+    },
+    {
+      "seed": 17,
+      "status": "fault",
+      "seconds": 674.3,
+      "last": "G1 未收到回执 · 换热入口地图",
+      "completedOrders": [
+        "pump",
+        "filter"
+      ],
+      "dropped": "heat_map",
+      "passed": true
+    },
+    {
+      "seed": 17,
+      "status": "fault",
+      "seconds": 1036.92,
+      "last": "G1 未收到回执 · 回水验收许可",
+      "completedOrders": [
+        "pump",
+        "filter",
+        "heat",
+        "spare"
+      ],
+      "dropped": "return_permit",
+      "passed": true
+    }
+  ]
+}

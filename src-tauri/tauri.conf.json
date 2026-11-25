@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "工厂机器人协同作业平台",
+  "mainBinaryName": "工厂机器人协同作业平台",
+  "version": "1.0.0",
+  "identifier": "org.robotlab.collaboration",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:5173",
+    "beforeBuildCommand": "npm run desktop:assets",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      { "label": "main", "title": "工厂机器人协同作业平台", "width": 1440, "height": 900, "minWidth": 820,
+        "minHeight": 560, "center": true, "fullscreen": true, "resizable": true }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost blob: data:; img-src 'self' data: blob:"
+    }
+  },
+  "bundle": { "active": false, "icon": ["icons/icon.ico"] }
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工厂机器人协同作业平台</title>
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">
+      <h1>工厂机器人协同作业平台</h1>
+    </div>
+    <div class="system" id="engine-status" role="status"><span></span>启动本地物理引擎</div>
+    <button type="button" class="tool fullscreen" id="fullscreen"><kbd>F11</kbd><span>切换全屏</span></button>
+  </header>
+  <main class="console">
+    <aside class="work-sidebar" aria-label="联动工单与双机状态">
+      <section class="work-order">
+        <div class="section-top"><h2>联动工单</h2><span class="status-badge" id="job-status">等待</span></div>
+        <div class="order-progress"><output id="order-progress"></output><output id="checkpoint-progress"></output></div>
+        <nav id="orders" class="orders" aria-label="五个工区"></nav>
+        <h3 id="active-order" class="phase-title"></h3>
+        <ol id="steps" class="steps"></ol>
+      </section>
+      <section class="robot-state">
+        <h2>双机状态</h2>
+        <div class="robot-row"><i class="g1-dot"></i><div><strong>G1</strong><small id="g1-state">待命</small></div><output id="g1-speed">—</output></div>
+        <div class="robot-row"><i class="go2-dot"></i><div><strong>Go2</strong><small id="go2-state">待命</small></div><output id="go2-speed">—</output></div>
+      </section>
+      <section class="evidence">
+        <h2>取证与测量</h2>
+        <div id="feedback" class="feedback">等待首次观测</div>
+      </section>
+      <div class="scenario-options">
+        <label for="seed">工单种子</label>
+        <div class="seed-line"><input id="seed" type="number" min="0" max="2147483647" value="17"><button type="button" id="new-seed" class="tool">换种子</button></div>
+      </div>
+    </aside>
+    <section class="work-area" aria-label="三维工位与运行控制">
+      <div class="view-panel">
+        <div class="view-toolbar">
+          <div class="view-titles">
+            <div class="view-zone" id="zone"></div>
+            <h2 id="scene-title"></h2>
+          </div>
+          <div class="camera-tools" id="cameras" aria-label="三维视角">
+            <button type="button" id="auto-camera" data-camera="speaker" aria-pressed="true" title="建图时跟随 Go2，其他时间跟随发言者">随发言</button>
+            <button type="button" data-camera="overview" aria-pressed="false">全厂</button>
+            <button type="button" data-camera="plan" aria-pressed="false">俯视</button>
+            <button type="button" data-camera="zone" aria-pressed="false">工区</button>
+            <button type="button" data-camera="focus" aria-pressed="false">工位</button>
+            <button type="button" data-camera="g1" aria-pressed="false">跟随 G1</button>
+            <button type="button" data-camera="go2" aria-pressed="false">跟随 Go2</button>
+          </div>
+        </div>
+        <div id="viewport" aria-label="MuJoCo 工厂和双机实时状态">
+          <div class="scene-labels" id="scene-labels"></div>
+          <div id="viewport-message" class="viewport-message" role="status">正在载入厂房与机器人</div>
+          <div class="viewport-help">拖动旋转 <span></span> 滚轮缩放</div>
+          <div class="layer-legend"><i class="g1-dot"></i>G1 <i class="go2-dot"></i>Go2</div>
+        </div>
+      </div>
+      <section class="transport" aria-label="仿真记录">
+        <div class="action-row">
+          <button type="button" id="run" class="primary"><span aria-hidden="true">▶</span> 运行</button>
+          <button type="button" id="pause" class="tool"><span aria-hidden="true">Ⅱ</span> 暂停</button>
+          <button type="button" id="step" class="tool"><span aria-hidden="true">▸▏</span> 单步</button>
+          <button type="button" id="reset" class="tool"><span aria-hidden="true">↺</span> 重置</button>
+          <div class="spacer"></div>
+          <label class="rate-label">倍率 <select id="rate"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option><option value="16">16×</option><option value="24">24×</option></select></label>
+          <output id="clock" aria-label="仿真时钟">00:00.000</output>
+        </div>
+        <div class="timeline-row">
+          <label for="seek" id="timeline-label">本次时间轴</label>
+          <input id="seek" type="range" min="0" value="0" max="0" aria-describedby="timeline-label">
+          <output id="elapsed">00:00.000</output>
+        </div>
+      </section>
+    </section>
+    <aside class="coordination" aria-label="共享地图与通信">
+      <section class="map-panel">
+        <div class="section-top"><h2>共享地图</h2><output id="map-version" class="map-version">V00</output></div>
+        <div class="map-toolbar" id="floors" aria-label="地图楼层">
+          <div role="group" aria-label="地图范围">
+            <button type="button" class="tool" data-scope="factory" aria-pressed="true">全厂</button>
+            <button type="button" class="tool" data-scope="zone" aria-pressed="false">工区</button>
+          </div>
+          <div role="group" aria-label="地图楼层">
+            <button type="button" class="tool" data-floor="lower" aria-pressed="true">下层</button>
+            <button type="button" class="tool" data-floor="upper" aria-pressed="false">上层</button>
+          </div>
+        </div>
+        <div class="map-toolbar map-sources" id="map-sources" role="group" aria-label="下层地图来源">
+          <button type="button" class="tool" data-source="go2" aria-pressed="true">Go2 实时测绘</button>
+          <button type="button" class="tool" data-source="g1" aria-pressed="false" disabled>G1 接收地图</button>
+        </div>
+        <div class="map-location">
+          <span id="map-location"></span>
+          <output id="map-coverage"></output>
+        </div>
+        <canvas id="survey-map" role="img" aria-label="机器人传感器生成的占用栅格地图"></canvas>
+        <div class="map-legend"><span><i class="known"></i>已扫通</span><span><i class="unknown"></i>未知</span><span><i class="obstacle"></i>障碍</span><span><i class="route"></i>已采纳路线</span></div>
+        <div class="map-status" id="map-status">等待路线勘测</div>
+      </section>
+      <section class="messages">
+        <div class="section-top"><h2>协同通信</h2><output id="message-count">0 条</output></div>
+        <ol id="events" class="events" aria-label="机器间回执"></ol>
+      </section>
+    </aside>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

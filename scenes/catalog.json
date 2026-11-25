@@ -1,0 +1,52 @@
+[
+  {
+    "id": "pump",
+    "name": "循环水泵房",
+    "job": "隐蔽点巡检与测振布设",
+    "zone": "公用工程 · 双层泵房",
+    "brief": "Go2 建图并定位异常泵。G1 核验梯口、协同开盖并布设记录器。",
+    "part": "磁吸振动记录器",
+    "steps": ["Go2 初扫与低位取证", "G1 核验泵位与楼梯", "协同开盖取证并复位", "驻车交接记录器", "按新版地图选路携件", "固定测振记录器并签收"],
+    "source": "https://www.ksb.com/en-global/media/press-releases/uebersicht/new-system-puts-pumps-into-the-internet-of-things-achema-2018-404674"
+  },
+  {
+    "id": "cnc",
+    "name": "数控加工单元",
+    "job": "换型刀具备料",
+    "zone": "机加工 · 线外预调",
+    "brief": "核对刀具批次，将带防护帽的刀柄送入预调支座，再放到换型托盘。",
+    "part": "带帽刀柄",
+    "steps": ["核对刀具架标签", "从备料架取出指定刀柄", "置入预调支座并读数", "将合格刀柄转入换型托盘", "校核托盘到位并移交"],
+    "source": "https://www.renishaw.com/resourcecentre/download/data-sheet-probe-software-for-machine-tools-programs-and-features--144989?userLanguage=en"
+  },
+  {
+    "id": "pack",
+    "name": "包装输送线",
+    "job": "包装抽样与称重复核",
+    "zone": "成品物流 · 剔除支路",
+    "brief": "确认样品到达抽检位，按下抽样确认键，将小盒移到校核秤。",
+    "part": "封装小盒",
+    "steps": ["确认光电与样品位置", "按下抽样确认键", "从支路取下样品", "放上复核秤并稳定采样", "核对结果和支路状态"],
+    "source": "https://www.mt.com/us/en/home/products/Product-Inspection_1/checkweighing.html"
+  },
+  {
+    "id": "store",
+    "name": "备件库",
+    "job": "错位料盒复核",
+    "zone": "备件物流 · 循环盘点",
+    "brief": "比对货架与料盒标识，在复核台完成称重，再把料盒送回正确库位。",
+    "part": "备件料盒",
+    "steps": ["比对两个货位的标签", "从差异库位取出料盒", "放上复核秤校核物料", "归还到正确库位", "复扫原位和归还位"],
+    "source": "https://ref.gs1.org/guidelines/edi-healthcare/part-1/"
+  },
+  {
+    "id": "air",
+    "name": "空压站",
+    "job": "过滤器观察窗检查",
+    "zone": "公用工程 · 停机设备",
+    "brief": "在保养状态下推开防护观察罩，由 Go2 近距复核指示，再让罩门回位。",
+    "part": "回弹式观察罩",
+    "steps": ["核对保养状态与就地读数", "G1 推开观察罩", "Go2 读取罩后指示", "退出观察位并确认罩门回位", "签收检查记录"],
+    "source": "https://www.atlascopco.com/en-us/compressors/service"
+  }
+]

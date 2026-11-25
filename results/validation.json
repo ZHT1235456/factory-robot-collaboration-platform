@@ -1,0 +1,2853 @@
+{
+  "passed": 24,
+  "total": 24,
+  "skill": "gait",
+  "trials": [
+    {
+      "scene": "pump",
+      "seed": 0,
+      "status": "done",
+      "seconds": 168.18,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608578243668,
+        "maxGripN": 13.768996388438696,
+        "maxProbeN": 25.89879758882051,
+        "policyCalls": 3030,
+        "gaitPolicyCalls": 7566,
+        "reroutes": 0,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 308,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 5.96,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7566,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1043,
+          "upper": 1283
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 285,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 85.44,
+          "cover_open": 86.2,
+          "evidence": 86.36,
+          "clear_of_cover": 92.18,
+          "cover_closed": 94.0,
+          "handoff_ready": 99.66,
+          "handoff_done": 113.68,
+          "transfer_map": 130.86,
+          "route_ack": 138.92,
+          "complete": 168.18
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 1,
+      "status": "done",
+      "seconds": 170.68,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605769235251,
+        "maxGripN": 13.773840566538901,
+        "maxProbeN": 25.898567884632104,
+        "policyCalls": 3030,
+        "gaitPolicyCalls": 7691,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 314,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 6.22,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7691,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1043,
+          "upper": 1110
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 291,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 87.94,
+          "cover_open": 88.7,
+          "evidence": 88.86,
+          "clear_of_cover": 94.68,
+          "cover_closed": 96.5,
+          "handoff_ready": 102.16,
+          "handoff_done": 116.18,
+          "transfer_map": 133.36,
+          "route_ack": 141.42,
+          "complete": 170.68
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 2,
+      "status": "done",
+      "seconds": 163.6,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608578243668,
+        "maxGripN": 13.791807893013754,
+        "maxProbeN": 25.89879758882051,
+        "policyCalls": 2801,
+        "gaitPolicyCalls": 7337,
+        "reroutes": 0,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 299,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 5.97,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7337,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1074,
+          "upper": 1283
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 275,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 85.44,
+          "cover_open": 86.2,
+          "evidence": 86.36,
+          "clear_of_cover": 92.18,
+          "cover_closed": 94.0,
+          "handoff_ready": 99.66,
+          "handoff_done": 113.68,
+          "transfer_map": 130.86,
+          "route_ack": 138.92,
+          "complete": 163.6
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 3,
+      "status": "done",
+      "seconds": 166.1,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605769235251,
+        "maxGripN": 13.798182713641474,
+        "maxProbeN": 25.898567884632104,
+        "policyCalls": 2801,
+        "gaitPolicyCalls": 7462,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 297,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 5.95,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7462,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1073,
+          "upper": 1110
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 273,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 87.94,
+          "cover_open": 88.7,
+          "evidence": 88.86,
+          "clear_of_cover": 94.68,
+          "cover_closed": 96.5,
+          "handoff_ready": 102.16,
+          "handoff_done": 116.18,
+          "transfer_map": 133.36,
+          "route_ack": 141.42,
+          "complete": 166.1
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 4,
+      "status": "done",
+      "seconds": 176.36,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608719372158,
+        "maxGripN": 13.754899856595312,
+        "maxProbeN": 25.898810030627402,
+        "policyCalls": 3375,
+        "gaitPolicyCalls": 7975,
+        "reroutes": 0,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 304,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 6.05,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 7975,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1043,
+          "upper": 1297
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 281,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 86.72,
+          "cover_open": 87.48,
+          "evidence": 87.64,
+          "clear_of_cover": 93.46,
+          "cover_closed": 95.28,
+          "handoff_ready": 100.94,
+          "handoff_done": 114.96,
+          "transfer_map": 132.14,
+          "route_ack": 140.2,
+          "complete": 176.36
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 5,
+      "status": "done",
+      "seconds": 178.86,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605405213719,
+        "maxGripN": 13.761134736955118,
+        "maxProbeN": 25.89853695918976,
+        "policyCalls": 3375,
+        "gaitPolicyCalls": 8100,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 316,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 6.17,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 8100,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1043,
+          "upper": 1126
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 293,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 89.22,
+          "cover_open": 89.98,
+          "evidence": 90.14,
+          "clear_of_cover": 95.96,
+          "cover_closed": 97.78,
+          "handoff_ready": 103.44,
+          "handoff_done": 117.46,
+          "transfer_map": 134.64,
+          "route_ack": 142.7,
+          "complete": 178.86
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 6,
+      "status": "done",
+      "seconds": 168.92,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608719372158,
+        "maxGripN": 13.772713936575443,
+        "maxProbeN": 25.898810030627402,
+        "policyCalls": 3003,
+        "gaitPolicyCalls": 7603,
+        "reroutes": 0,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 301,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 5.99,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 7603,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1074,
+          "upper": 1297
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 277,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 86.72,
+          "cover_open": 87.48,
+          "evidence": 87.64,
+          "clear_of_cover": 93.46,
+          "cover_closed": 95.28,
+          "handoff_ready": 100.94,
+          "handoff_done": 114.96,
+          "transfer_map": 132.14,
+          "route_ack": 140.2,
+          "complete": 168.92
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 7,
+      "status": "done",
+      "seconds": 171.42,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605405213719,
+        "maxGripN": 13.769348242087629,
+        "maxProbeN": 25.89853695918976,
+        "policyCalls": 3003,
+        "gaitPolicyCalls": 7728,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 299,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 6.2,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 7728,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1073,
+          "upper": 1126
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 275,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 89.22,
+          "cover_open": 89.98,
+          "evidence": 90.14,
+          "clear_of_cover": 95.96,
+          "cover_closed": 97.78,
+          "handoff_ready": 103.44,
+          "handoff_done": 117.46,
+          "transfer_map": 134.64,
+          "route_ack": 142.7,
+          "complete": 171.42
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 8,
+      "status": "done",
+      "seconds": 180.8,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608700202042,
+        "maxGripN": 13.78836408804101,
+        "maxProbeN": 25.89880744067894,
+        "policyCalls": 3507,
+        "gaitPolicyCalls": 8197,
+        "reroutes": 0,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 317,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 6.24,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 8197,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1044,
+          "upper": 1299
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 292,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 88.52,
+          "cover_open": 89.28,
+          "evidence": 89.44,
+          "clear_of_cover": 95.26,
+          "cover_closed": 97.08,
+          "handoff_ready": 102.74,
+          "handoff_done": 116.76,
+          "transfer_map": 133.94,
+          "route_ack": 142.0,
+          "complete": 180.8
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 9,
+      "status": "done",
+      "seconds": 183.3,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77519719297832,
+        "maxGripN": 13.75813062009052,
+        "maxProbeN": 25.891458642966473,
+        "policyCalls": 3507,
+        "gaitPolicyCalls": 8322,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 325,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "far",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 5.97,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 8322,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1042,
+          "upper": 1142
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 300,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 91.02,
+          "cover_open": 91.78,
+          "evidence": 91.94,
+          "clear_of_cover": 97.76,
+          "cover_closed": 99.58,
+          "handoff_ready": 105.24,
+          "handoff_done": 119.26,
+          "transfer_map": 136.44,
+          "route_ack": 144.5,
+          "complete": 183.3
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 10,
+      "status": "done",
+      "seconds": 173.36,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608700202042,
+        "maxGripN": 13.754342802645054,
+        "maxProbeN": 25.89880744067894,
+        "policyCalls": 3135,
+        "gaitPolicyCalls": 7825,
+        "reroutes": 0,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 311,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 5.94,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 7825,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1075,
+          "upper": 1299
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 286,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 88.52,
+          "cover_open": 89.28,
+          "evidence": 89.44,
+          "clear_of_cover": 95.26,
+          "cover_closed": 97.08,
+          "handoff_ready": 102.74,
+          "handoff_done": 116.76,
+          "transfer_map": 133.94,
+          "route_ack": 142.0,
+          "complete": 173.36
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 11,
+      "status": "done",
+      "seconds": 175.86,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77519719297832,
+        "maxGripN": 13.796575104654826,
+        "maxProbeN": 25.891458642966473,
+        "policyCalls": 3135,
+        "gaitPolicyCalls": 7950,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 309,
+        "messages": 14,
+        "cartMoves": 0,
+        "transferLane": "near",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 6.05,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 7950,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1073,
+          "upper": 1142
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 285,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 91.02,
+          "cover_open": 91.78,
+          "evidence": 91.94,
+          "clear_of_cover": 97.76,
+          "cover_closed": 99.58,
+          "handoff_ready": 105.24,
+          "handoff_done": 119.26,
+          "transfer_map": 136.44,
+          "route_ack": 144.5,
+          "complete": 175.86
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 12,
+      "status": "done",
+      "seconds": 164.86,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608578243668,
+        "maxGripN": 13.79224373794848,
+        "maxProbeN": 25.89879758882051,
+        "policyCalls": 2864,
+        "gaitPolicyCalls": 7337,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 311,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 6.22,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7337,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1077,
+          "upper": 1283
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 288,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 85.44,
+          "cover_open": 86.2,
+          "evidence": 86.36,
+          "clear_of_cover": 92.18,
+          "cover_closed": 94.0,
+          "handoff_ready": 99.66,
+          "handoff_done": 113.68,
+          "transfer_map": 132.12,
+          "route_ack": 140.18,
+          "complete": 164.86
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 13,
+      "status": "done",
+      "seconds": 167.36,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605769235251,
+        "maxGripN": 13.75835116973834,
+        "maxProbeN": 25.898567884632104,
+        "policyCalls": 2864,
+        "gaitPolicyCalls": 7462,
+        "reroutes": 2,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 313,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 6.19,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7462,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1078,
+          "upper": 1110
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 292,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 87.94,
+          "cover_open": 88.7,
+          "evidence": 88.86,
+          "clear_of_cover": 94.68,
+          "cover_closed": 96.5,
+          "handoff_ready": 102.16,
+          "handoff_done": 116.18,
+          "transfer_map": 134.62,
+          "route_ack": 142.68,
+          "complete": 167.36
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 14,
+      "status": "done",
+      "seconds": 169.44,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608578243668,
+        "maxGripN": 13.759955222670829,
+        "maxProbeN": 25.89879758882051,
+        "policyCalls": 3093,
+        "gaitPolicyCalls": 7566,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 301,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 6.0,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7566,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1045,
+          "upper": 1283
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 278,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 85.44,
+          "cover_open": 86.2,
+          "evidence": 86.36,
+          "clear_of_cover": 92.18,
+          "cover_closed": 94.0,
+          "handoff_ready": 99.66,
+          "handoff_done": 113.68,
+          "transfer_map": 132.12,
+          "route_ack": 140.18,
+          "complete": 169.44
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 15,
+      "status": "done",
+      "seconds": 171.94,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605769235251,
+        "maxGripN": 13.766940699702975,
+        "maxProbeN": 25.898567884632104,
+        "policyCalls": 3093,
+        "gaitPolicyCalls": 7691,
+        "reroutes": 2,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 300,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P1"
+      },
+      "result": {
+        "name": "P1 模拟振动 RMS",
+        "value": 6.17,
+        "unit": "mm/s"
+      },
+      "last": "P1 记录器已固定 · 工单签收",
+      "gaitCalls": 7691,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1047,
+          "upper": 1110
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 277,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.28,
+          "descent": 52.9,
+          "request_cover": 87.94,
+          "cover_open": 88.7,
+          "evidence": 88.86,
+          "clear_of_cover": 94.68,
+          "cover_closed": 96.5,
+          "handoff_ready": 102.16,
+          "handoff_done": 116.18,
+          "transfer_map": 134.62,
+          "route_ack": 142.68,
+          "complete": 171.94
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 16,
+      "status": "done",
+      "seconds": 170.18,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608719372158,
+        "maxGripN": 13.771526313828833,
+        "maxProbeN": 25.898810030627402,
+        "policyCalls": 3066,
+        "gaitPolicyCalls": 7603,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 315,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 6.02,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 7603,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1077,
+          "upper": 1297
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 292,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 86.72,
+          "cover_open": 87.48,
+          "evidence": 87.64,
+          "clear_of_cover": 93.46,
+          "cover_closed": 95.28,
+          "handoff_ready": 100.94,
+          "handoff_done": 114.96,
+          "transfer_map": 133.4,
+          "route_ack": 141.46,
+          "complete": 170.18
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 17,
+      "status": "done",
+      "seconds": 172.68,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605405213719,
+        "maxGripN": 13.759291217510778,
+        "maxProbeN": 25.89853695918976,
+        "policyCalls": 3066,
+        "gaitPolicyCalls": 7728,
+        "reroutes": 2,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 319,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 5.92,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 7728,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1078,
+          "upper": 1126
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 298,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 89.22,
+          "cover_open": 89.98,
+          "evidence": 90.14,
+          "clear_of_cover": 95.96,
+          "cover_closed": 97.78,
+          "handoff_ready": 103.44,
+          "handoff_done": 117.46,
+          "transfer_map": 135.9,
+          "route_ack": 143.96,
+          "complete": 172.68
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 18,
+      "status": "done",
+      "seconds": 177.62,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608719372158,
+        "maxGripN": 13.78299185609016,
+        "maxProbeN": 25.898810030627402,
+        "policyCalls": 3438,
+        "gaitPolicyCalls": 7975,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 303,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 6.13,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 7975,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1045,
+          "upper": 1297
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 280,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 86.72,
+          "cover_open": 87.48,
+          "evidence": 87.64,
+          "clear_of_cover": 93.46,
+          "cover_closed": 95.28,
+          "handoff_ready": 100.94,
+          "handoff_done": 114.96,
+          "transfer_map": 133.4,
+          "route_ack": 141.46,
+          "complete": 177.62
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 19,
+      "status": "done",
+      "seconds": 180.12,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77605405213719,
+        "maxGripN": 13.781147909638829,
+        "maxProbeN": 25.89853695918976,
+        "policyCalls": 3438,
+        "gaitPolicyCalls": 8100,
+        "reroutes": 2,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 302,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P2"
+      },
+      "result": {
+        "name": "P2 模拟振动 RMS",
+        "value": 6.21,
+        "unit": "mm/s"
+      },
+      "last": "P2 记录器已固定 · 工单签收",
+      "gaitCalls": 8100,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1047,
+          "upper": 1126
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 279,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 47.76,
+          "descent": 54.18,
+          "request_cover": 89.22,
+          "cover_open": 89.98,
+          "evidence": 90.14,
+          "clear_of_cover": 95.96,
+          "cover_closed": 97.78,
+          "handoff_ready": 103.44,
+          "handoff_done": 117.46,
+          "transfer_map": 135.9,
+          "route_ack": 143.96,
+          "complete": 180.12
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 20,
+      "status": "done",
+      "seconds": 174.62,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608700202042,
+        "maxGripN": 13.79095836987118,
+        "maxProbeN": 25.89880744067894,
+        "policyCalls": 3198,
+        "gaitPolicyCalls": 7825,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 324,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 6.04,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 7825,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1079,
+          "upper": 1299
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 300,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 88.52,
+          "cover_open": 89.28,
+          "evidence": 89.44,
+          "clear_of_cover": 95.26,
+          "cover_closed": 97.08,
+          "handoff_ready": 102.74,
+          "handoff_done": 116.76,
+          "transfer_map": 135.2,
+          "route_ack": 143.26,
+          "complete": 174.62
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 21,
+      "status": "done",
+      "seconds": 177.12,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77519719297832,
+        "maxGripN": 13.762240669791803,
+        "maxProbeN": 25.891458642966473,
+        "policyCalls": 3198,
+        "gaitPolicyCalls": 7950,
+        "reroutes": 2,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 332,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "near",
+        "previousLane": "far",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 6.09,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 7950,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1077,
+          "upper": 1142
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 308,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 91.02,
+          "cover_open": 91.78,
+          "evidence": 91.94,
+          "clear_of_cover": 97.76,
+          "cover_closed": 99.58,
+          "handoff_ready": 105.24,
+          "handoff_done": 119.26,
+          "transfer_map": 137.7,
+          "route_ack": 145.76,
+          "complete": 177.12
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 22,
+      "status": "done",
+      "seconds": 182.06,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77608700202042,
+        "maxGripN": 13.785617545356082,
+        "maxProbeN": 25.89880744067894,
+        "policyCalls": 3570,
+        "gaitPolicyCalls": 8197,
+        "reroutes": 1,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 314,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "A",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 5.94,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 8197,
+      "stairs": {
+        "openFlight": "A",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1047,
+          "upper": 1299
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 289,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 88.52,
+          "cover_open": 89.28,
+          "evidence": 89.44,
+          "clear_of_cover": 95.26,
+          "cover_closed": 97.08,
+          "handoff_ready": 102.74,
+          "handoff_done": 116.76,
+          "transfer_map": 135.2,
+          "route_ack": 143.26,
+          "complete": 182.06
+        }
+      },
+      "passed": true
+    },
+    {
+      "scene": "pump",
+      "seed": 23,
+      "status": "done",
+      "seconds": 184.56,
+      "metrics": {
+        "grasps": 1,
+        "placements": 1,
+        "samples": 2,
+        "buttonMm": 0.0,
+        "doorDegrees": 44.77519719297832,
+        "maxGripN": 13.766900658146334,
+        "maxProbeN": 25.891458642966473,
+        "policyCalls": 3570,
+        "gaitPolicyCalls": 8322,
+        "reroutes": 2,
+        "aisleDetours": 2,
+        "yieldFrames": 0,
+        "basketPickups": 1,
+        "unexpectedContactFrames": 0,
+        "mapUpdates": 313,
+        "messages": 14,
+        "cartMoves": 1,
+        "transferLane": "far",
+        "previousLane": "near",
+        "selectedFlight": "B",
+        "coverProof": 1,
+        "blindProof": 3,
+        "verifiedPump": "P3"
+      },
+      "result": {
+        "name": "P3 模拟振动 RMS",
+        "value": 6.1,
+        "unit": "mm/s"
+      },
+      "last": "P3 记录器已固定 · 工单签收",
+      "gaitCalls": 8322,
+      "stairs": {
+        "openFlight": "B",
+        "loadedSteps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "otherFlight": []
+      },
+      "survey": {
+        "observedCells": {
+          "lower": 1045,
+          "upper": 1142
+        },
+        "initialMap": {
+          "revision": 73,
+          "lanes": {
+            "near": "clear",
+            "far": "blocked"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "transferMap": {
+          "revision": 289,
+          "lanes": {
+            "near": "blocked",
+            "far": "clear"
+          },
+          "landings": {
+            "A": "clear",
+            "B": "clear"
+          }
+        },
+        "coverEvidence": {
+          "point": [
+            -2.762,
+            -0.865,
+            0.576
+          ],
+          "source": [
+            -3.582,
+            -1.238,
+            0.378
+          ],
+          "angle": 37.4
+        },
+        "timeline": {
+          "initial_map": 19.7,
+          "finding": 28.6,
+          "verified_pump": 48.72,
+          "descent": 55.98,
+          "request_cover": 91.02,
+          "cover_open": 91.78,
+          "evidence": 91.94,
+          "clear_of_cover": 97.76,
+          "cover_closed": 99.58,
+          "handoff_ready": 105.24,
+          "handoff_done": 119.26,
+          "transfer_map": 137.7,
+          "route_ack": 145.76,
+          "complete": 184.56
+        }
+      },
+      "passed": true
+    }
+  ],
+  "faultTrials": [
+    {
+      "dropped": "clear_of_cover",
+      "status": "fault",
+      "last": "G1 未收到取证和退场回执，观察盖保持打开",
+      "passed": true
+    },
+    {
+      "dropped": "transfer_map",
+      "status": "fault",
+      "last": "两条横向通道的净空均未得到 Go2 确认",
+      "passed": true
+    }
+  ]
+}

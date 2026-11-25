@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.inference-env/
+.training/
+__pycache__/
+src-tauri/target/
+src-tauri/gen/
+release/
+MUJOCO_LOG.TXT

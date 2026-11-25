@@ -1,0 +1,329 @@
+\documentclass[10pt,a4paper,UTF8,fontset=fandol]{ctexart}
+
+\usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm,headheight=20pt,headsep=5mm,footskip=8mm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
+
+% 统一占位宏（后续脚本或人工实测后统一替换）
+\newcommand{\ReleaseSize}{38.61\,MiB}
+\newcommand{\ReleaseBytes}{40\,488\,448}
+\newcommand{\MapCoverage}{93.08\%}
+\newcommand{\MapVersion}{V1034}
+\newcommand{\MapTime}{344\,秒（仿真时间）}
+
+% 深青、灰、白配色体系
+\definecolor{DeepTeal}{HTML}{0F5257}
+\definecolor{MidTeal}{HTML}{1B7278}
+\definecolor{TealTint}{HTML}{ECF4F5}
+\definecolor{SlateText}{HTML}{1E293B}
+\definecolor{MutedGray}{HTML}{64748B}
+\definecolor{RuleGray}{HTML}{CBD5E1}
+\definecolor{LightPanel}{HTML}{F8FAFC}
+\definecolor{WarnSlate}{HTML}{475569}
+\definecolor{WarnTint}{HTML}{F1F5F9}
+
+\color{SlateText}
+
+% 章节与版式设定
+\ctexset{
+  section = {
+    format = \Large\bfseries\color{DeepTeal},
+    name = {,},
+    number = \arabic{section},
+    aftername = \hspace{0.6em},
+    beforeskip = 8pt plus 2pt minus 2pt,
+    afterskip = 6pt plus 2pt minus 1pt,
+  },
+  subsection = {
+    format = \normalsize\bfseries\color{MidTeal},
+    beforeskip = 6pt plus 1pt minus 1pt,
+    afterskip = 3pt plus 1pt minus 1pt,
+  }
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{MutedGray}工厂机器人协同作业平台软件开发日志}
+\fancyhead[R]{\footnotesize\color{MutedGray}Factory Robot Collaboration Platform}
+\fancyfoot[C]{\footnotesize\color{MutedGray}第 \thepage{} 页}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{RuleGray}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{firstpage}{
+  \fancyhf{}
+  \fancyfoot[C]{\footnotesize\color{MutedGray}第 \thepage{} 页}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\setlist[itemize]{leftmargin=1.4em,itemsep=2pt,topsep=3pt,parsep=0pt}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{3pt}
+
+\hypersetup{
+  pdftitle={工厂机器人协同作业平台软件开发日志},
+  pdfauthor={朱华天，GPT-6.2 Sol，Gemini 4 Hydrogen},
+  colorlinks=true,
+  linkcolor=DeepTeal,
+  citecolor=DeepTeal,
+  urlcolor=DeepTeal
+}
+
+\begin{document}
+\thispagestyle{firstpage}
+
+% 首页抬头（非独立封面，直接接正文）
+\noindent
+\begin{tikzpicture}
+  \fill[DeepTeal] (0,0) rectangle (\textwidth, 1.8pt);
+\end{tikzpicture}
+\vspace{4pt}
+
+\begin{flushleft}
+  {\LARGE\bfseries\color{DeepTeal} 工厂机器人协同作业平台软件开发日志}\\[4pt]
+  {\small\color{MutedGray} Factory Robot Collaboration Platform}\\[6pt]
+  {\normalsize\color{SlateText} 朱华天，GPT-6.2 Sol，Gemini 4 Hydrogen}\\[2pt]
+  {\small\color{MutedGray} 2026年11月25日}\\[2pt]
+  {\small \url{https://github.com/ZHT1235456/factory-robot-collaboration-platform}}
+\end{flushleft}
+
+\vspace{2pt}
+\noindent{\color{RuleGray}\hrule height 0.5pt}
+\vspace{6pt}
+
+\section{项目概况与发布形态}
+
+工厂机器人协同作业平台面向公用工程厂房运维场景构建双机协同桌面仿真软件。仿真环境覆盖 $47.2 \times 26$ 米厂房区域，部署四足机器狗 Go2 与人形机器人 G1 联合执行巡检、建图交付与设备作业流程，完整流程包含 5 张连续工单与 30 个任务节点。软件重点验证先导建图、栅格交付、路径净空校验与状态回执闭环，为多构型机器人协同任务提供可复现的桌面工程基线。
+
+软件发行包构建为 Windows x64 单文件可执行程序，当前打包体积为 \ReleaseSize{}（\ReleaseBytes{} 字节）。桌面程序默认全屏启动，运行期间支持通过 \texttt{F11} 快捷键在全屏与窗口模式之间切换。界面由 Microsoft Edge WebView2 承载。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{../assets/factory-map-handoff.png}
+  \caption{G1 接收下层地图后的桌面界面。左侧列出工单，中央为三维场景，右侧可切换 Go2 实时地图和 G1 接收的版本。}
+  \label{fig:handoff}
+\end{figure}
+
+\clearpage
+
+\section{技术栈与系统数据流}
+
+界面通过 Tauri IPC 将工单种子和步进请求交给 Rust 宿主。宿主以标准输入和输出来往传输逐行 JSON，向 Python 子进程发送指令并接收仿真快照。前端用同批快照刷新三维姿态、占用地图和通信记录，并将快照保存到本次运行的时间轴。桌面程序在首次启动时将 PyInstaller 打包的推理进程解包至应用缓存，供后续启动使用。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{软件分层技术栈与职责划分}
+  \label{tab:stack}
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{DeepTeal}}l l X@{}}
+    \toprule
+    系统层次 & 核心技术选型 & 运行期工程职责 \\
+    \midrule
+    前端构建与三维渲染 & Vite、Three.js & 打包前端资源，渲染厂房场景、双机模型、对话气泡与射线回波 \\
+    桌面宿主与进程通信 & Tauri 2、Rust & 托管原生窗口与 \texttt{F11} 切换，经 \texttt{stdin}/\texttt{stdout} 逐行 JSON 交互 \\
+    本地包封装与缓存 & PyInstaller & 打包内嵌 Python 推理进程，首次启动由桌面端解包到应用缓存 \\
+    物理动力学与感知求解 & MuJoCo & 求解刚体动力学、多点接触反力及平面激光射线求交 \cite{todorov2012mujoco} \\
+    神经网络策略推理 & ONNX Runtime（CPU） & 在 CPU 上执行接触残差估计与 Go2、G1 足端跟踪策略推理 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    node distance=0.9cm and 1.1cm,
+    box/.style={
+      rectangle, rounded corners=2pt, draw=DeepTeal, line width=0.7pt,
+      fill=LightPanel, text=SlateText, align=center, font=\footnotesize,
+      minimum height=1.2cm, text width=3.3cm, inner sep=4pt
+    },
+    subbox/.style={
+      rectangle, rounded corners=2pt, draw=MidTeal, line width=0.6pt,
+      fill=TealTint, text=SlateText, align=center, font=\footnotesize,
+      minimum height=1.15cm, text width=3.3cm, inner sep=4pt
+    },
+    arr/.style={-{Stealth[length=2.2mm,width=1.5mm]}, line width=0.7pt, color=DeepTeal},
+    biarr/.style={{Stealth[length=2.0mm,width=1.4mm]}-{Stealth[length=2.0mm,width=1.4mm]}, line width=0.7pt, color=DeepTeal},
+    dasharr/.style={-{Stealth[length=2.0mm,width=1.4mm]}, dashed, line width=0.65pt, color=MutedGray},
+    lbl/.style={font=\scriptsize\color{SlateText}, fill=white, inner sep=1.5pt}
+  ]
+    \node[box] (fe) at (0,0) {\textbf{前端渲染层}\\Vite 与 Three.js\\厂房、气泡与射线};
+    \node[box] (host) at (5.1,0) {\textbf{桌面宿主层}\\Tauri 2 与 Rust\\窗口、全屏与托管};
+    \node[box] (py) at (10.2,0) {\textbf{本地推理进程}\\内嵌 Python 服务\\建图、规划与调度};
+
+    \node[subbox] (cache) at (2.5,-2.35) {\textbf{应用缓存解包}\\PyInstaller 单包\\首次启动释放};
+    \node[subbox] (mujoco) at (6.8,-2.35) {\textbf{MuJoCo 引擎}\\运动动力学、接触\\与 112 射线求交};
+    \node[subbox] (onnx) at (11.1,-2.35) {\textbf{ONNX Runtime}\\CPU 推理接触残差\\与双机足端策略};
+
+    \draw[biarr] (fe.east) -- node[above,lbl]{Tauri IPC} (host.west);
+    \draw[biarr] (host.east) -- node[above,lbl]{逐行 JSON} (py.west);
+
+    \draw[arr] (host.south west) -- node[left,lbl]{解包释放} (cache.north);
+    \draw[dasharr] (cache.north east) -- node[right,lbl]{拉起进程} (py.south west);
+
+    \draw[biarr] (py.south) -- node[left,lbl]{位姿与射线} (mujoco.north east);
+    \draw[biarr] (py.south east) -- node[right,lbl]{状态与策略输出} (onnx.north);
+  \end{tikzpicture}
+  \caption{平台软件模块架构与本地进程数据流框图}
+  \label{fig:arch}
+\end{figure}
+
+\subsection{策略训练思路与在线控制实现}
+
+底层运动策略训练受到 SuperMimic 框架启发 \cite{liao2026supermimic}，采用参考动作条件化输入形式，结合物理仿真迁移拟合可微动力学近似模型，并在短步想象视界内进行滚动策略优化，得到接触和足端跟踪的策略权重。离线导出的策略网络在本地由 ONNX Runtime 在 CPU 端执行前向推理，输出足端跟踪目标与接触残差修正量。
+
+在线执行环节将推理结果与足步参考、逆运动学、运动导引和关节限矩伺服结合。桌面程序加载项目导出的接触与足端跟踪权重，执行任务调度、步态控制和物理反馈检查。
+
+\clearpage
+
+\section{Go2 建图、交付与 G1 用图流程}
+
+Go2 沿预设的 31 个地面观测点移动并转向。仿真用 MuJoCo 位姿把测距结果投到厂房坐标系，每轮按整圈角度采样 112 条最大量程为 5 米的平面射线，更新边长 0.25 米的占用格 \cite{elfes1989occupancy}。宇树官网列出的 Go2 L2 雷达标称视场为水平 360 度、垂直 96 度 \cite{unitreeGo2}。本文的建图数据来自 MuJoCo 的二维水平采样。
+
+射线碰到 Go2 的机身、腿或箩筐时，该方向从扫线显示与栅格更新中剔除。默认起始姿态测得 15 条射线被本体遮挡，原点正后方未观测格保持未知，后续通过移动和转向补采。地图用对数几率累积空闲与占用证据。Go2 完成巡检后，系统检查全下层覆盖率是否达到 88\%，并检查各工区是否达到 65\%。
+
+\subsection{版本封包交付与 G1 用图约束}
+
+建图满足覆盖阈值后，Python 推理服务生成结构化地图数据包并向 G1 发起交付，传输载荷包含地图版本号、下层统一坐标系标识、原点坐标、栅格分辨率、栅格行列尺寸以及经游程编码（RLE）压缩的栅格数组。G1 在收到数据包并回传确认信号后正式启动后续工单动作。在进入过滤转场与换热入口等关键通道前，G1 基于接收到的空闲栅格执行路径连通性检验，直达路径受阻时在已观测空闲格上进行 A* 搜索 \cite{hart1968astar}。路径执行前校核 G1 的身体净空，关键回执缺失时停止推进并显示原因。
+
+\vspace{4pt}
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  \centering
+  \begin{tikzpicture}[
+    node distance=0.55cm and 0.9cm,
+    flowbox/.style={
+      rectangle, rounded corners=2pt, draw=DeepTeal, line width=0.65pt,
+      fill=LightPanel, text=SlateText, align=center, font=\scriptsize,
+      minimum height=0.72cm, text width=3.7cm, inner sep=3pt
+    },
+    branch/.style={
+      rectangle, rounded corners=2pt, draw=WarnSlate, line width=0.6pt,
+      fill=WarnTint, text=SlateText, align=center, font=\scriptsize,
+      minimum height=0.72cm, text width=2.8cm, inner sep=3pt
+    },
+    arr/.style={-{Stealth[length=1.8mm,width=1.3mm]}, line width=0.65pt, color=DeepTeal},
+    sidearr/.style={-{Stealth[length=1.8mm,width=1.3mm]}, line width=0.6pt, color=WarnSlate},
+    lbl/.style={font=\tiny\color{SlateText}, fill=white, inner sep=1pt}
+  ]
+    \node[flowbox] (s1) at (0,0) {\textbf{起点初始化}\\下层坐标系与初始状态就绪};
+    \node[flowbox] (s2) at (0,-1.3) {\textbf{Go2 沿 31 点建图}\\5 米 112 射线更新 0.25 米栅格};
+    \node[flowbox] (s3) at (0,-2.65) {\textbf{覆盖达标检查}\\全下层 $\ge 88\%$ 且各工区 $\ge 65\%$};
+    \node[flowbox] (s4) at (0,-4.0) {\textbf{版本封包交付}\\写入版本、原点、尺寸与 RLE 地图};
+    \node[flowbox] (s5) at (0,-5.3) {\textbf{G1 接收确认}\\校验栅格数据并进入五张工单};
+    \node[flowbox] (s6) at (0,-6.65) {\textbf{入口检验与路径执行}\\基于空闲栅格验证转场与换热入口};
+
+    \node[branch] (b1) at (4.35,-1.3) {剔除自遮挡射线\\移动转向补齐观测};
+    \node[branch] (b2) at (4.35,-2.65) {覆盖不足\\停止并等待复核};
+    \node[branch] (b3) at (4.35,-5.3) {缺少关键回执或地图\\立即停止作业流程};
+    \node[branch] (b4) at (4.35,-6.65) {入口受阻启动 A*\\同步检查身体净空};
+
+    \draw[arr] (s1) -- (s2);
+    \draw[arr] (s2) -- (s3);
+    \draw[arr] (s3) -- node[left,lbl]{达标} (s4);
+    \draw[arr] (s4) -- (s5);
+    \draw[arr] (s5) -- node[left,lbl]{已确认} (s6);
+
+    \draw[sidearr,dashed] (s2.east) -- (b1.west);
+    \draw[sidearr] (s3.east) -- node[above,lbl]{未达标} (b2.west);
+
+    \draw[sidearr] (s5.east) -- node[above,lbl]{缺失} (b3.west);
+    \draw[sidearr] (s6.east) -- node[above,lbl]{阻挡} (b4.west);
+  \end{tikzpicture}
+  \par\vspace{3pt}
+  {\footnotesize\color{MutedGray} 图 3\quad Go2 建图、版本封包交付与 G1 用图主流程及旁侧分支}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\textwidth}
+  \vspace{0pt}
+  \centering
+  \includegraphics[width=\linewidth,height=0.22\textheight,keepaspectratio]{../assets/factory-map-follow-go2.png}
+  \par\vspace{4pt}
+  {\footnotesize\color{MutedGray} 图 4\quad 建图阶段自动跟随 Go2 视角截图}
+  \par\vspace{8pt}
+  \begin{flushleft}
+    \small
+    \textbf{\color{DeepTeal}自动运镜切换逻辑}\par\vspace{2pt}
+    在 Go2 执行 31 点建图期间，前端自动镜头持续跟随四足机器人行进轨迹与转向视口，界面呈现扫线和占用栅格更新。G1 确认接图后，自动镜头切换为跟随发言者。
+  \end{flushleft}
+\end{minipage}
+
+\clearpage
+
+\section{开发记录与仿真验证}
+
+\subsection{核心开发里程碑}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{平台迭代开发主要里程碑汇总}
+  \label{tab:milestones}
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{DeepTeal}}l X@{}}
+    \toprule
+    里程碑阶段 & 完成的工程改造与问题闭环 \\
+    \midrule
+    泵房阶梯与双机接触 & 完成 G1 楼梯下行、Go2 地面通行及双机接触保护 \\
+    扩建五工区 & 将场景扩展至 $47.2 \times 26$ 米完整厂房，贯通五个作业工区与连接通道 \\
+    地面标线和工区对齐 & 统一前端渲染标线图层与物理世界坐标系，对齐过滤支路和回水区设备排、标线与作业坐标 \\
+    交接与气泡 & 建立 Go2 到 G1 的显式交接时序，补齐三维消息气泡与镜头联动提示 \\
+    射线回波 & 实现 112 条平面射线与厂房障碍求交计算，并在前端叠加可视化回波渲染 \\
+    建图交付 & 落地 0.25 米概率栅格、下层总体和分区覆盖检查、RLE 编码封包及 G1 确认协议 \\
+    修复自遮挡 & 过滤机身、腿部与箩筐产生的自遮挡射线，由其它视点补采遮挡区 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{五张工单与默认种子交付指标}
+
+双机协同流程顺序贯穿五张连续作业工单，依次为\textbf{泵组测振}、\textbf{过滤隔离}、\textbf{换热复检}、\textbf{备件转运}以及\textbf{回水验收}，全流程共调度 30 个结构化动作与状态检查节点。在默认随机种子仿真运行条件下，Go2 建图交付阶段的实测覆盖率为 \MapCoverage{}，生成地图数据版本号为 \MapVersion{}，建图总耗时为 \MapTime{}。
+
+\subsection{仿真工况验证与安全停机复核}
+
+验收使用桌面仿真。验证范围包括四个完整工况、三项缺失回执测试与 Windows 桌面界面检查。
+
+\begin{itemize}
+  \item 工况闭环验收，在 \texttt{0}、\texttt{11}、\texttt{14}、\texttt{17} 四个仿真工况下完成 5 张工单与 30 个节点的连贯执行，两段用图路线按接收版本完成，接触监测未记录异常接触。
+  \item 缺失地图与许可停机检验，分别注入缺失下层地图、缺失换热地图以及缺少回水许可三项异常条件，系统均按预期触发安全拦截并停止推进。
+  \item 工程交付物复核，前后端通信码流、三维场景图层对齐以及单文件程序启动验收均依据开发运行记录逐项复核通过。
+\end{itemize}
+
+\begin{thebibliography}{9}
+  \small
+  \bibitem{liao2026supermimic}
+  Qiayuan Liao, Yiyang Shao, Junfeng Long, Kevin Zakka, Roberto Horowitz, Pieter Abbeel, Koushil Sreenath.
+  SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model.
+  CoRL 2026 / arXiv:2610.28480, \url{https://arxiv.org/abs/2610.28480}.
+
+  \bibitem{todorov2012mujoco}
+  Emanuel Todorov, Tom Erez, Yuval Tassa.
+  MuJoCo: A Physics Engine for Model-Based Control.
+  IROS, 2012, DOI 10.1109/IROS.2012.6386109, \url{https://homes.cs.washington.edu/~todorov/papers/TodorovIROS12.pdf}.
+
+  \bibitem{elfes1989occupancy}
+  Alberto Elfes.
+  Using Occupancy Grids for Mobile Robot Perception and Navigation.
+  IEEE Computer 22(6), 1989, 46--57, \url{https://doi.org/10.1109/2.30720}.
+
+  \bibitem{hart1968astar}
+  Peter E. Hart, Nils J. Nilsson, Bertram Raphael.
+  A Formal Basis for the Heuristic Determination of Minimum Cost Paths.
+  IEEE TSSC 4(2), 1968, 100--107, \url{https://doi.org/10.1109/TSSC.1968.300136}.
+
+  \bibitem{unitreeGo2}
+  Unitree Robotics.
+  Go2 官方规格（L2）, \url{https://www.unitree.com/go2/}.
+\end{thebibliography}
+
+\end{document}

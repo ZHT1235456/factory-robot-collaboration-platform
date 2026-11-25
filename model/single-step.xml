@@ -1,0 +1,10 @@
+<mujoco model="go2-single-step">
+  <include file="go2.xml"/>
+  <worldbody>
+    <geom name="floor" type="plane" size="0 0 0.05" rgba="0.7 0.74 0.76 1"/>
+    <geom name="step" type="box" pos="0.381 0.142 0.04" size="0.15 0.12 0.04" rgba="0.6 0.63 0.65 1"/>
+  </worldbody>
+  <keyframe>
+    <key name="stair_start" qpos="0 0 0.326255726032 1 0 0 0 0 0.78 -1.56 0 0.78 -1.56 0 0.78 -1.56 0 0.78 -1.56"/>
+  </keyframe>
+</mujoco>

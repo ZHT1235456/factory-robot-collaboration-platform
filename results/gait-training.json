@@ -1,0 +1,297 @@
+{
+  "method": "reference-conditioned actor, learned differentiable dynamics, four-step imagined policy optimization",
+  "hardware": "NVIDIA GeForce RTX 4090",
+  "torch": "2.13.0+cu130",
+  "seed": 73614,
+  "input": [
+    23
+  ],
+  "rolloutSteps": 4,
+  "samples": 252030,
+  "windows": 249798,
+  "rounds": [
+    {
+      "round": 1,
+      "worldLoss": 0.03747577592730522,
+      "teacherLoss": 0.015747344121336937,
+      "rolloutLoss": 0.018361004069447517
+    },
+    {
+      "round": 2,
+      "worldLoss": 0.04544827342033386,
+      "teacherLoss": 0.006663636304438114,
+      "rolloutLoss": 0.016508247703313828
+    },
+    {
+      "round": 3,
+      "worldLoss": 0.03535990044474602,
+      "teacherLoss": 0.004316829144954681,
+      "rolloutLoss": 0.018319271504878998
+    }
+  ],
+  "trainSeeds": [
+    117,
+    128,
+    239,
+    340,
+    451,
+    562
+  ],
+  "export": {
+    "actor": {
+      "file": "foot-tracking-policy.onnx",
+      "bytes": 35464,
+      "sha256": "9847e5ce4d04f9823a35c60c2be73f73437fa8042aca7227eb51e40e3534771d",
+      "parityMaxError": 1.1622905731201172e-06
+    },
+    "world": {
+      "file": "foot-tracking-world.onnx",
+      "bytes": 67348,
+      "sha256": "b16681cae3a86230cbbedde49da8a86e4a953064b61ed575379cb934268f4be3",
+      "parityMaxError": 4.76837158203125e-06
+    }
+  },
+  "collection": [
+    {
+      "scene": "pump",
+      "seed": 117,
+      "status": "done",
+      "seconds": 105.9,
+      "samples": 16326,
+      "note": "P2 测点保留记录器 · 工单已移交"
+    },
+    {
+      "scene": "pump",
+      "seed": 128,
+      "status": "done",
+      "seconds": 104.28,
+      "samples": 16164,
+      "note": "P2 测点保留记录器 · 工单已移交"
+    },
+    {
+      "scene": "pump",
+      "seed": 239,
+      "status": "done",
+      "seconds": 105.9,
+      "samples": 16326,
+      "note": "P2 测点保留记录器 · 工单已移交"
+    },
+    {
+      "scene": "pump",
+      "seed": 340,
+      "status": "done",
+      "seconds": 104.28,
+      "samples": 16164,
+      "note": "P2 测点保留记录器 · 工单已移交"
+    },
+    {
+      "scene": "pump",
+      "seed": 451,
+      "status": "done",
+      "seconds": 105.9,
+      "samples": 16326,
+      "note": "P2 测点保留记录器 · 工单已移交"
+    },
+    {
+      "scene": "pump",
+      "seed": 562,
+      "status": "done",
+      "seconds": 104.28,
+      "samples": 16164,
+      "note": "P2 测点保留记录器 · 工单已移交"
+    },
+    {
+      "scene": "cnc",
+      "seed": 117,
+      "status": "done",
+      "seconds": 55.1,
+      "samples": 6088,
+      "note": "T-114 已装入换型托盘"
+    },
+    {
+      "scene": "cnc",
+      "seed": 128,
+      "status": "done",
+      "seconds": 54.98,
+      "samples": 6088,
+      "note": "T-114 已装入换型托盘"
+    },
+    {
+      "scene": "cnc",
+      "seed": 239,
+      "status": "done",
+      "seconds": 54.98,
+      "samples": 6088,
+      "note": "T-114 已装入换型托盘"
+    },
+    {
+      "scene": "cnc",
+      "seed": 340,
+      "status": "done",
+      "seconds": 55.1,
+      "samples": 6088,
+      "note": "T-114 已装入换型托盘"
+    },
+    {
+      "scene": "cnc",
+      "seed": 451,
+      "status": "done",
+      "seconds": 55.02,
+      "samples": 6088,
+      "note": "T-114 已装入换型托盘"
+    },
+    {
+      "scene": "cnc",
+      "seed": 562,
+      "status": "done",
+      "seconds": 55.06,
+      "samples": 6088,
+      "note": "T-114 已装入换型托盘"
+    },
+    {
+      "scene": "pack",
+      "seed": 117,
+      "status": "done",
+      "seconds": 46.84,
+      "samples": 5088,
+      "note": "抽检支路清空 · 样品留在秤台"
+    },
+    {
+      "scene": "pack",
+      "seed": 128,
+      "status": "done",
+      "seconds": 46.84,
+      "samples": 5088,
+      "note": "抽检支路清空 · 样品留在秤台"
+    },
+    {
+      "scene": "pack",
+      "seed": 239,
+      "status": "done",
+      "seconds": 46.84,
+      "samples": 5088,
+      "note": "抽检支路清空 · 样品留在秤台"
+    },
+    {
+      "scene": "pack",
+      "seed": 340,
+      "status": "done",
+      "seconds": 46.82,
+      "samples": 5088,
+      "note": "抽检支路清空 · 样品留在秤台"
+    },
+    {
+      "scene": "pack",
+      "seed": 451,
+      "status": "done",
+      "seconds": 46.84,
+      "samples": 5088,
+      "note": "抽检支路清空 · 样品留在秤台"
+    },
+    {
+      "scene": "pack",
+      "seed": 562,
+      "status": "done",
+      "seconds": 46.84,
+      "samples": 5088,
+      "note": "抽检支路清空 · 样品留在秤台"
+    },
+    {
+      "scene": "store",
+      "seed": 117,
+      "status": "done",
+      "seconds": 68.94,
+      "samples": 8764,
+      "note": "B-07 确认有料盒 · A-12 空位复扫"
+    },
+    {
+      "scene": "store",
+      "seed": 128,
+      "status": "done",
+      "seconds": 68.94,
+      "samples": 8764,
+      "note": "B-07 确认有料盒 · A-12 空位复扫"
+    },
+    {
+      "scene": "store",
+      "seed": 239,
+      "status": "done",
+      "seconds": 68.94,
+      "samples": 8764,
+      "note": "B-07 确认有料盒 · A-12 空位复扫"
+    },
+    {
+      "scene": "store",
+      "seed": 340,
+      "status": "done",
+      "seconds": 68.94,
+      "samples": 8764,
+      "note": "B-07 确认有料盒 · A-12 空位复扫"
+    },
+    {
+      "scene": "store",
+      "seed": 451,
+      "status": "done",
+      "seconds": 68.94,
+      "samples": 8764,
+      "note": "B-07 确认有料盒 · A-12 空位复扫"
+    },
+    {
+      "scene": "store",
+      "seed": 562,
+      "status": "done",
+      "seconds": 68.94,
+      "samples": 8764,
+      "note": "B-07 确认有料盒 · A-12 空位复扫"
+    },
+    {
+      "scene": "air",
+      "seed": 117,
+      "status": "done",
+      "seconds": 33.92,
+      "samples": 5820,
+      "note": "观察窗闭合 · 巡检记录签收"
+    },
+    {
+      "scene": "air",
+      "seed": 128,
+      "status": "done",
+      "seconds": 33.96,
+      "samples": 5820,
+      "note": "观察窗闭合 · 巡检记录签收"
+    },
+    {
+      "scene": "air",
+      "seed": 239,
+      "status": "done",
+      "seconds": 33.94,
+      "samples": 5820,
+      "note": "观察窗闭合 · 巡检记录签收"
+    },
+    {
+      "scene": "air",
+      "seed": 340,
+      "status": "done",
+      "seconds": 33.94,
+      "samples": 5820,
+      "note": "观察窗闭合 · 巡检记录签收"
+    },
+    {
+      "scene": "air",
+      "seed": 451,
+      "status": "done",
+      "seconds": 33.94,
+      "samples": 5820,
+      "note": "观察窗闭合 · 巡检记录签收"
+    },
+    {
+      "scene": "air",
+      "seed": 562,
+      "status": "done",
+      "seconds": 33.96,
+      "samples": 5820,
+      "note": "观察窗闭合 · 巡检记录签收"
+    }
+  ],
+  "skill": "gait"
+}

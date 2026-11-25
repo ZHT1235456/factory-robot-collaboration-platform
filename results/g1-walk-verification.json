@@ -1,0 +1,95 @@
+{
+  "robot": "Unitree G1",
+  "motion": "unloaded level walking",
+  "commandedDistanceM": 5,
+  "commandedSpeedMps": 0.78,
+  "sampleSeconds": 0.02,
+  "steadyIntervalM": [
+    0.38,
+    4.62
+  ],
+  "minForwardSpeedMps": 0.38,
+  "stanceKnee": {
+    "minNormalForceN": 2,
+    "maxSoleToPelvisForeAftM": 0.09
+  },
+  "reference": {
+    "recordedBy": "CMU Graphics Lab",
+    "cycleSubset": "Masaryk University extracted-56.3",
+    "url": "https://gait.fi.muni.cz/",
+    "estimatedPhases": {
+      "cycles": 35,
+      "phaseObservations": 70,
+      "samplingHz": 120,
+      "medianCadenceStepsPerMin": 102.86,
+      "dominantArmPhase": [
+        -0.9897,
+        -0.1432
+      ],
+      "upperArmAmplitudeDeg": 5.43,
+      "kneePeakCycleFraction": 0.8047,
+      "elbowMedianDeg": 30.65
+    }
+  },
+  "releasePolicy": {
+    "file": "foot-tracking-policy.onnx",
+    "bytes": 35464,
+    "sha256": "9847e5ce4d04f9823a35c60c2be73f73437fa8042aca7227eb51e40e3534771d",
+    "parityMaxError": 1.1622905731201172e-06
+  },
+  "windows": {
+    "before": {
+      "state": "done",
+      "timeSeconds": 7.0200000000000005,
+      "distanceM": 5.0,
+      "cruiseFrames": 271,
+      "supportedPct": 100.0,
+      "medianStanceKneeDeg": 45.695,
+      "swingKneeP90Deg": 68.31,
+      "medianElbowFlexionDeg": 34.893,
+      "medianPelvisM": 0.737,
+      "opposedArmDifferenceP90Deg": 25.75,
+      "medianForwardMps": 0.783,
+      "landings": 14,
+      "heelFirstLandings": 14,
+      "toeOffs": 0,
+      "unexpectedContactFrames": 0
+    },
+    "after": {
+      "state": "done",
+      "timeSeconds": 7.22,
+      "distanceM": 5.0,
+      "cruiseFrames": 274,
+      "supportedPct": 100.0,
+      "medianStanceKneeDeg": 17.279,
+      "swingKneeP90Deg": 56.156,
+      "medianElbowFlexionDeg": 14.795,
+      "medianPelvisM": 0.768,
+      "opposedArmDifferenceP90Deg": 24.532,
+      "medianForwardMps": 0.771,
+      "landings": 18,
+      "heelFirstLandings": 11,
+      "toeOffs": 13,
+      "unexpectedContactFrames": 0
+    }
+  },
+  "lab": {
+    "after": {
+      "state": "done",
+      "timeSeconds": 7.22,
+      "distanceM": 5.0,
+      "cruiseFrames": 274,
+      "supportedPct": 100.0,
+      "medianStanceKneeDeg": 17.064,
+      "swingKneeP90Deg": 56.156,
+      "medianElbowFlexionDeg": 14.795,
+      "medianPelvisM": 0.768,
+      "opposedArmDifferenceP90Deg": 24.534,
+      "medianForwardMps": 0.771,
+      "landings": 18,
+      "heelFirstLandings": 11,
+      "toeOffs": 13,
+      "unexpectedContactFrames": 0
+    }
+  }
+}

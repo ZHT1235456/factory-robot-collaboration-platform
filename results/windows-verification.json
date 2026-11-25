@@ -1,0 +1,61 @@
+{
+  "file": "工厂机器人协同作业平台.exe",
+  "title": "工厂机器人协同作业平台",
+  "bytes": 40488448,
+  "sha256": "7c098f45ee041c590517c30dca7a3170ccf33810837c037788cf978ebf6aa9af",
+  "scene": "factory",
+  "extent": [
+    47.2,
+    26
+  ],
+  "defaults_to_fullscreen": true,
+  "f11_round_trip": true,
+  "default_camera": "speaker",
+  "go2_lidar": {
+    "nominal_planar_rays": 112,
+    "occluded_at_start": 15,
+    "rear_unknown": true
+  },
+  "full_size": [
+    2880,
+    1800
+  ],
+  "restored_window": [
+    2642,
+    1518
+  ],
+  "verified_seed": 17,
+  "mapping": {
+    "method": "known-pose log odds occupancy grid",
+    "floor": "lower",
+    "cell_size_m": 0.25,
+    "stops": 31,
+    "go2_version": "V1034",
+    "coverage_percent": 93,
+    "handoff_seconds": 344.0,
+    "ack_seconds": 345.0,
+    "g1_map_source_verified": true,
+    "g1_waited_verified": true,
+    "live_map_version": "V1101",
+    "replay_through_handoff": true,
+    "map_based_route_visible": true,
+    "reset_verified": true,
+    "camera_tracks_go2_during_survey": true,
+    "camera_returns_to_speakers_after_delivery": true
+  },
+  "headless_physics": {
+    "seeds": [
+      0,
+      11,
+      14,
+      17
+    ],
+    "work_orders": 5,
+    "checkpoints": 30,
+    "validated_missing_receipts": [
+      "floor_map",
+      "heat_map",
+      "return_permit"
+    ]
+  }
+}

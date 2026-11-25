@@ -1,0 +1,720 @@
+{
+  "sampleSeconds": 0.02,
+  "platform": "Windows",
+  "motion": {
+    "minPlanarSpeedMps": 0.1,
+    "minYawSpeedRadSec": 0.17
+  },
+  "minNormalForceN": 2,
+  "minSupportedFeet": {
+    "g1": 1,
+    "go2": 2
+  },
+  "aggregation": "median across work orders with matching scenarios and seeds, omitting unavailable slip values",
+  "before": {
+    "controller": "previous joint curves",
+    "summary": {
+      "passed": 10,
+      "contact": {
+        "g1": {
+          "supportedPct": 48.895,
+          "flatSlipMedianCmS": 16.128,
+          "flatSlipP90CmS": 120.763,
+          "stairSlipP90CmS": 114.014,
+          "headingErrorP90Deg": 58.446
+        },
+        "go2": {
+          "supportedPct": 0.29,
+          "flatSlipMedianCmS": 102.88,
+          "flatSlipP90CmS": 168.864,
+          "stairSlipP90CmS": null,
+          "headingErrorP90Deg": 34.34
+        }
+      }
+    },
+    "trials": [
+      {
+        "scene": "pump",
+        "seed": 17,
+        "state": "done",
+        "seconds": 60.12,
+        "last": "P2 测点保留记录器 · 工单已移交",
+        "contact": {
+          "g1": {
+            "motionFrames": 2012,
+            "supportedPct": 57.46,
+            "flatContactSamples": 1003,
+            "flatSlipMedianCmS": 15.496,
+            "flatSlipP90CmS": 105.246,
+            "stairSlipP90CmS": 122.795,
+            "headingErrorP90Deg": 58.505,
+            "treadLevels": [
+              0.175,
+              0.35,
+              0.525,
+              0.7,
+              0.875,
+              1.05,
+              1.225,
+              1.4,
+              1.575,
+              1.75,
+              1.925,
+              2.1,
+              2.275,
+              2.45,
+              2.625,
+              2.8
+            ]
+          },
+          "go2": {
+            "motionFrames": 1038,
+            "supportedPct": 0.0,
+            "flatContactSamples": 0,
+            "flatSlipMedianCmS": null,
+            "flatSlipP90CmS": null,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 37.896,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "pump",
+        "seed": 28,
+        "state": "done",
+        "seconds": 58.64,
+        "last": "P2 测点保留记录器 · 工单已移交",
+        "contact": {
+          "g1": {
+            "motionFrames": 1938,
+            "supportedPct": 56.5,
+            "flatContactSamples": 957,
+            "flatSlipMedianCmS": 16.271,
+            "flatSlipP90CmS": 112.426,
+            "stairSlipP90CmS": 105.233,
+            "headingErrorP90Deg": 57.878,
+            "treadLevels": [
+              0.175,
+              0.35,
+              0.525,
+              0.7,
+              0.875,
+              1.05,
+              1.225,
+              1.4,
+              1.575,
+              1.75,
+              1.925,
+              2.1,
+              2.275,
+              2.45,
+              2.625,
+              2.8
+            ]
+          },
+          "go2": {
+            "motionFrames": 1025,
+            "supportedPct": 0.1,
+            "flatContactSamples": 3,
+            "flatSlipMedianCmS": 131.301,
+            "flatSlipP90CmS": 143.359,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 38.345,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "cnc",
+        "seed": 17,
+        "state": "done",
+        "seconds": 42.94,
+        "last": "T-114 已装入换型托盘",
+        "contact": {
+          "g1": {
+            "motionFrames": 1327,
+            "supportedPct": 48.91,
+            "flatContactSamples": 717,
+            "flatSlipMedianCmS": 15.869,
+            "flatSlipP90CmS": 112.569,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 58.386,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 347,
+            "supportedPct": 0.29,
+            "flatContactSamples": 2,
+            "flatSlipMedianCmS": 57.635,
+            "flatSlipP90CmS": 63.991,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.043,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "cnc",
+        "seed": 28,
+        "state": "done",
+        "seconds": 42.96,
+        "last": "T-114 已装入换型托盘",
+        "contact": {
+          "g1": {
+            "motionFrames": 1328,
+            "supportedPct": 50.23,
+            "flatContactSamples": 725,
+            "flatSlipMedianCmS": 15.908,
+            "flatSlipP90CmS": 113.386,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 58.288,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 347,
+            "supportedPct": 0.29,
+            "flatContactSamples": 2,
+            "flatSlipMedianCmS": 57.635,
+            "flatSlipP90CmS": 63.991,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.043,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "pack",
+        "seed": 17,
+        "state": "done",
+        "seconds": 36.54,
+        "last": "抽检支路清空 · 样品留在秤台",
+        "contact": {
+          "g1": {
+            "motionFrames": 1198,
+            "supportedPct": 44.32,
+            "flatContactSamples": 610,
+            "flatSlipMedianCmS": 16.157,
+            "flatSlipP90CmS": 128.08,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 63.159,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 298,
+            "supportedPct": 0.0,
+            "flatContactSamples": 0,
+            "flatSlipMedianCmS": null,
+            "flatSlipP90CmS": null,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.043,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "pack",
+        "seed": 28,
+        "state": "done",
+        "seconds": 36.58,
+        "last": "抽检支路清空 · 样品留在秤台",
+        "contact": {
+          "g1": {
+            "motionFrames": 1200,
+            "supportedPct": 44.33,
+            "flatContactSamples": 605,
+            "flatSlipMedianCmS": 16.291,
+            "flatSlipP90CmS": 124.807,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 63.464,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 298,
+            "supportedPct": 0.0,
+            "flatContactSamples": 0,
+            "flatSlipMedianCmS": null,
+            "flatSlipP90CmS": null,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.043,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "store",
+        "seed": 17,
+        "state": "done",
+        "seconds": 53.62,
+        "last": "B-07 确认有料盒 · A-12 空位复扫",
+        "contact": {
+          "g1": {
+            "motionFrames": 1514,
+            "supportedPct": 48.88,
+            "flatContactSamples": 826,
+            "flatSlipMedianCmS": 15.675,
+            "flatSlipP90CmS": 129.219,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 55.514,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 698,
+            "supportedPct": 1.43,
+            "flatContactSamples": 24,
+            "flatSlipMedianCmS": 133.038,
+            "flatSlipP90CmS": 277.969,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 46.594,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "store",
+        "seed": 28,
+        "state": "done",
+        "seconds": 53.6,
+        "last": "B-07 确认有料盒 · A-12 空位复扫",
+        "contact": {
+          "g1": {
+            "motionFrames": 1516,
+            "supportedPct": 48.94,
+            "flatContactSamples": 838,
+            "flatSlipMedianCmS": 16.099,
+            "flatSlipP90CmS": 129.048,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 55.504,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 704,
+            "supportedPct": 1.42,
+            "flatContactSamples": 24,
+            "flatSlipMedianCmS": 133.038,
+            "flatSlipP90CmS": 277.969,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 46.594,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "air",
+        "seed": 17,
+        "state": "done",
+        "seconds": 20.1,
+        "last": "观察窗闭合 · 巡检记录签收",
+        "contact": {
+          "g1": {
+            "motionFrames": 552,
+            "supportedPct": 48.01,
+            "flatContactSamples": 257,
+            "flatSlipMedianCmS": 19.658,
+            "flatSlipP90CmS": 120.763,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 61.477,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 426,
+            "supportedPct": 0.7,
+            "flatContactSamples": 8,
+            "flatSlipMedianCmS": 102.88,
+            "flatSlipP90CmS": 168.864,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 34.34,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "air",
+        "seed": 28,
+        "state": "done",
+        "seconds": 20.1,
+        "last": "观察窗闭合 · 巡检记录签收",
+        "contact": {
+          "g1": {
+            "motionFrames": 552,
+            "supportedPct": 48.01,
+            "flatContactSamples": 257,
+            "flatSlipMedianCmS": 19.658,
+            "flatSlipP90CmS": 120.763,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 61.477,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 426,
+            "supportedPct": 0.7,
+            "flatContactSamples": 8,
+            "flatSlipMedianCmS": 102.88,
+            "flatSlipP90CmS": 168.864,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 34.34,
+            "treadLevels": []
+          }
+        }
+      }
+    ]
+  },
+  "after": {
+    "controller": "world-space foot plan and ONNX correction",
+    "summary": {
+      "passed": 10,
+      "contact": {
+        "g1": {
+          "supportedPct": 97.165,
+          "flatSlipMedianCmS": 2.289,
+          "flatSlipP90CmS": 18.755,
+          "stairSlipP90CmS": 25.941,
+          "headingErrorP90Deg": 16.265
+        },
+        "go2": {
+          "supportedPct": 79.515,
+          "flatSlipMedianCmS": 2.576,
+          "flatSlipP90CmS": 16.768,
+          "stairSlipP90CmS": null,
+          "headingErrorP90Deg": 0.03
+        }
+      }
+    },
+    "trials": [
+      {
+        "scene": "pump",
+        "seed": 17,
+        "state": "done",
+        "seconds": 98.12,
+        "gaitCalls": 4169,
+        "last": "P2 测点保留记录器 · 工单已移交",
+        "contact": {
+          "g1": {
+            "motionFrames": 3616,
+            "supportedPct": 97.18,
+            "flatContactSamples": 2148,
+            "flatSlipMedianCmS": 2.2,
+            "flatSlipP90CmS": 18.454,
+            "stairSlipP90CmS": 29.775,
+            "headingErrorP90Deg": 17.966,
+            "treadLevels": [
+              0.175,
+              0.35,
+              0.525,
+              0.7,
+              0.875,
+              1.05,
+              1.225,
+              1.4,
+              1.575,
+              1.75,
+              1.925,
+              2.1,
+              2.275,
+              2.45,
+              2.625,
+              2.8
+            ]
+          },
+          "go2": {
+            "motionFrames": 2163,
+            "supportedPct": 79.75,
+            "flatContactSamples": 3145,
+            "flatSlipMedianCmS": 2.519,
+            "flatSlipP90CmS": 17.023,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.034,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "pump",
+        "seed": 28,
+        "state": "done",
+        "seconds": 96.64,
+        "gaitCalls": 4095,
+        "last": "P2 测点保留记录器 · 工单已移交",
+        "contact": {
+          "g1": {
+            "motionFrames": 3552,
+            "supportedPct": 97.8,
+            "flatContactSamples": 2143,
+            "flatSlipMedianCmS": 2.182,
+            "flatSlipP90CmS": 15.738,
+            "stairSlipP90CmS": 22.107,
+            "headingErrorP90Deg": 14.231,
+            "treadLevels": [
+              0.175,
+              0.35,
+              0.525,
+              0.7,
+              0.875,
+              1.05,
+              1.225,
+              1.4,
+              1.575,
+              1.75,
+              1.925,
+              2.1,
+              2.275,
+              2.45,
+              2.625,
+              2.8
+            ]
+          },
+          "go2": {
+            "motionFrames": 2196,
+            "supportedPct": 79.28,
+            "flatContactSamples": 3141,
+            "flatSlipMedianCmS": 2.501,
+            "flatSlipP90CmS": 16.514,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.034,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "cnc",
+        "seed": 17,
+        "state": "done",
+        "seconds": 68.42,
+        "gaitCalls": 2799,
+        "last": "T-114 已装入换型托盘",
+        "contact": {
+          "g1": {
+            "motionFrames": 2424,
+            "supportedPct": 98.02,
+            "flatContactSamples": 1632,
+            "flatSlipMedianCmS": 2.286,
+            "flatSlipP90CmS": 20.964,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 17.177,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 622,
+            "supportedPct": 84.41,
+            "flatContactSamples": 1137,
+            "flatSlipMedianCmS": 3.275,
+            "flatSlipP90CmS": 28.262,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.03,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "cnc",
+        "seed": 28,
+        "state": "done",
+        "seconds": 68.42,
+        "gaitCalls": 2799,
+        "last": "T-114 已装入换型托盘",
+        "contact": {
+          "g1": {
+            "motionFrames": 2423,
+            "supportedPct": 97.15,
+            "flatContactSamples": 1625,
+            "flatSlipMedianCmS": 2.292,
+            "flatSlipP90CmS": 19.554,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 17.176,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 622,
+            "supportedPct": 84.41,
+            "flatContactSamples": 1137,
+            "flatSlipMedianCmS": 3.275,
+            "flatSlipP90CmS": 28.262,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.03,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "pack",
+        "seed": 17,
+        "state": "done",
+        "seconds": 64.36,
+        "gaitCalls": 2775,
+        "last": "抽检支路清空 · 样品留在秤台",
+        "contact": {
+          "g1": {
+            "motionFrames": 2355,
+            "supportedPct": 96.86,
+            "flatContactSamples": 1553,
+            "flatSlipMedianCmS": 2.297,
+            "flatSlipP90CmS": 17.367,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 16.737,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 531,
+            "supportedPct": 86.44,
+            "flatContactSamples": 996,
+            "flatSlipMedianCmS": 2.576,
+            "flatSlipP90CmS": 16.435,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.03,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "pack",
+        "seed": 28,
+        "state": "done",
+        "seconds": 64.36,
+        "gaitCalls": 2775,
+        "last": "抽检支路清空 · 样品留在秤台",
+        "contact": {
+          "g1": {
+            "motionFrames": 2354,
+            "supportedPct": 97.07,
+            "flatContactSamples": 1564,
+            "flatSlipMedianCmS": 2.336,
+            "flatSlipP90CmS": 19.056,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 16.685,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 531,
+            "supportedPct": 86.44,
+            "flatContactSamples": 996,
+            "flatSlipMedianCmS": 2.576,
+            "flatSlipP90CmS": 16.435,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.03,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "store",
+        "seed": 17,
+        "state": "done",
+        "seconds": 89.56,
+        "gaitCalls": 3830,
+        "last": "B-07 确认有料盒 · A-12 空位复扫",
+        "contact": {
+          "g1": {
+            "motionFrames": 2619,
+            "supportedPct": 94.39,
+            "flatContactSamples": 1807,
+            "flatSlipMedianCmS": 2.521,
+            "flatSlipP90CmS": 22.299,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 15.696,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 1495,
+            "supportedPct": 73.11,
+            "flatContactSamples": 1931,
+            "flatSlipMedianCmS": 3.275,
+            "flatSlipP90CmS": 28.911,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.042,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "store",
+        "seed": 28,
+        "state": "done",
+        "seconds": 93.52,
+        "gaitCalls": 3830,
+        "last": "B-07 确认有料盒 · A-12 空位复扫",
+        "contact": {
+          "g1": {
+            "motionFrames": 2670,
+            "supportedPct": 94.57,
+            "flatContactSamples": 1807,
+            "flatSlipMedianCmS": 2.473,
+            "flatSlipP90CmS": 22.632,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 15.845,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 1495,
+            "supportedPct": 73.24,
+            "flatContactSamples": 1931,
+            "flatSlipMedianCmS": 3.275,
+            "flatSlipP90CmS": 28.911,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.042,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "air",
+        "seed": 17,
+        "state": "done",
+        "seconds": 40.3,
+        "gaitCalls": 1810,
+        "last": "观察窗闭合 · 巡检记录签收",
+        "contact": {
+          "g1": {
+            "motionFrames": 1060,
+            "supportedPct": 99.72,
+            "flatContactSamples": 692,
+            "flatSlipMedianCmS": 2.159,
+            "flatSlipP90CmS": 15.675,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 14.209,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 1011,
+            "supportedPct": 73.49,
+            "flatContactSamples": 1090,
+            "flatSlipMedianCmS": 2.225,
+            "flatSlipP90CmS": 15.329,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.03,
+            "treadLevels": []
+          }
+        }
+      },
+      {
+        "scene": "air",
+        "seed": 28,
+        "state": "done",
+        "seconds": 40.3,
+        "gaitCalls": 1810,
+        "last": "观察窗闭合 · 巡检记录签收",
+        "contact": {
+          "g1": {
+            "motionFrames": 1060,
+            "supportedPct": 99.72,
+            "flatContactSamples": 692,
+            "flatSlipMedianCmS": 2.159,
+            "flatSlipP90CmS": 15.675,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 14.209,
+            "treadLevels": []
+          },
+          "go2": {
+            "motionFrames": 1011,
+            "supportedPct": 73.49,
+            "flatContactSamples": 1090,
+            "flatSlipMedianCmS": 2.225,
+            "flatSlipP90CmS": 15.329,
+            "stairSlipP90CmS": null,
+            "headingErrorP90Deg": 0.03,
+            "treadLevels": []
+          }
+        }
+      }
+    ]
+  }
+}
