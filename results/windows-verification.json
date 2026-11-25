@@ -1,8 +1,9 @@
 {
   "file": "工厂机器人协同作业平台.exe",
   "title": "工厂机器人协同作业平台",
-  "bytes": 40488448,
-  "sha256": "7c098f45ee041c590517c30dca7a3170ccf33810837c037788cf978ebf6aa9af",
+  "version": "1.0.1",
+  "bytes": 40491008,
+  "sha256": "80ffbc7a992a3f065ed6c633b49c98f770c94a719e112bcacd1dea3bc8e3adda",
   "scene": "factory",
   "extent": [
     47.2,
@@ -16,14 +17,6 @@
     "occluded_at_start": 15,
     "rear_unknown": true
   },
-  "full_size": [
-    2880,
-    1800
-  ],
-  "restored_window": [
-    2642,
-    1518
-  ],
   "verified_seed": 17,
   "mapping": {
     "method": "known-pose log odds occupancy grid",
@@ -36,12 +29,16 @@
     "ack_seconds": 345.0,
     "g1_map_source_verified": true,
     "g1_waited_verified": true,
-    "live_map_version": "V1101",
     "replay_through_handoff": true,
     "map_based_route_visible": true,
     "reset_verified": true,
-    "camera_tracks_go2_during_survey": true,
-    "camera_returns_to_speakers_after_delivery": true
+    "camera_tracks_go2_during_survey": true
+  },
+  "scene_review": {
+    "work_areas_checked": ["pump", "filter", "heat", "spare", "return"],
+    "grated_surfaces": 33,
+    "pump_dialogue_replay": true,
+    "physics_and_navigation_match_v1_0_0": true
   },
   "headless_physics": {
     "seeds": [

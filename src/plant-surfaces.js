@@ -13,12 +13,12 @@ const units = {
 };
 const finish = {
   paint: [.57, .14], panel: [.51, .19], metal: [.41, .61], brushed: [.34, .68],
-  tread: [.57, .59], concrete: [.88, .01], plastic: [.64, .03], rubber: [.91, .02],
+  tread: [.57, .59], grating: [.52, .53], concrete: [.88, .01], plastic: [.64, .03], rubber: [.91, .02],
   cardboard: [.91, 0], tape: [.47, .03], paper: [.82, 0], porcelain: [.31, .04],
   window: [.22, .34], display: [.38, .13], light: [.35, 0],
   'factory-floor': [.79, .02], 'floor-paint': [.73, .015],
 };
-const metersPerTile = { concrete: 2.4, tread: .143, 'factory-floor': 3.8 };
+const metersPerTile = { concrete: 2.4, tread: .143, grating: .32, 'factory-floor': 3.8 };
 const nonShadowing = new Set(['concrete', 'factory-floor', 'paper', 'light', 'display']);
 
 function treadMap() {
@@ -47,6 +47,26 @@ function treadMap() {
   return map;
 }
 
+function gratingMap() {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#31393d';
+  ctx.fillRect(0, 0, 128, 128);
+  ctx.fillStyle = '#7e888b';
+  for (let y = 0; y < 128; y += 32) ctx.fillRect(0, y, 128, 4);
+  for (let x = 0; x < 128; x += 16) {
+    ctx.fillStyle = '#a4afb2';
+    ctx.fillRect(x, 0, 6, 128);
+    ctx.fillStyle = '#d3dada';
+    ctx.fillRect(x, 0, 2, 128);
+  }
+  const map = new CanvasTexture(canvas);
+  map.colorSpace = SRGBColorSpace;
+  map.wrapS = map.wrapT = RepeatWrapping;
+  return map;
+}
+
 export class PlantSurfaces {
   constructor(renderer, redraw) {
     this.materials = new Map();
@@ -62,6 +82,8 @@ export class PlantSurfaces {
     this.factoryFloor.wrapS = this.factoryFloor.wrapT = MirroredRepeatWrapping;
     this.tread = treadMap();
     this.tread.anisotropy = anisotropy;
+    this.grating = gratingMap();
+    this.grating.anisotropy = anisotropy;
   }
 
   material(surface, rgb) {
@@ -77,13 +99,18 @@ export class PlantSurfaces {
       spec.bumpMap = this.concrete;
       spec.bumpScale = .004;
     } else if (surface === 'factory-floor') {
-      spec.color.setRGB(.91, .94, .96, SRGBColorSpace);
+      spec.color.setRGB(.86, .885, .90, SRGBColorSpace);
       spec.map = this.factoryFloor;
       spec.bumpMap = this.factoryFloor;
-      spec.bumpScale = .006;
+      spec.bumpScale = .0045;
     } else if (surface === 'tread') {
       spec.bumpMap = this.tread;
       spec.bumpScale = .005;
+    } else if (surface === 'grating') {
+      spec.color.lerp(new Color(0xffffff), .65);
+      spec.map = this.grating;
+      spec.bumpMap = this.grating;
+      spec.bumpScale = .004;
     } else if (surface === 'display' || surface === 'light') {
       spec.emissive = color;
       spec.emissiveIntensity = surface === 'light' ? .85 : .26;

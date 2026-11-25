@@ -336,18 +336,25 @@ class Plant:
                 self.box(x, lane, .002, .038, .75, .004, YELLOW, collide=False)
 
     def _pump(self):
+        tread = "grating" if self.factory else "tread"
         self.box(2.75, 1.94, PUMP_FLIGHT.upper - .08, 6.1, 3.61, .16, GALV, name="walkway",
-                 nav=False, surface="tread")
+                 nav=False, surface=tread)
         for x in (.18, 3.0, 5.43):
             self.box(x, .22, 1.38, .125, .125, 2.74, STEEL, surface="metal")
             self.box(x, .22, .033, .28, .25, .066, GALV, surface="metal")
+            if self.factory:
+                for dx in (-.095, .095):
+                    self.tube((x+dx, .22, .066), (x+dx, .22, .087), .021, STEEL, surface="brushed")
         self.box(2.76, .21, 2.64, 6.05, .16, .19, STEEL, collide=False, surface="metal")
+        if self.factory:
+            self.box(2.74, .151, 2.815, 5.94, .052, .084, STEEL, collide=False, surface="metal")
+            self.box(5.72, 1.937, 2.815, .055, 3.57, .084, STEEL, collide=False, surface="metal")
         for letter, y in FLIGHTS.items():
             flight = letter.lower()
             for i, x in enumerate(PUMP_FLIGHT.centers):
                 height = (i + 1) * PUMP_FLIGHT.riser
                 self.box(x, y, height-.023, PUMP_FLIGHT.tread + .002, 1.14, .046, GALV,
-                         name=f"tread_{flight}_{i + 1}", surface="tread")
+                         name=f"tread_{flight}_{i + 1}", surface=tread)
                 self.box(x - .14, y, height + .002, .025, 1.10, .004, YELLOW, collide=False)
             for side in (-.59, .59):
                 side_name = "south" if side < 0 else "north"
@@ -441,6 +448,15 @@ class Plant:
             self.tube((-5.11, y+offset, .947), (-3.32, y+offset, .947), .037, BLUE, surface="metal")
             for x in (-4.97, -4.09, -3.44):
                 self.tube((x-.024, y+offset, .947), (x+.024, y+offset, .947), .063, GALV, surface="metal")
+        if self.factory:
+            # The clamping collars sit on galvanized saddles, leaving the inspection opening clear.
+            for x in (-4.97, -4.09, -3.44):
+                self.box(x, y, .900, .087, .84, .032, GALV, collide=False, surface="brushed")
+            for side in (-1, 1):
+                base_y = y+side*.485
+                for x in (-5.06, -3.39):
+                    self.box(x, base_y, .414, .068, .088, .756, STEEL, collide=False, surface="metal")
+                    self.tube((x, base_y, .036), (x, base_y, .056), .023, GALV, surface="brushed")
         self.box(-5.145, y, .41, .050, 1.04, .82, GALV, name="sample_bank_wall", surface="panel")
         for index, name in enumerate(PUMPS):
             axis = y + (index-1)*.23
@@ -458,19 +474,7 @@ class Plant:
         for x, lane_y, text in ((-2.71, LANES["near"], "服务通道"), (-2.71, LANES["far"], "南侧回程通道")):
             self.label(text, x, lane_y+.45, .07)
 
-        cart = ET.SubElement(self.world, "body", name="service_cart", mocap="true",
-                             pos=vec((CART_X, LANES[self.variant.cart_lane], 0.)))
-        boxes = [((0., 0., .39), (.40, .36, .285), STEEL, "panel", "cart_frame"),
-                 ((0., 0., .692), (.423, .38, .025), INK, "rubber", None),
-                 ((.371, 0., .80), (.027, .29, .095), YELLOW, "metal", "cart_handle")]
-        for x in (-.30, .30):
-            for dy in (-.285, .285):
-                boxes.append(((x,dy,.084), (.080,.042,.080), INK, "rubber", None))
-        for center, half, color, surface, name in boxes:
-            self.cart.append(self.shape("box", center, half, color, None, surface))
-            if name:
-                self.geom("box", center, half, color, parent=cart, name=name)
-
+        self._service_cart()
         x, y, z = COVER
         self.box(x+.55, y-.024, .40, .23, .60, .80, STEEL, name="inspection_box", surface="panel")
         for side in (-.362, .204):
@@ -482,6 +486,36 @@ class Plant:
                  surface="display")
         self._inspection_door(COVER)
         self.label("检修观察盖", x+.20, y, 1.05)
+
+    def _service_cart(self):
+        cart = ET.SubElement(self.world, "body", name="service_cart", mocap="true",
+                             pos=vec((CART_X, LANES[self.variant.cart_lane], 0.)))
+        self.geom("box", (0., 0., .39), (.40, .36, .285), STEEL, parent=cart, name="cart_frame")
+        self.geom("box", (.371, 0., .80), (.027, .29, .095), YELLOW, parent=cart, name="cart_handle")
+
+        def panel(center, size, color, surface="metal"):
+            self.cart.append(self.shape("box", center, tuple(value/2 for value in size), color, None, surface))
+
+        axle = (math.sqrt(.5), math.sqrt(.5), 0., 0.)
+        panel((0., 0., .39), (.80, .72, .57), STEEL, "panel")
+        panel((0., 0., .692), (.846, .76, .05), INK, "rubber")
+        for y in (-.369, .369):
+            panel((0., y, .723), (.84, .023, .029), GALV)
+        for x in (-.410, .410):
+            panel((x, 0., .723), (.024, .72, .029), GALV)
+        for z in (.235, .372, .509):
+            panel((0., -.362, z), (.718, .014, .123), (.32, .38, .42), "panel")
+            panel((0., -.386, z+.032), (.47, .027, .020), GALV, "brushed")
+            for x in (-.208, .208):
+                panel((x, -.375, z+.032), (.022, .027, .028), GALV)
+        for y in (-.252, .252):
+            self.cart.append(self.shape("cylinder", (.371, y, .794), (.021, .086), YELLOW, None, "metal"))
+        self.cart.append(self.shape("cylinder", (.371, 0., .874), (.021, .262), YELLOW, axle, "metal"))
+        for x in (-.30, .30):
+            for y in (-.285, .285):
+                panel((x, y, .115), (.056, .104, .106), GALV)
+                self.cart.append(self.shape("cylinder", (x, y, .075), (.074, .042), RUBBER, axle, "rubber"))
+                self.cart.append(self.shape("cylinder", (x, y, .075), (.030, .046), GALV, axle, "brushed"))
 
     def _cnc(self):
         for index, x in enumerate((-1.40, 2.73), 1):

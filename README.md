@@ -10,9 +10,9 @@
 
 ## 运行截图
 
-![Go2 扫描厂房下层，右侧同步更新实时占用栅格](assets/factory-map-follow-go2.png)
+![泵房工区的格栅夹层、双检修梯、管架和检修车](assets/factory-pump-overview.png)
 
-[查看 G1 接收地图的界面](assets/factory-map-handoff.png)
+[查看 Go2 建图](assets/factory-map-follow-go2.png) · [查看 G1 接收地图](assets/factory-map-handoff.png)
 
 ## 厂房和工单
 
@@ -56,7 +56,9 @@ python training/verify_factory.py --seeds 0 11 14 17 --workers 4
 
 ## 设计和构建
 
-[工厂多视角参考](assets/imagegen/maps/factory-utility-hall.png)和[界面设计稿](assets/imagegen/factory-console.png)使用内置 ImageGen 生成。地面铺设冷灰混凝土材质，标线按实景坐标绘制了圆角主通道、工区虚线、门口白线与交接位斜纹。[全厂俯视](assets/factory-floor-plan.png) · [换热工区近景](assets/factory-floor-detail.png) · [地面材质](assets/imagegen/factory-floor.webp) · [生成记录和提示词](assets/imagegen/prompts.md)
+设计阶段调用 ImageGen 技能生成厂房多视角参考、泵房细节图和界面设计稿。三维场景按参考图细化了格栅、检修车、开放式货架和设备管接头。圆角主通道、工区虚线、门口白线和交接位斜纹按厂房坐标绘制。
+
+[全厂参考图](assets/imagegen/maps/factory-utility-hall.png) · [泵房参考图](assets/imagegen/maps/pump-cooperation-map.png) · [界面设计稿](assets/imagegen/factory-console.png) · [全厂俯视](assets/factory-floor-plan.png) · [换热工区近景](assets/factory-floor-detail.png) · [地面材质](assets/imagegen/factory-floor.webp) · [生成记录和提示词](assets/imagegen/prompts.md)
 
 在 Windows 上构建需要 Node.js、Python、Rust MSVC 和 Visual C++ 工具链。可将 `COLLAB_PYTHON` 指向已有的推理环境。
 

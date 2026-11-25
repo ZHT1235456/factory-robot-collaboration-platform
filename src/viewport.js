@@ -294,12 +294,13 @@ export class WorkcellView {
       const [x, y, z] = layout.points.door;
       this.door.position.set(x, y+.18, z);
       this.plant.add(this.door);
+      const face = layout.factory ? this.surfaces.material('panel', [.22, .37, .53]) : display;
       for (const side of [-1, 1]) {
         piece(this.door, [.033, .41, .046], [0, -.205, side*.217], metal);
         piece(this.door, [.033, .047, .386], [0, -.205+side*.181, 0], metal);
         pin(this.door, [0, -.016, side*.134-.044], [0, -.016, side*.134+.044], .022, anodized);
       }
-      piece(this.door, [.023, .316, .388], [0, -.205, 0], display);
+      piece(this.door, [.023, .316, .388], [0, -.205, 0], face);
       piece(this.door, [.043, .075, .055], [-.028, -.314, 0], safety);
       piece(this.door, [.004, .093, .029], [-.013, -.17, .137], anodized);
     }

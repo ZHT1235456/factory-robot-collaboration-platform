@@ -1,6 +1,6 @@
 [package]
 name = "robot-collaboration"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 description = "基于 SuperMimic 的工业机器人协同作业仿真"
 publish = false

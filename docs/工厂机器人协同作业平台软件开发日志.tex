@@ -13,9 +13,9 @@
 
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
-% v1.0.0 发行包及默认种子 17 的仿真记录
-\newcommand{\ReleaseSize}{38.61\,MiB}
-\newcommand{\ReleaseBytes}{40\,488\,448}
+% v1.0.1 发行包及默认种子 17 的仿真记录
+\newcommand{\ReleaseSize}{38.62\,MiB}
+\newcommand{\ReleaseBytes}{40\,491\,008}
 \newcommand{\MapCoverage}{93.08\%}
 \newcommand{\MapVersion}{V1034}
 \newcommand{\MapTime}{344\,秒}
@@ -108,7 +108,7 @@
 
 场景串联 5 张工单，共 30 个任务节点，依次执行泵组测振、过滤隔离、换热复检、备件转运和回水验收。
 
-v1.0.0 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（\ReleaseBytes{} 字节）。界面运行在 Microsoft Edge WebView2 中，双击启动后默认全屏，按 \texttt{F11} 可切换全屏与窗口模式。
+v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（\ReleaseBytes{} 字节）。界面运行在 Microsoft Edge WebView2 中，双击启动后默认全屏，按 \texttt{F11} 可切换全屏与窗口模式。
 
 \begin{figure}[htbp]
   \centering
@@ -259,6 +259,25 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
     建图时，镜头跟随 Go2，右侧同步更新下层地图。G1 接图后，镜头转向最近发送消息的机器人。
   \end{flushleft}
 \end{minipage}
+
+\clearpage
+
+\section{设计图与场景建模}
+
+设计阶段调用了 ImageGen 技能，生成五工区和泵房的多视角设计图、操作台设计稿及混凝土地面纹理。全厂图用于核对设备分区和安全黄线，泵房图用于查看格栅、低位管架和检修工装的结构。
+
+对照设计图，三维场景补上了夹层和踏步的格栅纹理、检修车的抽屉与脚轮、开放式备件货架，以及过滤、换热和回水设备的管接头与支座。Three.js 按厂房坐标绘制标线和设备细节，MuJoCo 负责碰撞与测距。
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.98\linewidth,height=0.345\textheight,keepaspectratio]{../assets/imagegen/maps/factory-utility-hall.png}
+  \caption{五工区厂房设计图。上部为全厂平面，下部为两个斜向剖视。}
+  \label{fig:factory-design}
+  \par\vspace{9pt}
+  \includegraphics[width=0.98\linewidth,height=0.345\textheight,keepaspectratio]{../assets/imagegen/maps/pump-cooperation-map.png}
+  \caption{双层泵房设计图。底部分别放大低位管架、观察盖、检修车与箩筐。}
+  \label{fig:pump-design}
+\end{figure}
 
 \clearpage
 

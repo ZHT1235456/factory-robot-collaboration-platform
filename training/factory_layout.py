@@ -78,6 +78,8 @@ def switch(plant, key, point, title):
     plant.box(x+.16, y, .35, .12, .14, .70, STEEL, name=f"stand_{key}", surface="metal")
     plant.box(x+.087, y, z, .108, .23, .18, INK, surface="panel")
     plant.tube((x+.032, y, z), (x+.059, y, z), .055, YELLOW, surface="plastic")
+    anchor_plate(plant, x+.16, y, 0., .223, .27)
+    plant.box(x+.039, y, z, .012, .162, .133, YELLOW, collide=False, surface="panel")
     platform = ET.SubElement(plant.world, "body", name=f"button_{key}", pos=point_string(point))
     ET.SubElement(platform, "joint", name=f"slide_{key}", type="slide", axis="1 0 0", range="0 .030",
                   limited="true", stiffness="310", damping="2.5", solreflimit=".005 1", solimplimit=".98 .999 .001")
@@ -109,6 +111,7 @@ def hall(plant):
     # Keep the central pump house dimensions and build the extension around its outside doors.
     for x in (-23.39, 23.39):
         plant.box(x, 0., .27, .20, 25.6, .54, WHITE, surface="concrete")
+        plant.box(x, 0., .546, .198, 25.57, .012, GALV, collide=False, surface="brushed")
     plant.box(0., 12.79, .27, 46.8, .20, .54, WHITE, surface="concrete")
     plant.box(0., 12.81, 1.90, 46.8, .14, 2.72, WHITE, surface="panel")
     for x in (-23.20, -17.2, -11.4, -5.7, 0., 5.7, 11.4, 17.2, 23.20):
@@ -209,12 +212,17 @@ def filtration(plant):
         plant.tube((x-.60, row, .52), (x+1.83, row, .52), .09, STEEL, True, surface="metal")
         for dx in (-.48, .58, 1.69):
             plant.flange(x+dx, row, .52, .131)
+            plant.box(x+dx, row, .297, .08, .199, .194, STEEL, collide=False, surface="metal")
         handwheel(plant, x+1.70, row, 2.20)
         plant.tube((x+1.70, row, 1.99), (x+1.70, row, 2.10), .049, BLUE, surface="metal")
         pipe_run(plant, [(x+.60, row, 1.96), (x+.60, -1.69, 1.96), (x+.60, -1.69, 2.18)],
                  .072, .098)
         plant.tube((x+.24, -2.76, 1.40), (x+.24, -2.99, 1.40), .019, GALV, surface="metal")
         plant.gauge(x+.24, -2.99, 1.40, .09)
+        for dx, height in ((.12, .63), (.32, 1.48)):
+            pipe_run(plant, [(x+dx, row-.30, height), (x+dx, -2.94, height),
+                             (x+dx, -2.94, 1.34), (x+.24, -2.94, 1.34)],
+                     .011, .033, color=GALV)
         indicator(plant, f"filter_low_{key}", (x+.24, -3.02, .40), (.18, .018, .095),
                   OCHRE if key == alarm else GREEN)
         indicator(plant, f"filter_id_{key}", (x+.24, -3.03, 1.17), (.28, .018, .11), (.32, .61, .66))
@@ -298,13 +306,58 @@ def exchange(plant):
         plant.tube((x+.46, 8.37, 1.47), (x+.46, 8.51, 1.47), .019, GALV, surface="metal")
         plant.tube((x+.56, 9.12, 1.28), (x+.56, 9.12, 2.14), .084, BLUE, surface="metal")
         plant.flange(x+.56, 9.12, 1.99, .118, vertical=True)
+        pipe_run(plant, [(x-.50, 9.06, 1.36), (x-.50, 9.42, 1.36), (x-.50, 9.42, 2.49)],
+                 .061, .134, color=STEEL)
+        plant.flange(x-.50, 9.42, 1.97, .088, vertical=True)
         plant.label(f"H{number} 板换", x, 8.85, 1.90)
     plant.tube((11.72, 9.12, 2.15), (21.05, 9.12, 2.15), .105, BLUE, surface="metal")
+    plant.tube((13.10, 9.42, 2.49), (19.10, 9.42, 2.49), .081, STEEL, surface="metal")
+    pipe_run(plant, [(18.37, 11.92, 2.89), (18.37, 9.42, 2.89), (18.37, 9.42, 2.49)],
+             .081, .18, color=STEEL)
+    for x in (13.41, 15.93, 18.91):
+        plant.flange(x, 9.42, 2.49, .112)
     for name, x, z, color in (("heat_low", 13.62, .42, OCHRE if plant.factory.spare == "seal" else GREEN),
                                ("heat_high", 16.20, 1.32, (.32, .61, .66))):
         plant.box(x, 7.73, .34, .14, .13, .68, GALV, surface="metal")
         plant.tube((x, 7.77, .39), (x, 7.77, z+.05), .035, STEEL, surface="metal")
         indicator(plant, name, (x, 7.64, z), (.28, .020, .10), color)
+
+
+def spare_rack(plant, x):
+    y = 10.62
+    plant.box(x, y, 1.26, 2.58, .69, 2.49, BLUE, surface="metal", render=False)
+    for dx in (-1.22, 1.22):
+        for dy in (-.287, .287):
+            plant.box(x+dx, y+dy, 1.26, .070, .060, 2.49, STEEL, collide=False, surface="metal")
+            anchor_plate(plant, x+dx, y+dy, 0., .123, .106)
+        plant.tube((x+dx, y-.287, .32), (x+dx, y+.287, 1.11), .017, GALV, surface="metal")
+        plant.tube((x+dx, y+.287, 1.12), (x+dx, y-.287, 2.16), .017, GALV, surface="metal")
+    for side in (-1, 1):
+        plant.tube((x+side*1.22, y+.29, .37), (x-side*1.22, y+.29, 2.23), .017, STEEL, surface="metal")
+    for row, z in enumerate((.27, .74, 1.21, 1.69, 2.16)):
+        plant.box(x, y, z, 2.49, .618, .046, GALV, collide=False, surface="brushed")
+        plant.box(x, y-.300, z-.008, 2.51, .034, .082, STEEL, collide=False, surface="metal")
+        if row == 4:
+            continue
+        top = z+.023
+        for index, dx in enumerate((-.88, -.31, .30, .88)):
+            carton = row >= 2 and (index+row) % 3 != 1
+            color = KRAFT if carton else (.28, .46, .60)
+            depth, height = (.40, .291) if carton else (.445, .20)
+            center = y-.280+depth/2
+            face = y-.281
+            plant.box(x+dx, center, top+height/2, .43, depth, height, color, collide=False,
+                      surface="cardboard" if carton else "plastic")
+            if carton:
+                plant.box(x+dx, center, top+height+.002, .048, depth, .004, (.76, .62, .46),
+                          collide=False, surface="tape")
+                plant.box(x+dx, face, top+height*.76, .048, .006, height*.48, (.76, .62, .46),
+                          collide=False, surface="tape")
+            else:
+                plant.box(x+dx, face, top+.179, .43, .022, .038, (.28, .46, .60),
+                          collide=False, surface="plastic")
+                plant.box(x+dx, face-.012, top+.120, .16, .007, .027, INK, collide=False, surface="rubber")
+            plant.box(x+dx+.112, face-.004, top+.082, .088, .006, .039, WHITE, collide=False, surface="paper")
 
 
 def spares(plant):
@@ -320,22 +373,7 @@ def spares(plant):
     plant.label("备件秤台", SPARE_SCALE[0]+.17, SPARE_SCALE[1], 1.02)
     plant.label("交接位", SPARE_DOCK[0], SPARE_DOCK[1], .06)
     for x in (-20.5, -17.0, -13.4):
-        plant.box(x, 10.62, 1.26, 2.58, .69, 2.49, BLUE, surface="metal")
-        for z in (.27, .74, 1.21, 1.69, 2.16):
-            plant.box(x, 10.26, z, 2.53, .056, .072, GALV, collide=False, surface="metal")
-            if z < 2.:
-                for index, dx in enumerate((-.81, -.27, .27, .81)):
-                    carton = z > 1. and index % 3 != 1
-                    color = KRAFT if carton else (.34, .50, .62)
-                    plant.box(x+dx, 10.20, z+.17, .43, .21, .26, color, collide=False,
-                              surface="cardboard" if carton else "plastic")
-                    if carton:
-                        plant.box(x+dx, 10.093, z+.184, .069, .005, .233, (.75, .62, .45), collide=False, surface="tape")
-                    else:
-                        plant.box(x+dx, 10.092, z+.212, .198, .007, .038, INK, collide=False, surface="rubber")
-                    plant.box(x+dx+.119, 10.090, z+.147, .094, .005, .044, WHITE, collide=False, surface="paper")
-        for dx in (-1.27, 1.27):
-            plant.box(x+dx, 10.20, 1.26, .068, .068, 2.49, INK, collide=False, surface="metal")
+        spare_rack(plant, x)
     part_position = SPARE_POINTS[plant.factory.spare]
     ET.SubElement(plant.world, "body", name="spare_source", pos=point_string(part_position))
     part = ET.SubElement(plant.world, "body", name="spare_piece", pos=point_string(part_position))
@@ -364,10 +402,16 @@ def return_monitor(plant):
         for dx in (-.38, .38):
             for dy in (-.33, .33):
                 anchor_plate(plant, x+dx, row+dy, .179, .245, .19)
+                plant.box(x+dx, row+dy, .258, .125, .11, .145, STEEL, collide=False, surface="metal")
+        for height in (.71, 1.66):
+            plant.tube((x, row, height-.009), (x, row, height+.009), .513, STEEL, surface="metal")
         plant.geom("ellipsoid", (x, row, 2.00), (.511, .511, .155), BLUE, collide=False, surface="panel")
         plant.flange(x, row, 2.19, .115, vertical=True)
         plant.tube((x, row-.27, 1.40), (x, row-.50, 1.40), .021, GALV, surface="metal")
         plant.gauge(x, row-.50, 1.40, .092)
+        pipe_run(plant, [(x, row-.45, .52), (x, row-.575, .52), (x, row-.575, .285)],
+                 .036, .061)
+        plant.tube((x, row-.575, .280), (x, row-.575, .331), .056, GALV, surface="brushed")
         plant.label(f"R{index} 缓冲罐", x, row-.01, 2.34)
     plant.tube((-20.32, row, 2.29), (-14.85, row, 2.29), .10, BLUE, surface="metal")
     x, y, _ = RETURN_STATUS
