@@ -104,16 +104,16 @@
 
 \section{厂房场景与软件发布}
 
-这款桌面软件模拟两台机器人在循环水厂房内协作检修。厂房长 47.2 米、宽 26 米，泵房设有夹层和楼梯。四足机器狗 Go2 在下层建图，可从低位通道观察仪表和指示片。人形机器人 G1 核对高处位号，并用手开盖、取放备件和操作按钮。两台机器人通过仿真消息交接地图和确认作业条件，消息在三维场景中以气泡显示。
+这款桌面软件模拟两台机器人在循环水厂房内协作检修。厂房长 47.2 米、宽 26 米，泵房设有夹层和楼梯。四足机器狗 Go2 在下层建图，可从低位通道观察仪表和指示片。人形机器人 G1 核对高处位号，并用手开盖、取放备件和操作按钮。两台机器人通过仿真消息交接地图、确认作业条件，双方发出的消息在三维场景中以气泡显示。
 
-场景串联 5 张工单，共 30 个任务节点，依次执行泵组测振、过滤隔离、换热复检、备件转运和回水验收。
+场景串联 5 张工单，共 30 个任务节点，依次完成泵组测振、过滤隔离、换热复检、备件转运和回水验收。
 
-v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（\ReleaseBytes{} 字节）。界面运行在 Microsoft Edge WebView2 中，双击启动后默认全屏，按 \texttt{F11} 可切换全屏与窗口模式。
+v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（\ReleaseBytes{} 字节）。界面运行在 Microsoft Edge WebView2 中，双击启动后默认全屏，按 \texttt{F11} 可在窗口与全屏模式间切换。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{../assets/factory-map-handoff.png}
-  \caption{G1 接收下层地图后的桌面界面。左侧列出工单，中央为三维场景，右侧可在 Go2 实时地图和 G1 已接收的地图版本之间切换。}
+  \caption{G1 接收下层地图后的桌面界面。左侧为工单列表，中央为三维场景，右侧可在 Go2 实时地图与 G1 已收版本之间切换。}
   \label{fig:handoff}
 \end{figure}
 
@@ -121,7 +121,7 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
 
 \section{技术栈与进程通信}
 
-界面通过 Tauri IPC 将工单种子和步进请求交给 Rust 宿主。Rust 向 Python 子进程的标准输入写入 JSON 指令，从标准输出逐行读取响应。界面根据响应更新三维场景、占用地图和通信记录，并把仿真快照存入时间轴，供暂停后回看。
+界面通过 Tauri IPC 将工单种子和步进请求发给 Rust 宿主，由宿主向 Python 子进程的标准输入写入 JSON 指令，并从标准输出逐行读回数据。拿到结果后，前端更新三维场景、占用地图和通信记录，同时把仿真快照存入时间轴，供暂停后回看。
 
 \begin{table}[htbp]
   \centering
@@ -132,11 +132,11 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
     \toprule
     模块 & 技术 & 用途 \\
     \midrule
-    前端 & Vite、Three.js & Vite 构建前端，Three.js 绘制厂房、机器人、消息气泡和探测射线 \\
+    前端 & Vite、Three.js & Vite 负责构建，Three.js 绘制厂房、机器人、消息气泡和探测射线 \\
     桌面宿主 & Tauri 2、Rust & 管理窗口与全屏切换，启动 Python 子进程并转发消息 \\
-    Python 打包 & PyInstaller & 把 Python 仿真与推理程序打为可执行文件，供桌面端内嵌 \\
-    物理仿真 & MuJoCo & 模拟刚体动力学与接触，计算射线和场景的交点 \cite{todorov2012mujoco} \\
-    策略推理 & ONNX Runtime（CPU） & 计算 G1 操作时的接触修正量，以及 G1 和 Go2 的足端修正量 \\
+    Python 打包 & PyInstaller & 将仿真与推理程序封装为可执行文件，供桌面端内嵌 \\
+    物理仿真 & MuJoCo & 模拟刚体动力学与接触，计算射线与场景交点 \cite{todorov2012mujoco} \\
+    策略推理 & ONNX Runtime（CPU） & 计算 G1 操作接触修正量，以及 G1 与 Go2 的足端修正量 \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -164,15 +164,15 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
     \node[box] (host) at (5.1,0) {\textbf{桌面宿主}\\Tauri 2 与 Rust\\窗口与子进程管理};
     \node[box] (py) at (10.2,0) {\textbf{Python 子进程}\\仿真、建图与任务调度};
 
-    \node[subbox] (cache) at (2.5,-2.5) {\textbf{应用缓存}\\PyInstaller 打包的程序};
+    \node[subbox] (cache) at (2.5,-2.5) {\textbf{应用缓存}\\PyInstaller 打包程序};
     \node[subbox] (mujoco) at (6.8,-2.5) {\textbf{MuJoCo}\\刚体、接触与射线};
     \node[subbox] (onnx) at (11.1,-2.5) {\textbf{ONNX Runtime}\\接触修正与足端跟踪};
 
     \draw[biarr] (fe.east) -- node[above,lbl]{Tauri IPC} (host.west);
     \draw[biarr] (host.east) -- node[above,lbl]{逐行 JSON} (py.west);
 
-    \draw[arr] (host.south west) -- node[left,lbl]{首次启动时解包} (cache.north);
-    \draw[dasharr] (cache.north east) -- node[above,lbl,sloped]{宿主从缓存启动} (py.south west);
+    \draw[arr] (host.south west) -- node[left,lbl]{首次启动解包} (cache.north);
+    \draw[dasharr] (cache.north east) -- node[above,lbl,sloped]{从缓存启动} (py.south west);
 
     \draw[biarr] (py.south) -- node[left,lbl]{位姿与射线} (mujoco.north east);
     \draw[biarr] (py.south east) -- node[right,lbl]{观测与修正量} (onnx.north);
@@ -183,7 +183,7 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
 
 \subsection{运动策略训练与执行}
 
-训练沿用 SuperMimic 的思路 \cite{liao2026supermimic}。先用 MuJoCo 采集的数据拟合可微动力学模型，再以参考动作为条件，用模型预测未来 4 步的状态，结合模仿损失训练策略。实验室服务器训练了 G1 接触策略和两台机器人共用的足端跟踪策略，训练后导出 ONNX 权重。
+策略训练沿用 SuperMimic 思路 \cite{liao2026supermimic}，先用 MuJoCo 采集数据拟合可微动力学模型，再以参考动作为条件预测未来 4 步状态，并结合模仿损失优化策略。G1 接触策略及两机共用的足端跟踪策略均在实验室服务器上完成训练，随后导出 ONNX 权重。
 
 运行时，Python 子进程在 CPU 上调用 ONNX Runtime。控制器把推理得到的修正量加到操作目标或足端参考轨迹上，再用逆运动学和限矩伺服驱动关节。
 
@@ -191,15 +191,15 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
 
 \section{Go2 建图与 G1 路径规划}
 
-宇树公布的 Go2 L2 雷达标称视场为水平 360 度、垂直 96 度 \cite{unitreeGo2}。厂房仿真采用二维测距模型。Go2 沿预设的 31 个观测点移动，以 MuJoCo 给出的传感器位置为起点，每次扫描沿水平整圈发出 112 条射线，最大量程为 5 米。系统以对数几率累积空闲和占用证据，更新边长 0.25 米的占用栅格 \cite{elfes1989occupancy}。
+宇树公布的 Go2 L2 雷达标称视场为水平 360 度、垂直 96 度 \cite{unitreeGo2}。桌面仿真采用二维平面测距模型。Go2 沿预设的 31 个观测点移动，每次扫描从 MuJoCo 给出的传感器位置沿水平整圈发出 112 条射线，最大量程 5 米，并以对数几率累积空闲与占用证据，更新边长 0.25 米的占用栅格 \cite{elfes1989occupancy}。
 
-射线先碰到 Go2 的机身、腿或背负的箩筐时，界面略去这条射线，栅格也跳过该次测量。默认起始姿态有 15 条射线被遮挡，传感器正后方保持未知，留待 Go2 移动和转向后补采。覆盖率是已判为空闲或占用的格数占区域总格数的比例。扫描结束后，下层整体须达到 88\%，每个工区须达到 65\%，否则停止仿真并显示原因。
+若射线先碰到 Go2 机身、腿或背负的箩筐，系统会从显示和栅格更新中剔除这些被遮挡的射线。默认起始姿态有 15 条射线被遮挡，传感器正后方保持未知，留待 Go2 移动转向后补采。覆盖率指已判为空闲或占用的格数在区域总格数中的占比。扫描结束时，下层整体须达 88\%，每个工区须达 65\%，否则停止仿真并显示原因。
 
-\subsection{G1 怎样接图和选路}
+\subsection{G1 接图与选路}
 
-达到覆盖要求后，Go2 在仿真中给 G1 发送地图版本、坐标系、原点、分辨率、行列数和经游程编码（RLE）的栅格。G1 校验并确认后开始执行工单。转场去过滤支路时，G1 使用首次收到的下层地图。到换热站前，Go2 复查两处入口并发送更新地图，G1 选择畅通的入口，在收到清场回执后通行。
+达到覆盖要求后，Go2 在仿真中向 G1 发送地图版本、坐标系、原点、分辨率、行列数和经游程编码（RLE）的栅格。G1 校验并确认后开始执行工单。转往过滤支路时，G1 使用首次收到的下层地图。到换热站前，Go2 复查两处入口并发送更新后的地图，G1 选择畅通入口，收到清场回执后通行。
 
-G1 规划这两段路线时，先给障碍物周围留出身体净空，再检查已观测空闲格中能否直达，必要时用 A* 找路 \cite{hart1968astar}。找不到可行路线或缺少当前工序所需的回执时，仿真停止并显示原因。
+G1 规划这两段路线时，先在障碍物周围留出身体净空，再检查已观测空闲格内能否直达，必要时通过 A* 搜索路径 \cite{hart1968astar}。若无可行路线或缺少当前工序所需回执，仿真停止并显示原因。
 
 \vspace{4pt}
 \noindent
@@ -227,12 +227,12 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
     \node[flowbox] (s3) at (0,-2.65) {\textbf{检查覆盖率}\\下层 $\ge 88\%$ 且各工区 $\ge 65\%$};
     \node[flowbox] (s4) at (0,-4.0) {\textbf{Go2 发送下层地图}\\附栅格参数与版本号};
     \node[flowbox] (s5) at (0,-5.3) {\textbf{G1 校验并确认收图}\\开始工单};
-    \node[flowbox] (s6) at (0,-6.65) {\textbf{G1 按接收的地图选路}\\过滤转场与换热入口};
+    \node[flowbox] (s6) at (0,-6.65) {\textbf{G1 按所收地图选路}\\过滤转场与换热入口};
 
     \node[branch] (b1) at (4.35,-1.3) {跳过受遮挡的射线\\换位后补采};
     \node[branch] (b2) at (4.35,-2.65) {覆盖不足\\停止并显示原因};
     \node[branch] (b3) at (4.35,-5.3) {缺图或校验失败\\停止并显示原因};
-    \node[branch] (b4) at (4.35,-6.65) {直达受阻时尝试 A*\\没有可行路线时停止};
+    \node[branch] (b4) at (4.35,-6.65) {直达受阻时用 A*\\无可行路径时停止};
 
     \draw[arr] (s1) -- (s2);
     \draw[arr] (s2) -- (s3);
@@ -246,7 +246,7 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
     \draw[sidearr] (s5.east) -- (b3.west);
     \draw[sidearr] (s6.east) -- (b4.west);
   \end{tikzpicture}
-  {\footnotesize\captionof{figure}{从 Go2 建图到 G1 选路}}
+  {\footnotesize\captionof{figure}{Go2 建图与 G1 选路流程}}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.42\textwidth}
@@ -256,7 +256,7 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
   {\footnotesize\captionof{figure}{建图时的 Go2 跟随视角}}
   \begin{flushleft}
     \small
-    建图时，镜头跟随 Go2，右侧同步更新下层地图。G1 接图后，镜头转向最近发送消息的机器人。
+    建图期间镜头跟随 Go2，右侧同步更新下层地图。G1 接图后，镜头转向最近发送消息的机器人。
   \end{flushleft}
 \end{minipage}
 
@@ -264,18 +264,18 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
 
 \section{设计图与场景建模}
 
-设计阶段调用了 ImageGen 技能，生成五工区和泵房的多视角设计图、操作台设计稿及混凝土地面纹理。全厂图用于核对设备分区和安全黄线，泵房图用于查看格栅、低位管架和检修工装的结构。
+前期调用 ImageGen 技能生成了五工区和泵房的多视角参考图、操作台设计稿及混凝土地面纹理。全厂图用来核对设备分区和安全黄线，泵房图则展示了格栅、低位管架和检修工装的结构。
 
-对照设计图，三维场景补上了夹层和踏步的格栅纹理、检修车的抽屉与脚轮、开放式备件货架，以及过滤、换热和回水设备的管接头与支座。Three.js 按厂房坐标绘制标线和设备细节，MuJoCo 负责碰撞与测距。
+建模时对照这些设计图，三维场景补充了夹层和踏步的格栅纹理、检修车的抽屉与脚轮、开放式备件货架，以及过滤、换热和回水设备的管接头与支座。Three.js 按厂房坐标绘制标线和设备细节，MuJoCo 负责碰撞与测距。
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.98\linewidth,height=0.345\textheight,keepaspectratio]{../assets/imagegen/maps/factory-utility-hall.png}
-  \caption{五工区厂房设计图。上部为全厂平面，下部为两个斜向剖视。}
+  \caption{五工区厂房设计参考图。上部为全厂平面，下部为两个斜向剖视。}
   \label{fig:factory-design}
   \par\vspace{9pt}
   \includegraphics[width=0.98\linewidth,height=0.345\textheight,keepaspectratio]{../assets/imagegen/maps/pump-cooperation-map.png}
-  \caption{双层泵房设计图。底部分别放大低位管架、观察盖、检修车与箩筐。}
+  \caption{双层泵房设计参考图。底部分别放大低位管架、观察盖、检修车与箩筐。}
   \label{fig:pump-design}
 \end{figure}
 
@@ -286,11 +286,11 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.97\linewidth,height=0.39\textheight,keepaspectratio]{../assets/factory-pump-cooperation.png}
-  \caption{泵组测振工单。G1 用手扶住打开的观察盖，Go2 从低处核验盖内的指示片。}
+  \caption{泵组测振工单运行画面。G1 用手扶住打开的观察盖，Go2 从低处核验内部指示片。}
   \label{fig:cover}
   \par\vspace{12pt}
   \includegraphics[width=0.97\linewidth,height=0.39\textheight,keepaspectratio]{../assets/factory-g1-map-route.png}
-  \caption{过滤隔离工单。G1 采用 Go2 交付的 \MapVersion{} 地图。右侧蓝线标出 G1 通向过滤支路的路线。}
+  \caption{过滤隔离工单运行画面。G1 采用 Go2 交付的 \MapVersion{} 地图，右侧蓝线标出通往过滤支路的路线。}
   \label{fig:filter-route}
 \end{figure}
 
@@ -310,10 +310,10 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
     开发阶段 & 主要改动 \\
     \midrule
     泵房原型 & 加入 G1 下楼、Go2 低位通行及双机避碰。 \\
-    扩建厂房 & 以原泵房为中心扩建至 5 个工区，接通区间通道。 \\
-    调整设备和标线 & 统一厂房坐标，校准过滤支路与回水区的设备位置、地面黄线和作业点。 \\
+    厂房扩建 & 以原泵房为中心扩展至 5 个工区，接通区间通道。 \\
+    设备与标线 & 统一厂房坐标，校准过滤支路与回水区的设备位置、地面黄线和作业点。 \\
     工序交接 & 加入消息回执、三维气泡和随发言切换的镜头。 \\
-    激光探测 & 显示探测射线，过滤被 Go2 机身、腿和箩筐遮住的测量。 \\
+    激光探测 & 绘制射线并过滤被 Go2 机身、腿和箩筐遮挡的测量。 \\
     地图交付 & 新增下层覆盖率检查，G1 按收到的栅格版本规划路线。 \\
     \bottomrule
   \end{tabularx}
@@ -321,12 +321,12 @@ G1 规划这两段路线时，先给障碍物周围留出身体净空，再检�
 
 \subsection{测试结果}
 
-使用默认工单种子 \texttt{17} 时，Go2 在仿真开始后 \MapTime{} 发送下层地图 \MapVersion{}，覆盖率为 \MapCoverage{}。G1 在仿真第 345 秒确认接收。该工况下，G1 转场到过滤支路时使用 \MapVersion{}，经换热东门时使用复查后收到的 V1481。
+在默认工单种子 \texttt{17} 的桌面仿真中，Go2 于运行后 \MapTime{} 发送下层地图 \MapVersion{}（覆盖率 \MapCoverage{}），G1 于第 345 秒确认接收。该工况下，G1 转往过滤支路时采用 \MapVersion{}，经换热东门时采用复查后收到的 V1481。
 
 \begin{itemize}
-  \item 以 \texttt{0}、\texttt{11}、\texttt{14} 和 \texttt{17} 为种子的 4 次仿真均完成 5 张工单的全部 30 个节点。G1 的两段路线采用各自收到的地图版本，接触监测未记录异常接触。
-  \item 分别模拟未收到首次下层地图、换热入口更新地图和回水验收许可的情况。仿真均在对应工序停止。
-  \item 使用 Windows 发行版核验了双击启动、默认全屏、\texttt{F11} 切换、建图跟随和沿时间轴回看。
+  \item 以 \texttt{0}、\texttt{11}、\texttt{14} 和 \texttt{17} 为种子的 4 次仿真均完成 5 张工单的全部 30 个节点。G1 两段路线采用各自收到的地图版本，接触监测未发现异常。
+  \item 测试逐项设置缺失首次下层地图、缺失换热入口更新地图和缺失回水验收许可三种条件，仿真均在对应工序停止。
+  \item 在 Windows 发行版上核验了双击启动、默认全屏、\texttt{F11} 切换、建图跟随与时间轴回看。
 \end{itemize}
 
 \begin{thebibliography}{9}
