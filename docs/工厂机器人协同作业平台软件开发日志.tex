@@ -13,13 +13,6 @@
 
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
-% v1.0.1 发行包及默认种子 17 的仿真记录
-\newcommand{\ReleaseSize}{38.62\,MiB}
-\newcommand{\ReleaseBytes}{40\,491\,008}
-\newcommand{\MapCoverage}{93.08\%}
-\newcommand{\MapVersion}{V1034}
-\newcommand{\MapTime}{344\,秒}
-
 % 深青、灰、白配色体系
 \definecolor{DeepTeal}{HTML}{0F5257}
 \definecolor{MidTeal}{HTML}{1B7278}
@@ -91,11 +84,11 @@
 \vspace{4pt}
 
 \begin{flushleft}
-  {\LARGE\bfseries\color{DeepTeal} 工厂机器人协同作业平台软件开发日志}\\[4pt]
-  {\small\color{MutedGray} Factory Robot Collaboration Platform}\\[6pt]
-  {\normalsize\color{SlateText} 朱华天，GPT-6.2 Sol，Gemini 4 Neon}\\[2pt]
-  {\small\color{MutedGray} 2026年11月25日}\\[2pt]
-  {\small \url{https://github.com/ZHT1235456/factory-robot-collaboration-platform}}
+  {\LARGE\bfseries\color{DeepTeal} 工厂机器人协同作业平台软件开发日志}\\[3pt]
+  {\small\color{MutedGray} Factory Robot Collaboration Platform}\\[5pt]
+  {\normalsize\color{SlateText} 作者：朱华天，GPT-6.2 Sol，Gemini 4 Neon}\\[2pt]
+  {\small\color{MutedGray} 日期：2026 年 11 月 25 日}\\[2pt]
+  {\small 代码仓库：\url{https://github.com/ZHT1235456/factory-robot-collaboration-platform}}
 \end{flushleft}
 
 \vspace{2pt}
@@ -104,27 +97,30 @@
 
 \noindent\colorbox{TealTint}{%
   \parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
-    \small{\bfseries\color{DeepTeal} 简介}\hspace{0.6em}本文记录工厂机器人协同作业平台桌面仿真软件（v1.0.1）的设计与开发过程。软件面向循环水公用工程厂房的联动检修任务，基于桌面应用框架 Tauri、三维渲染引擎 Three.js、物理仿真引擎 MuJoCo 与神经网络推理引擎 ONNX Runtime 搭建，支持四足机器人 Go2 与人形机器人 G1 联合完成下层建图、地图交付、路径规划与设备检修。%
+    \small{\bfseries\color{DeepTeal} 简介}：本文记录工厂机器人协同作业平台桌面仿真软件（v1.0.1）的设计与开发过程。平台面向循环水公用工程厂房联动检修场景，集成 Tauri 桌面宿主、Three.js 三维可视化、MuJoCo 物理仿真与 ONNX Runtime 策略推理，实现四足机器人 Go2 与人形机器人 G1 的跨区建图、地图交付、路径规划与协同作业闭环。%
   }%
 }
-\vspace{4pt}
+\par
 
 \section{厂房场景与软件发布}
 
 \subsection{厂房场景与双机协同}
 
-这款桌面软件模拟 Go2 和 G1 在循环水厂房协作检修。厂房长 47.2\,m、宽 26\,m，中央泵房设有夹层和楼梯。Go2 负责下层建图，也能进入低位通道查看仪表和指示片。G1 核对高处的设备编号，并用手开盖、取放备件和操作按钮。
+本桌面软件用于仿真两台异构机器人在循环水公用工程厂房内的协同检修流程。厂房长 47.2 m、宽 26 m，中央循环水泵房设有夹层平台与楼梯。两台机器人按结构特点分工协作：
 
-两台机器人通过消息交接地图、确认何时可以进入下一道工序。三维场景用气泡显示这些消息。整套流程共 5 张工单、30 个任务节点，依次是泵组测振、过滤隔离、换热复检、备件转运和回水验收。
+\noindent 四足机器人 Go2：负责下层区域建图，并可深入低位通道观察仪表与指示片；\\
+人形机器人 G1：负责核对高位设备位号，并执行开盖、取放备件与操作按钮等灵巧作业。
+
+任务推进过程中，两台机器人通过仿真消息机制交接地图版本、确认作业条件与工序许可，双方的协同通信内容在三维场景中以气泡形式实时呈现。整个检修流程串联 5 张工单、共 30 个任务节点，依次完成泵组测振、过滤隔离、换热复检、备件转运与回水验收。
 
 \subsection{桌面端发布说明}
 
-v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（\ReleaseBytes{} 字节）。界面由 Microsoft Edge WebView2 显示。双击启动后默认全屏，按 \texttt{F11} 可切换窗口模式。图~\ref{fig:handoff} 记录了 G1 接图后的界面。
+平台 v1.0.1 版本提供 Windows x64 单文件可执行程序，体积为 38.62 MiB（40,491,008 字节）。应用界面运行于 Microsoft Edge WebView2 环境，双击启动后默认进入全屏模式，按 \texttt{F11} 可在窗口与全屏模式间切换。G1 接收下层地图后的桌面主界面如图~\ref{fig:handoff} 所示。
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\linewidth,height=0.33\textheight,keepaspectratio]{../assets/factory-map-handoff.png}
-  \caption{G1 接图后的界面。左侧列出工单和机器人状态，右侧可切换 Go2 的实时地图和 G1 收到的版本。}
+  \includegraphics[width=\linewidth,height=0.285\textheight,keepaspectratio]{../assets/factory-map-handoff.png}
+  \caption{G1 接收下层地图后的桌面界面。左侧为联动工单列表与双机状态，中央为三维仿真场景，右侧支持在 Go2 实时测绘地图与 G1 已接收版本之间切换。}
   \label{fig:handoff}
 \end{figure}
 
@@ -134,29 +130,29 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
 
 \subsection{桌面架构与进程通信}
 
-图~\ref{fig:arch} 列出了桌面界面、Rust 宿主和 Python 仿真进程之间的关系。首次启动时，Rust 宿主把 PyInstaller 打包的仿真程序解压到应用缓存，以后直接从缓存启动。各组件的分工见表~\ref{tab:stack}。
+平台采用前后端分离的本地多进程架构（如图~\ref{fig:arch} 所示），各核心组件及用途见表~\ref{tab:stack}。运行期间，前端界面通过 Tauri IPC 将工单种子（用于决定随机仿真工况）与步进请求发送至 Rust 桌面宿主；宿主随后向 Python 子进程的标准输入写入 JSON 指令，并从标准输出逐行读取仿真结果。首次启动时，宿主会将内嵌的 PyInstaller 打包程序解包至应用缓存，后续启动直接从缓存拉起仿真子进程。
 
-界面通过 Tauri 的进程间通信接口（IPC）把工单种子和步进请求发给 Rust。工单种子是决定仿真工况的数值。Rust 把指令逐行写入 Python 进程的标准输入，再从标准输出逐行读取仿真状态。收发两边都用 JSON。界面根据收到的状态刷新三维画面、地图和消息记录，并将快照存入时间轴，供暂停后回看。
+接收回传数据后，前端同步更新三维场景、占用栅格地图与协同通信记录，并将仿真快照写入时间轴，支持暂停后的任意进度回看。
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
   \centering
   \small
   \caption{软件组件及用途}
   \label{tab:stack}
   \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{DeepTeal}}l l X@{}}
     \toprule
-    模块 & 技术 & 用途 \\
+    模块 & 技术选型 & 主要用途 \\
     \midrule
-    前端界面 & Vite、Three.js & Vite 负责打包构建页面，Three.js 绘制厂房场景、双机模型、消息气泡与探测射线 \\
-    桌面宿主 & Tauri 2、Rust & 管理应用窗口与全屏切换，负责缓存解压、Python 子进程启停与消息转发 \\
-    Python 打包 & PyInstaller & 将物理仿真与策略推理代码封装为独立可执行文件，供桌面端内嵌分发 \\
-    物理仿真 & MuJoCo & 计算刚体动力学与物理接触，并求解激光射线与场景几何体的交点 \cite{todorov2012mujoco} \\
-    策略推理 & ONNX Runtime（CPU） & 运行神经网络模型，输出 G1 手部接触修正量与双机共用的足端跟踪修正量 \\
+    前端界面 & Vite、Three.js & Vite 负责工程构建；Three.js 绘制厂房场景、双机模型、消息气泡与探测射线 \\
+    桌面宿主 & Tauri 2、Rust & 管理应用窗口与全屏切换，负责缓存解包、Python 子进程生命周期管理与消息转发 \\
+    Python 打包 & PyInstaller & 将物理仿真与策略推理程序封装为独立可执行文件，供桌面端内嵌分发 \\
+    物理仿真 & MuJoCo & 模拟刚体动力学与物理接触，计算激光射线与场景几何体的交点 \cite{todorov2012mujoco} \\
+    策略推理 & ONNX Runtime (CPU) & 推理 G1 交互接触修正量，以及 G1 与 Go2 共用的足端跟踪修正量 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
   \centering
   \begin{tikzpicture}[
     node distance=0.9cm and 1.1cm,
@@ -192,15 +188,15 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
     \draw[biarr] (py.south) -- node[left,lbl]{位姿与射线} (mujoco.north east);
     \draw[biarr] (py.south east) -- node[right,lbl]{观测与修正量} (onnx.north);
   \end{tikzpicture}
-  \caption{桌面程序架构与数据流。虚线表示宿主从应用缓存启动 Python 进程。}
+  \caption{桌面程序架构与数据流。}
   \label{fig:arch}
 \end{figure}
 
 \subsection{运动策略训练与执行}
 
-项目借鉴 SuperMimic 的训练方法 \cite{liao2026supermimic}。先用 MuJoCo 生成运动数据，拟合可以预测身体状态的可微动力学模型。训练策略时，以参考动作为条件，用该模型预测未来 4 步，再结合模仿损失优化策略。实验室服务器分别训练了 G1 的手部接触策略和两台机器人共用的足端跟踪策略，权重导出为 ONNX 文件随程序打包。
+运动策略训练借鉴 SuperMimic 框架 \cite{liao2026supermimic}：先基于 MuJoCo 采集运动轨迹数据拟合可微动力学模型，再以参考动作为条件预测未来 4 步状态，并结合模仿损失优化控制策略。G1 接触策略以及两机共用的足端跟踪策略均在实验室服务器上完成训练，随后导出为 ONNX 权重文件随程序打包。
 
-软件运行时，Python 进程用 ONNX Runtime 在 CPU 上算出修正量，再加到操作目标或足端轨迹上。控制器用逆运动学求关节角度，并限制驱动关节的扭矩。
+运行时，Python 子进程在 CPU 端调用 ONNX Runtime 执行策略推理。底层控制器将推理输出的修正量叠加至操作目标或足端参考轨迹，再通过逆运动学求解与限矩伺服驱动各机器人关节。
 
 \clearpage
 
@@ -208,21 +204,23 @@ v1.0.1 提供 Windows x64 单文件可执行程序，体积为 \ReleaseSize{}（
 
 \subsection{Go2 激光建图与覆盖率校验}
 
-建图时，Go2 沿下层的 31 个观测点移动。每次扫描，仿真从 MuJoCo 给出的传感器位置沿水平一圈发出 112 条射线，最大量程为 5\,m。实体 Go2 的 L2 雷达标称视场为水平 $360^\circ$、垂直 $96^\circ$ \cite{unitreeGo2}。
+宇树 Go2 搭载的 L2 激光雷达标称视场为水平 \(360^\circ\)、垂直 \(96^\circ\) \cite{unitreeGo2}。为兼顾桌面端离线仿真的计算效率，本平台采用二维平面测距模型：Go2 沿预设的 31 个观测点巡检移动，每次扫描自 MuJoCo 提供的传感器位姿沿水平周向发射 112 条射线（最大量程 5 m），并以对数几率（log-odds）累积空闲与占用证据，持续更新边长 0.25 m 的占用栅格 \cite{elfes1989occupancy}。
 
-射线先撞到 Go2 自己的机身、腿或箩筐时，软件从画面和建图计算中剔除这条射线。默认起始姿态下有 15 条射线被遮挡，传感器正后方因此先标为未知，等 Go2 换位置和朝向后补扫。
+若探测射线首先命中 Go2 机身、腿部或背负式载物筐，系统会在可视化渲染与栅格更新中剔除这些受遮挡的射线。默认起始姿态下共有 15 条射线被机身遮挡，传感器正后方区域保持未知状态，留待 Go2 移动转向后完成补采。
 
-下层地图由边长 0.25\,m 的方格组成，每格标为空闲、占用或未知 \cite{elfes1989occupancy}。射线经过的格子得到空闲证据，击中障碍物的格子得到占用证据。软件用对数几率（log-odds）累积多次观测。空闲与占用格合计占总格数的比例，就是覆盖率。全下层达到 88\%，且每个工区达到 65\%，Go2 才会交图。覆盖率不足时，仿真停止并显示原因。图~\ref{fig:follow-go2} 展示建图时的界面。
+系统以“已判定为空闲或占用的栅格数占区域总栅格数的比例”定义地图覆盖率。建图扫描结束时，下层整体覆盖率须达到\(\ge 88\%\)，且各工区覆盖率均须达到\(\ge 65\%\)；若未达标，仿真将自动停止并提示原因。建图过程中的 Go2 跟随视角如图~\ref{fig:follow-go2} 所示。
 
 \subsection{G1 接图与路径规划}
 
-Go2 把下层地图发给 G1。图中带有版本号、坐标系、原点、分辨率和行列数，连续相同的格值用游程编码（RLE）压缩。G1 校验并确认收图，随后开始工单。交图流程见图~\ref{fig:flow}。
+覆盖率校验通过后，Go2 在仿真中向 G1 交付下层地图数据包，内容包含地图版本号、坐标系、原点、分辨率、行列数以及经游程编码（RLE）压缩的栅格数据。G1 完成数据校验并回执确认后，正式启动联动工单（完整建图与选路流程见图~\ref{fig:flow}）。
 
-去过滤支路时，G1 用第一次收到的下层地图。去换热站前，Go2 先复查两处入口，再发一版新图。G1 用新图选出畅通的入口，等收到清场确认后再通行。
+在跨工区转移阶段，G1 依据对应版本的实测地图规划路径：
 
-选路时，G1 先给机身留出距障碍物的余量，再看能否沿已观测的空闲格直达。直达受阻时，用 A* 搜索可行路线 \cite{hart1968astar}。找不到路或缺少当前工序的回执时，仿真停止并显示原因。
+\noindent 转往过滤支路：采用首次接收的下层地图；\\
+进入换热站前：由 Go2 先行复查两处入口并下发更新后的地图，G1 据此选择畅通入口，并在收到清场回执后通行。
 
-\vspace{4pt}
+规划上述两段路线时，G1 先在障碍物周围预留机身净空，再检测已观测空闲栅格内是否存在无碰撞直达路径；若直达受阻，则调用 \(\mathrm{A}^{*}\) 算法搜索可行路径 \cite{hart1968astar}。若无可行路径或缺少当前工序所需回执，仿真立即停止并显示故障原因。
+
 \noindent
 \begin{minipage}[t]{0.55\textwidth}
   \vspace{0pt}
@@ -267,32 +265,32 @@ Go2 把下层地图发给 G1。图中带有版本号、坐标系、原点、分�
     \draw[sidearr] (s5.east) -- (b3.west);
     \draw[sidearr] (s6.east) -- (b4.west);
   \end{tikzpicture}
-  {\footnotesize\captionof{figure}{从 Go2 建图到 G1 接图选路。右侧展示遮挡、覆盖不足和缺图等情况的处理。}\label{fig:flow}}
+  {\footnotesize\captionof{figure}{Go2 建图、覆盖率校验与 G1 路径规划流程。}\label{fig:flow}}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.42\textwidth}
   \vspace{0pt}
   \centering
   \includegraphics[width=\linewidth,height=0.22\textheight,keepaspectratio]{../assets/factory-map-follow-go2.png}
-  {\footnotesize\captionof{figure}{建图时镜头跟随 Go2，右侧更新下层地图。G1 接图后，镜头跟随最近发出消息的机器人。}\label{fig:follow-go2}}
+  {\footnotesize\captionof{figure}{建图时的 Go2 跟随视角。建图期间镜头自动跟随 Go2，右侧同步刷新下层占用地图；G1 确认接图后，镜头自动切换至最近发送消息的机器人。}\label{fig:follow-go2}}
 \end{minipage}
 
 \clearpage
 
 \section{设计图与场景建模}
 
-项目前期调用 ImageGen 技能生成了五工区全厂与双层泵房的多视角设计参考图（分别见图~\ref{fig:factory-design} 和图~\ref{fig:pump-design}），以及操作台设计稿与混凝土地面纹理。全厂参考图用来核对设备分区布局与地面安全黄线，泵房参考图则确定了平台格栅、低位管架与检修工装的细部结构。
+项目前期借助 AI 图像生成工具（ImageGen 技能）绘制了五工区全厂与双层泵房的多视角设计参考图（分别见图~\ref{fig:factory-design}、图~\ref{fig:pump-design}），以及操作台设计稿与混凝土地面纹理。其中，全厂参考图用于核对设备分区布局与地面安全黄线，泵房参考图则明确了平台格栅、低位管架与检修工装的细部结构。
 
-三维建模阶段对照这些设计图，在场景中补全了夹层与楼梯踏步的格栅纹理、移动检修车的抽屉与脚轮、开放式备件货架，以及过滤、换热与回水设备的管接头和支座。软件把视觉渲染与物理计算分给两个模块承担，Three.js 依据统一的厂房坐标系绘制标线与设备外观细节，MuJoCo 则依据同套坐标下的简化几何体完成碰撞检测与激光测距。
+三维建模阶段严格对照上述设计图，补全了夹层与楼梯踏步的格栅纹理、检修车抽屉与脚轮、开放式备件货架，以及过滤、换热与回水设备的管接头与支座。渲染与物理层采用职责解耦设计：Three.js 按统一厂房坐标系绘制标线与设备外观细节，MuJoCo 负责场景碰撞检测与激光测距计算。
 
-\begin{figure}[!ht]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.98\linewidth,height=0.33\textheight,keepaspectratio]{../assets/imagegen/maps/factory-utility-hall.png}
-  \caption{五工区厂房设计参考图。上部是全厂平面，下部是两个斜向剖视。}
+  \includegraphics[width=\linewidth,height=0.307\textheight,keepaspectratio]{../assets/imagegen/maps/factory-utility-hall.png}
+  \caption{五工区厂房设计参考图。上部为全厂俯视鸟瞰图，下部为两个不同角度的斜向透视剖视图。}
   \label{fig:factory-design}
   \par\vspace{6pt}
-  \includegraphics[width=0.98\linewidth,height=0.33\textheight,keepaspectratio]{../assets/imagegen/maps/pump-cooperation-map.png}
-  \caption{双层泵房设计参考图。上部呈现泵房上下层空间布局，底部依次放大展示低位管架、检修观察盖、移动检修车与背负式箩筐。}
+  \includegraphics[width=\linewidth,height=0.307\textheight,keepaspectratio]{../assets/imagegen/maps/pump-cooperation-map.png}
+  \caption{双层泵房设计参考图。底部依次放大展示低位管架、检修观察盖、移动检修车与背负式载物筐。}
   \label{fig:pump-design}
 \end{figure}
 
@@ -300,18 +298,20 @@ Go2 把下层地图发给 G1。图中带有版本号、坐标系、原点、分�
 
 \section{泵房开盖与过滤转场}
 
-默认工单种子为 \texttt{17}。泵组测振工单识别到的异常泵位是 P2。Go2 从低处检查时发现指示片被检修盖挡住，便发消息请 G1 开盖。G1 打开并扶住盖子，Go2 看清绿色指示片后退出观察位（图~\ref{fig:cover}）。
+本节以默认工单种子 17 下的两个典型作业节点为例，展示双机在物理操作协作与地图驱动导航上的运行表现。
 
-测振签收后，G1 用 Go2 交付的下层地图 \MapVersion{} 规划路线，前往过滤支路（图~\ref{fig:filter-route}）。沿时间轴回看时，机器人姿态、测量读数和消息都对应所选时刻。
+在循环水泵房的泵组测振工单中（图~\ref{fig:cover}），Go2 在低位探测时发现 P2 观察位指示片被观察盖遮挡，随即向 G1 发送开盖请求；G1 抵达工位后扶住观察盖并将其拉开至 \(36.7^\circ\)，同步回传开盖提示；Go2 确认观察盖内绿色指示片后退出观察位，完成该节点的协同取证。该过程直观体现了双机在“高位灵巧操作”与“低位受限空间感知”上的能力互补。
 
-\begin{figure}[!ht]
+完成泵组测振签收后，任务转入过滤隔离工单（图~\ref{fig:filter-route}）。G1 基于 Go2 交付的 V1034 下层地图规划通往过滤支路的跨区轨迹（见界面右侧共享地图中的蓝色路径线），并以 0.78 m/s 的移动速度前往目标工区。全过程中，双机位姿、取证测量结果、协同通信记录与时间轴进度均保持实时同步。
+
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.97\linewidth,height=0.33\textheight,keepaspectratio]{../assets/factory-pump-cooperation.png}
-  \caption{泵组测振。左侧读数显示此时观察盖开度为 $36.7^\circ$。}
+  \includegraphics[width=\linewidth,height=0.292\textheight,keepaspectratio]{../assets/factory-pump-cooperation.png}
+  \caption{泵组测振工单运行画面。G1 用手扶住打开的检修观察盖（开度 \(36.7^\circ\)），Go2 从低位通道核验内部绿色指示片。}
   \label{fig:cover}
-  \par\vspace{8pt}
-  \includegraphics[width=0.97\linewidth,height=0.33\textheight,keepaspectratio]{../assets/factory-g1-map-route.png}
-  \caption{过滤转场。蓝线标出 G1 的路线，左侧显示此刻速度为 0.78\,m/s。}
+  \par\vspace{6pt}
+  \includegraphics[width=\linewidth,height=0.292\textheight,keepaspectratio]{../assets/factory-g1-map-route.png}
+  \caption{过滤隔离工单运行画面。G1 采纳 Go2 交付的 V1034 下层地图，右侧蓝线标示出通往过滤支路的规划路线。}
   \label{fig:filter-route}
 \end{figure}
 
@@ -323,7 +323,7 @@ Go2 把下层地图发给 G1。图中带有版本号、坐标系、原点、分�
 
 从早期单泵房原型演进至五工区完整厂房场景的阶段性改动汇总见表~\ref{tab:milestones}。
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
   \centering
   \small
   \caption{从泵房原型到完整厂房场景的迭代记录}
@@ -336,47 +336,39 @@ Go2 把下层地图发给 G1。图中带有版本号、坐标系、原点、分�
     厂房扩建 & 以原泵房为中心扩展至 5 个工区，打通区间连接通道 \\
     设备与标线 & 统一全厂坐标系，校准过滤支路与回水监测区的设备位置、地面黄线与作业点 \\
     工序交接 & 接入协同消息回执机制、三维消息气泡与随发言自动切换的镜头控制 \\
-    激光探测 & 实现探测射线可视化，并过滤被 Go2 机身、腿部及箩筐遮挡的无效测量 \\
-    地图交付 & 新增下层建图覆盖率校验，支持 G1 依据所接收栅格版本自主规划路线 \\
+    激光探测 & 实现探测射线可视化，并过滤被 Go2 机身、腿部及载物筐遮挡的无效测量 \\
+    地图交付 & 新增下层建图覆盖率校验，实现 G1 依据所接收栅格版本自主规划路线 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \subsection{测试结果}
 
-在默认种子 \texttt{17} 的仿真中，Go2 第 \MapTime{} 发出下层地图 \MapVersion{}，当时覆盖率为 \MapCoverage{}。G1 第 345 秒确认收图，随后用此图去过滤支路。经换热东门时，G1 用的是 Go2 复查后发来的 V1481。
+在默认工单种子 17 的桌面仿真中，Go2 于运行第 344 s 完成建图并发送下层地图 V1034（覆盖率 93.08\%），G1 于第 345 s 校验并确认接收。该工况下，G1 转往过滤支路时采用 V1034 版本地图，经换热东门进入换热站时采用复查后更新的 V1481 版本地图。完整验证项结果如下：
 
 \begin{itemize}
-  \item \textbf{完整工单}\quad 用 \texttt{0}、\texttt{11}、\texttt{14} 和 \texttt{17} 四个种子各运行一次。每次均完成 5 张工单、30 个节点，G1 两段路线使用各自收到的地图版本。接触监测未记录异常接触。
-  \item \textbf{缺项测试}\quad 分别模拟未收到首次下层地图、换热入口新图和回水验收许可。仿真在需要该项数据或许可的工序停下。
-  \item \textbf{桌面交互}\quad 在 Windows 发行版上检查了双击启动、默认全屏、\texttt{F11} 切换窗口、建图镜头跟随及时间轴回看。
+  \item 多工况全流程验证：分别以 0、11、14 和 17 为工单种子执行 4 次完整仿真，均顺利完成 5 张工单的全部 30 个任务节点；G1 两段跨区路线均严格采用各自收到的地图版本，全过程接触监测未发现异常。
+  \item 异常拦截与容错验证：逐项构造“缺失首次下层地图”“缺失换热入口更新地图”和“缺失回水验收许可”三种异常条件，仿真均在对应前置工序准确触发保护机制并停止运行。
+  \item 桌面发行版交互验证：在 Windows x64 单文件发行版上逐项核验双击启动、默认全屏、\texttt{F11} 窗口切换、建图镜头跟随与时间轴暂停回看功能，各项交互均按预期正常运行。
 \end{itemize}
 
 \begin{thebibliography}{9}
   \small
   \bibitem{todorov2012mujoco}
-  Emanuel Todorov, Tom Erez, Yuval Tassa.
-  MuJoCo: A Physics Engine for Model-Based Control.
-  IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2012, DOI 10.1109/IROS.2012.6386109, \url{https://www.roboti.us/lab/papers/TodorovIROS12.pdf}.
+  Emanuel Todorov, Tom Erez, Yuval Tassa. MuJoCo: A Physics Engine for Model-Based Control. IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2012. DOI: 10.1109/IROS.2012.6386109. \url{https://homes.cs.washington.edu/~todorov/papers/TodorovIROS12.pdf}
 
   \bibitem{liao2026supermimic}
-  Qiayuan Liao, Yiyang Shao, Junfeng Long, Kevin Zakka, Roberto Horowitz, Pieter Abbeel, Koushil Sreenath.
-  SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model.
-  Conference on Robot Learning (CoRL), 2026 / arXiv:2610.28480, \url{https://arxiv.org/abs/2610.28480}.
+  Qiayuan Liao, Yiyang Shao, Junfeng Long, Kevin Zakka, Roberto Horowitz, Pieter Abbeel, Koushil Sreenath. SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model. Conference on Robot Learning (CoRL), 2026 / arXiv:2610.28480. \url{https://arxiv.org/abs/2610.28480}
 
   \bibitem{unitreeGo2}
-  Unitree Robotics.
-  Go2 官方规格（L2）, \url{https://www.unitree.com/go2/}（访问 2026-11-25）.
+  Unitree Robotics. Go2 官方规格（L2）. \url{https://www.unitree.com/go2/} [访问日期：2026-11-25]
 
   \bibitem{elfes1989occupancy}
-  Alberto Elfes.
-  Using Occupancy Grids for Mobile Robot Perception and Navigation.
-  IEEE Computer, 22(6), 1989, 46--57, DOI 10.1109/2.30720, \url{https://doi.org/10.1109/2.30720}.
+  Alberto Elfes. Using Occupancy Grids for Mobile Robot Perception and Navigation. IEEE Computer, 22(6), 1989, 46–57. DOI: 10.1109/2.30720. \url{https://doi.org/10.1109/2.30720}
 
   \bibitem{hart1968astar}
-  Peter E. Hart, Nils J. Nilsson, Bertram Raphael.
-  A Formal Basis for the Heuristic Determination of Minimum Cost Paths.
-  IEEE Transactions on Systems Science and Cybernetics (TSSC), 4(2), 1968, 100--107, DOI 10.1109/TSSC.1968.300136, \url{https://doi.org/10.1109/TSSC.1968.300136}.
+  Peter E. Hart, Nils J. Nilsson, Bertram Raphael. A Formal Basis for the Heuristic Determination of Minimum Cost Paths. IEEE Transactions on Systems Science and Cybernetics (TSSC), 4(2), 1968, 100–107. DOI: 10.1109/TSSC.1968.300136. \url{https://doi.org/10.1109/TSSC.1968.300136}
+
 \end{thebibliography}
 
 \end{document}
