@@ -9,6 +9,7 @@ from gait_policy import FootFeedback
 from navigation import Aisles, ContactWatch
 from plant import BASKET_FLOOR, BASKET_X, CATALOG, GRIP_HALF, PAN_MASS, PAN_STIFFNESS, PUMP_FLIGHT, ROOT, build, named_id, mj, np
 from factory_layout import PUMP_EXTENT
+from yard_layout import yard_fault
 from pump_survey import (
     CART_X, COVER_CLEAR, COVER_VIEW, DOG_WAIT, FLIGHTS, GATE_VIEW, LANES, LANE_EAST, LANE_NAMES,
     LANE_WEST, LOWER_VIEW, PUMPS, UNDERPIPE_ENTRY, UNDERPIPE_VIEW, PumpSurvey, PumpVariant,
@@ -71,12 +72,13 @@ class Simulation:
         self.random = np.random.default_rng(seed)
         variant = PumpVariant.from_seed(seed) if scene == "pump" else None
         self.alternate = variant is not None and variant.closed_a
-        xml, self.layout = build(scene, self.alternate, variant, factory)
+        xml, self.layout = build(scene, self.alternate, yard_fault(seed) if scene == "yard" else variant, factory)
         self.aisles = Aisles(dict(self.layout, extent=PUMP_EXTENT) if factory else self.layout)
         self.model = mj.MjModel.from_xml_string(xml)
         self.data = mj.MjData(self.model)
         self.kin = mj.MjData(self.model)
         self.policy = policy
+        self.external_g1 = None
         self.capture = capture
         self.transitions = []
         self.robot = {"g1": self._robot("pelvis", "floating_base_joint", 29, 0),
@@ -109,6 +111,8 @@ class Simulation:
                         "aisleDetours": 0, "yieldFrames": 0, "basketPickups": 0, "unexpectedContactFrames": 0}
         self.guides = {"g1": Guide(np.array((1.31, 2.55, 2.8) if scene == "pump" else (-4.25, -.52, 0.))),
                        "go2": Guide(np.array((-4.59, -2.31, 0.)))}
+        if scene == "yard":
+            self.guides["g1"].xyz[:] = (-5.80, -5.55, 0.)
         self.mocap = {key: self.model.body_mocapid[self.id("body", f"{key}_guide")] for key in self.guides}
         self.hand_goal = None
         self.access_entry = None
@@ -131,13 +135,18 @@ class Simulation:
         self.reading = None
         self.target_station = None if scene == "pump" else "target"
         self.survey = None
+        self.cart = None
         self.inbox = {}
         if variant is not None:
             self.cart = self.model.body_mocapid[self.id("body", "service_cart")]
             self.move_cart = variant.move_cart
-            self.survey = PumpSurvey(self.model, self.data, self.robot, self.part, self.layout["extent"], compact=bool(factory))
+            self.survey = PumpSurvey(self.model, self.data, self.robot, self.part, self.layout["extent"],
+                                     compact=bool(factory), upper_decks=self.layout.get("upperDecks"))
             self.metrics.update(mapUpdates=0, messages=0, cartMoves=0, transferLane=None, previousLane=None,
                                 selectedFlight=None, coverProof=0, blindProof=0, verifiedPump=None)
+        elif scene == "yard":
+            self.survey = PumpSurvey(self.model, self.data, self.robot, None, self.layout["extent"], compact=True)
+            self.metrics.update(mapUpdates=0, messages=0)
         self._initialize()
         self.leg_ik = LegIK(self.model, self.kin, self.robot)
         self.footsteps = {}
@@ -374,7 +383,8 @@ class Simulation:
 
         offsets = self.foot_feedback.command(d, self.guides, self.random) if self.foot_feedback is not None else {}
         for key, robot in self.robot.items():
-            self._move_legs(key, robot, offsets.get(key))
+            if key != "g1" or self.external_g1 is None:
+                self._move_legs(key, robot, offsets.get(key))
         arm_act = np.arange(22, 29)
         d.ctrl[arm_act] += np.clip(d.qfrc_bias[self.arm_dof], -10., 10.) / m.actuator_gainprm[arm_act, 0]
         d.ctrl[self.jaw_ctrl] = .040 if self.closed else 0.
@@ -389,6 +399,8 @@ class Simulation:
                 mj.mj_step(m, d)
         else:
             mj.mj_step(m, d, nstep=5)
+        if self.external_g1 is not None:
+            self.external_g1()
         mj.mj_forward(m, d)
         self._read_contacts()
         collision = self.clearance.check(d)
@@ -1053,5 +1065,6 @@ class Simulation:
                 detection = self.survey.go2_detection()
                 if detection:
                     packet["survey"]["go2Detection"] = detection
-            packet["cart"] = d.mocap_pos[self.cart].round(4).tolist()
+            if self.cart is not None:
+                packet["cart"] = d.mocap_pos[self.cart].round(4).tolist()
         return packet

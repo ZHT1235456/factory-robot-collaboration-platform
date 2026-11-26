@@ -72,7 +72,7 @@ def architectures(torch, n):
     return policy, world
 
 
-def fit(directory, device, rounds):
+def fit(directory, device, rounds, *, seeds=TRAIN_SEEDS):
     import torch
     import torch.nn.functional as F
 
@@ -129,7 +129,7 @@ def fit(directory, device, rounds):
                                                         "four-step imagined policy optimization",
                                             "hardware": hardware, "torch": torch.__version__, "seed": 73614,
                                             "input": list(obs.shape[1:]), "rolloutSteps": 4, "samples": len(obs),
-                                            "windows": len(starts), "rounds": reports, "trainSeeds": TRAIN_SEEDS})
+                                            "windows": len(starts), "rounds": reports, "trainSeeds": list(seeds)})
 
 
 def export(directory, output, skill):
@@ -144,7 +144,8 @@ def export(directory, output, skill):
     policy, world = architectures(torch, arrays["obs"].shape[1])
     output.mkdir(parents=True, exist_ok=True)
     result = {}
-    prefix = "foot-tracking" if skill == "gait" else "g1-contact"
+    prefix = f"g1-{skill}" if skill in ("ladder", "ladder-skip") else (
+        "foot-tracking" if skill == "gait" else "g1-contact")
     for key, network, value, filename, input_name, output_name in [
         ("actor", policy, arrays["obs"][:96], f"{prefix}-policy.onnx", "observation", "correction"),
         ("world", world, np.concatenate((arrays["obs"][:96], arrays["action"][:96]), axis=1),
@@ -169,7 +170,8 @@ def export(directory, output, skill):
     report["export"] = result
     report["collection"] = json.loads((directory / "collection.json").read_text(encoding="utf-8"))
     report["skill"] = skill
-    write_json(output / ("gait-training.json" if skill == "gait" else "training.json"), report)
+    report_name = "training.json" if skill == "contact" else f"{skill}-training.json"
+    write_json(output / report_name, report)
 
 
 def verify_one(request):

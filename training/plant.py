@@ -13,11 +13,13 @@ import numpy as np
 
 from gait import StairFlight
 from pump_survey import CART_X, COVER, FLIGHTS, LANES, PUMPS, UNDERPIPE_Y, PumpVariant
-from factory_layout import FACTORY, PUMP_EXTENT, add_factory
+from factory_layout import FACTORY, HEAT_LADDER_ENTRY, HEAT_VIEW_PORT, LIFT_XY, PUMP_EXTENT, UPPER_DECKS, add_factory
+from yard_layout import YARD, TOWER_X, build_yard
 
 
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[1]))
 CATALOG = {item["id"]: item for item in json.loads((ROOT / "scenes/catalog.json").read_text(encoding="utf-8"))}
+CATALOG["yard"] = {**YARD, "steps": YARD["orders"][0]["steps"]}
 ROBOT_XML = {name: ET.parse(ROOT / f"model/{name}.xml").getroot() for name in ("g1", "go2")}
 
 STEEL = (.39, .46, .51)
@@ -68,7 +70,7 @@ def named_id(model, kind, name):
 class Plant:
     def __init__(self, scene, alternate, variant, factory=None):
         self.scene = scene
-        self.points = POSITIONS[scene].copy()
+        self.points = POSITIONS.get(scene, {}).copy()
         self.alternate = alternate
         self.variant = variant
         self.factory = factory
@@ -77,7 +79,8 @@ class Plant:
         self.cart = []
         self.obstacles = []
         self.labels = []
-        self.width, self.depth = FACTORY["extent"] if factory else (PUMP_EXTENT if scene == "pump" else (11.8, 7.8))
+        self.width, self.depth = (FACTORY["extent"] if factory else
+                                  YARD["extent"] if scene == "yard" else PUMP_EXTENT if scene == "pump" else (11.8, 7.8))
         self.xml = deepcopy(ROBOT_XML["g1"])
         self.xml.set("model", f"collaboration-{scene}")
         self.xml.remove(self.xml.find("keyframe"))
@@ -305,6 +308,8 @@ class Plant:
     def _structure(self):
         self.box(0, 0, -.10, self.width, self.depth, .20, FLOOR, name="slab", nav=False,
                  surface="factory-floor" if self.factory else "concrete")
+        if self.scene == "yard":
+            return
         width, depth = PUMP_EXTENT if self.factory else (self.width, self.depth)
         if not self.factory:
             for x in (-3.94, .04, 3.95):
@@ -335,6 +340,9 @@ class Plant:
             for x in (-5.54, 5.54):
                 self.box(x, lane, .002, .038, .75, .004, YELLOW, collide=False)
 
+    def _yard(self):
+        build_yard(self, self.variant)
+
     def _pump(self):
         tread = "grating" if self.factory else "tread"
         self.box(2.75, 1.94, PUMP_FLIGHT.upper - .08, 6.1, 3.61, .16, GALV, name="walkway",
@@ -348,7 +356,9 @@ class Plant:
         self.box(2.76, .21, 2.64, 6.05, .16, .19, STEEL, collide=False, surface="metal")
         if self.factory:
             self.box(2.74, .151, 2.815, 5.94, .052, .084, STEEL, collide=False, surface="metal")
-            self.box(5.72, 1.937, 2.815, .055, 3.57, .084, STEEL, collide=False, surface="metal")
+            for start, end in ((.145, 1.29), (2.65, 3.729)):
+                self.box(5.72, (start+end)/2, 2.815, .055, end-start, .084, STEEL,
+                         collide=False, surface="metal")
         for letter, y in FLIGHTS.items():
             flight = letter.lower()
             for i, x in enumerate(PUMP_FLIGHT.centers):
@@ -390,7 +400,9 @@ class Plant:
                 self.tube((-.24, y, z), (5.72, y, z), .025, YELLOW, True)
         for z in (3.27, 3.75):
             self.tube((-.245, 1.48, z), (-.245, 2.22, z), .025, YELLOW, True)
-            self.tube((5.72, .145, z), (5.72, 3.729, z), .025, YELLOW, True)
+            segments = ((.145, 1.29), (2.65, 3.729)) if self.factory else ((.145, 3.729),)
+            for start, end in segments:
+                self.tube((5.72, start, z), (5.72, end, z), .025, YELLOW, True)
         self.tube((-.13, -.47, 1.57), (5.19, -.47, 1.57), .094, BLUE, True, name="pump_header")
         self.tube((-.18, -.83, .38), (5.26, -.83, .38), .079, STEEL, True, name="pump_return")
         for index, (name, x) in enumerate(PUMPS.items(), 1):
@@ -736,7 +748,7 @@ class Plant:
         layout = {"shapes": self.shapes, "labels": self.labels, "points": self.points, "handleZ": HANDLE_Z.get(self.scene),
                   "extent": [self.width, self.depth], "blocked": self.alternate, "obstacles": self.obstacles,
                   "basket": self.basket, "basketX": BASKET_X, "cart": self.cart}
-        if self.variant is not None:
+        if self.scene == "pump":
             layout["surveyLandmarks"] = {
                 "lower": [[f"{flight}梯", -5.30, y] for flight, y in FLIGHTS.items()]
                          + [[name, x, -.52] for name, x in PUMPS.items()]
@@ -749,6 +761,16 @@ class Plant:
             layout["orders"] = FACTORY["orders"]
             layout["zoneLandmarks"] = self.factory_landmarks
             layout["floorMarkings"] = self.floor_markings
+            layout["upperDecks"] = UPPER_DECKS
+            layout["surveyLandmarks"]["lower"].append(["上楼梯口", *HEAT_LADDER_ENTRY[:2]])
+            layout["surveyLandmarks"]["upper"].extend((
+                ["检修梯出口", HEAT_LADDER_ENTRY[0], UPPER_DECKS[1][3]], ["H2 巡检台", *HEAT_VIEW_PORT[:2]],
+                ["下行升降台", *LIFT_XY],
+            ))
+        if self.scene == "yard":
+            layout.update(orders=YARD["orders"],
+                          surveyLandmarks={"lower": [[name, x, 3.55] for name, x in TOWER_X.items()], "upper": []},
+                          zoneLandmarks={"tower": [[name, x, 3.55] for name, x in TOWER_X.items()]})
         return layout
 
 

@@ -10,6 +10,10 @@
     <div class="brand">
       <h1>工厂机器人协同作业平台</h1>
     </div>
+    <select id="site-select" class="tool site-select" aria-label="作业场景">
+      <option value="factory">两层室内厂房</option>
+      <option value="yard">室外冷却水站</option>
+    </select>
     <div class="system" id="engine-status" role="status"><span></span>启动本地物理引擎</div>
     <button type="button" class="tool fullscreen" id="fullscreen"><kbd>F11</kbd><span>切换全屏</span></button>
   </header>
@@ -18,7 +22,7 @@
       <section class="work-order">
         <div class="section-top"><h2>联动工单</h2><span class="status-badge" id="job-status">等待</span></div>
         <div class="order-progress"><output id="order-progress"></output><output id="checkpoint-progress"></output></div>
-        <nav id="orders" class="orders" aria-label="五个工区"></nav>
+        <nav id="orders" class="orders" aria-label="工区工单"></nav>
         <h3 id="active-order" class="phase-title"></h3>
         <ol id="steps" class="steps"></ol>
       </section>
@@ -44,7 +48,7 @@
             <h2 id="scene-title"></h2>
           </div>
           <div class="camera-tools" id="cameras" aria-label="三维视角">
-            <button type="button" id="auto-camera" data-camera="speaker" aria-pressed="true" title="建图时跟随 Go2，其他时间跟随发言者">随发言</button>
+            <button type="button" id="auto-camera" data-camera="action" aria-pressed="true" title="跟随开始移动或发言的机器人。Go2 停驻测绘时继续跟随。">随行动</button>
             <button type="button" data-camera="overview" aria-pressed="false">全厂</button>
             <button type="button" data-camera="plan" aria-pressed="false">俯视</button>
             <button type="button" data-camera="zone" aria-pressed="false">工区</button>

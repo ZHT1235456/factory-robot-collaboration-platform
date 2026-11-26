@@ -10,7 +10,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "src-tauri/target/inference"
 INPUTS = ["model/g1.xml", "model/go2.xml", "model/G1-LICENSE", "model/LICENSE",
-          "scenes/catalog.json", "scenes/factory.json", "results/g1-contact-policy.onnx", "results/foot-tracking-policy.onnx"]
+          "scenes/catalog.json", "scenes/factory.json", "scenes/yard.json", "results/g1-contact-policy.onnx",
+          "results/foot-tracking-policy.onnx", "results/g1-ladder-skip-policy.onnx"]
 
 
 def main():
@@ -19,6 +20,7 @@ def main():
     for name in [*INPUTS, "training/live.py", "training/sim.py", "training/plant.py", "training/navigation.py",
                  "training/gait.py", "training/gait_policy.py", "training/pump_survey.py", "training/occupancy.py",
                  "training/factory_layout.py", "training/factory_markings.py", "training/factory_mission.py",
+                 "training/ladder.py", "training/yard_layout.py", "training/yard_mission.py",
                  "training/inference-requirements.txt", "scripts/build_worker.py",
                  "scripts/pyinstaller-hooks/hook-onnxruntime.py"]:
         signature.update((ROOT / name).read_bytes())

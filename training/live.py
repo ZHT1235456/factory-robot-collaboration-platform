@@ -11,6 +11,7 @@ os.environ["MUJOCO_GL"] = "disable"
 from gait_policy import load_gait_policy
 from sim import Simulation, load_policy
 from factory_mission import FactoryRun
+from yard_mission import YardRun
 
 
 class Worker:
@@ -25,7 +26,10 @@ class Worker:
         if op == "reset":
             scene, seed = message.get("scene"), message.get("seed", 17)
             policies = {"policy": load_policy(), "gait_policy": load_gait_policy()}
-            runner = FactoryRun(seed, **policies) if scene == "factory" else Simulation(scene, seed, **policies)
+            if scene in ("factory", "yard"):
+                runner = (FactoryRun if scene == "factory" else YardRun)(seed, **policies)
+            else:
+                runner = Simulation(scene, seed, **policies)
             if len(self.sessions) >= 4 and client not in self.sessions:
                 self.sessions.pop(next(iter(self.sessions)))
             self.sessions[client] = runner
@@ -39,7 +43,7 @@ class Worker:
         count = message.get("count", 1)
         previous = message.get("events", 0)
         revision = message.get("mapRevision")
-        maximum = 32 if runner.factory else 8
+        maximum = 32 if runner.factory or runner.scene == "yard" else 8
         if type(count) is not int or not 1 <= count <= maximum or type(previous) is not int or previous < 0:
             raise ValueError("无效的步进请求")
         for _ in range(count):

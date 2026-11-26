@@ -30,6 +30,7 @@ h2 { font-size: 15px; line-height: 1.3; font-weight: 680; }
   background: var(--panel); border-bottom: 1px solid var(--border);
 }
 .brand h1 { font-size: 22px; font-weight: 740; letter-spacing: .035em; }
+.site-select { color: var(--ink); max-width: 12em; font-size: 12px; }
 .system { display: flex; align-items: center; gap: 8px; margin-left: auto; color: var(--muted); font-size: 12px; }
 .system > span, .g1-dot, .go2-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #84968d; flex: none; }
 .system[data-state="ok"] > span { background: var(--green); }

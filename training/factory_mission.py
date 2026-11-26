@@ -1,15 +1,20 @@
 """Five linked work orders executed in one expanded cooling-water hall."""
 
 import math
+from functools import lru_cache
 
 from factory_layout import (
-    FACTORY, FILTER_X, GATE_NORTH, GATE_SOUTH, GREEN, HEAT_VIEWS, PORTALS, PORTAL_NAMES,
+    FACTORY, FILTER_X, GATE_NORTH, GATE_SOUTH, GREEN, LIFT_WAIT, LIFT_XY, UPPER_Z,
+    HEAT_DOG_WAIT, HEAT_LADDER, HEAT_LADDER_APPROACH, HEAT_LADDER_ENTRY, HEAT_LADDER_ORIGIN,
+    HEAT_VIEW_STAND, HEAT_VIEWS, PORTALS, PORTAL_NAMES,
     RETURN_BUTTON, RETURN_DOCK, RETURN_REST, RETURN_VIEW, SPARE_DOCK, SPARE_NAMES, SPARE_POINTS, SURVEY_POSES,
     FactoryVariant,
 )
 from navigation import Aisles
 from occupancy import ReceivedFloor
-from plant import BASKET_FLOOR, GRIP_HALF
+from plant import BASKET_FLOOR, GRIP_HALF, ROOT, mj
+from gait import yaw_quat
+from ladder import Climb, PLATFORM_SUPPORT, eased, inference
 from sim import Simulation, TaskFault, np
 
 
@@ -18,11 +23,17 @@ RECEIPTS = {
     "complete": "泵组测振签收", "filter_alarm": "低位压差记录", "filter_verified": "过滤控制位号",
     "filter_permit": "过滤区清场许可", "filter_switch": "过滤按钮行程", "filter_isolated": "过滤隔离确认",
     "heat_map": "换热入口地图", "heat_route": "换热入口采纳回执", "gate_clear": "跨区入口清场",
+    "heat_ladder_clear": "换热检修梯梯口净空",
     "heat_high_ok": "换热位号核对", "heat_low_ok": "换热低位复检", "spare_order": "备件领料单",
     "stock_verified": "备件货位核对", "spare_weighed": "备件称重", "spare_dock": "备件区驻车",
     "spare_loaded": "箩筐载荷确认", "return_dock": "回水区驻车", "return_seated": "托架就位",
     "return_permit": "回水验收许可", "return_switch": "回水按钮行程", "return_visual": "回水指示回读",
 }
+
+
+@lru_cache(maxsize=1)
+def ladder_policy():
+    return inference(ROOT / "results/g1-ladder-skip-policy.onnx")
 
 
 class FactoryRun(Simulation):
@@ -37,6 +48,8 @@ class FactoryRun(Simulation):
         self.survey_stops = 0
         self.g1_floor = None
         self.floor_delivery = None
+        self.ladder = None
+        self.lift_moving = False
         super().__init__("pump", seed, factory=FactoryVariant.from_seed(seed), **options)
         self.recorder_q = self.part_q
         self.spare_part = self.id("body", "spare_piece")
@@ -47,12 +60,17 @@ class FactoryRun(Simulation):
         self.buttons = {key: self.model.jnt_qposadr[self.id("joint", f"slide_{key}")]
                         for key in self.layout["factory"]["buttons"]}
         self.indicators = {key: self.id("geom", key) for key in self.layout["factory"]["indicators"]}
+        self.lift = self.model.body_mocapid[self.id("body", "heat_lift")]
+        g1 = self.robot["g1"]
+        self.ladder_stance = self.data.qpos[g1["root"]:g1["q"]+g1["n"]].copy()
+        self.ladder_stance[:3] = [HEAT_LADDER_ORIGIN[0]-HEAT_LADDER_ENTRY[0], 0.,
+                                  self.standing["g1"]+HEAT_LADDER.floor]
         spare_geoms = np.flatnonzero(self.model.body_rootid[self.model.geom_bodyid] == self.spare_part)
         self.clearance.payload.update(spare_geoms)
         self.model.geom_group[spare_geoms] = 5
         self.metrics.update(verifiedFilter=None, selectedPortal=None, requestedSpare=None, cargoLoads=0,
                             spareMassG=None, spareDelivered=False, validatedSwitches={}, acceptedReturn=False,
-                            modelledFloor=None, mappedRoutes=[])
+                            modelledFloor=None, mappedRoutes=[], heatLadder=None, heatLiftStops=[])
 
     def event(self, note, kind="info"):
         super().event(note, kind)
@@ -239,19 +257,24 @@ class FactoryRun(Simulation):
         self.receipt("go2", "heat_route")
         yield from self.drive("go2", [approach])
         yield from self.drive("go2", [crossing], direct=True)
-        yield from self.drive("go2", [HEAT_VIEWS["low"]], yaw=math.pi/2)
+        yield from self.drive("go2", [(x, LIFT_WAIT[1], 0.), HEAT_VIEWS["low"]], yaw=math.pi/2)
         self.send("go2", "g1", "gate_clear", "Go2 已通过并离开入口 · G1 可以通过")
         self.receipt("g1", "gate_clear")
         g1_x = float(self.guides["g1"].xyz[0])
         yield from self.drive("g1", [(g1_x, -5.48, 0.), (x, -5.48, 0.), approach])
         yield from self.drive_on_floor(crossing, "heat", "换热"+PORTAL_NAMES[chosen])
         self.phase(3)
-        self.focus = "heat_station"
-        yield from self.drive("g1", [HEAT_VIEWS["high"]], yaw=math.pi/2)
-        self.find_color("g1", "heat_high")
-        self.send("g1", "go2", "heat_high_ok", "上方换热支路 H2 已核对 · 请看低位回流指示", unit="H2")
+        yield from self.drive("go2", [HEAT_DOG_WAIT], yaw=-.8)
+        if not all(self.survey.clear_to("go2", (HEAT_LADDER_ENTRY[0], HEAT_LADDER_ENTRY[1]+offset, .24))
+                   for offset in (-.26, 0., .26)):
+            raise TaskFault("Go2 未确认换热检修梯梯口净空")
+        self.send("go2", "g1", "heat_ladder_clear", "一层梯口净空 · G1 可以登梯上楼")
+        self.receipt("g1", "heat_ladder_clear")
+        yield from self.inspect_heat_ladder()
+        self.send("g1", "go2", "heat_high_ok", "二层 H2 已复检 · G1 已回到一层", unit="H2")
         self.phase(4)
         self.receipt("go2", "heat_high_ok")
+        yield from self.drive("go2", [HEAT_VIEWS["low"]], yaw=math.pi/2)
         low = self.find_color("go2", "heat_low")
         request = "seal" if low[0] > .8 else "screen"
         self.send("go2", "g1", "heat_low_ok",
@@ -261,6 +284,115 @@ class FactoryRun(Simulation):
         request = self.receipt("g1", "heat_low_ok")["spare"]
         self.metrics["requestedSpare"] = request
         self.send("g1", "go2", "spare_order", f"上位和低位证据已联签 · 领用 {SPARE_NAMES[request]}", spare=request)
+
+    def ride_heat_lift(self, level):
+        guide = self.guides["g1"]
+        start = float(self.data.mocap_pos[self.lift, 2])
+        if abs(guide.xyz[2]-start) > .025 or np.linalg.norm(guide.xyz[:2]-LIFT_XY) > .12:
+            raise TaskFault("G1 未在升降台内站稳")
+        self.lift_moving = True
+        for step in range(1, 261):
+            height = start + (level-start)*eased(step/260)
+            self.data.mocap_pos[self.lift, 2] = height
+            guide.xyz[2] = height
+            yield
+        self.lift_moving = False
+        self.metrics["heatLiftStops"].append(level)
+        yield from self.pause(.24)
+
+    def inspect_heat_ladder(self):
+        self.focus = "heat_ladder"
+        x = float(self.guides["g1"].xyz[0])
+        yield from self.drive("g1", [(x, LIFT_WAIT[1], 0.), (HEAT_LADDER_APPROACH[0], LIFT_WAIT[1], 0.),
+                                     HEAT_LADDER_APPROACH, HEAT_LADDER_ENTRY], yaw=math.pi)
+
+        climb = Climb(HEAT_LADDER, 17)
+        robot = self.robot["g1"]
+        coordinates = slice(robot["root"], robot["q"]+robot["n"])
+        speed = slice(robot["rv"], robot["v"]+robot["n"])
+        origin = np.array(HEAT_LADDER_ORIGIN)
+        turn = yaw_quat(math.pi)
+        inverse = yaw_quat(-math.pi)
+        state = self.data.qpos[coordinates].copy()
+        state[:3] -= origin
+        state[:2] *= -1
+        mj.mju_mulQuat(state[3:7], inverse, self.data.qpos[robot["root"]+3:robot["root"]+7])
+
+        def synchronize():
+            pose = climb.data.qpos
+            self.data.qpos[coordinates] = pose
+            self.data.qpos[robot["root"]:robot["root"]+3] = origin + [-pose[0], -pose[1], pose[2]]
+            mj.mju_mulQuat(self.data.qpos[robot["root"]+3:robot["root"]+7], turn, pose[3:7])
+            self.data.qvel[speed] = climb.data.qvel
+            self.data.qvel[robot["rv"]:robot["rv"]+2] *= -1
+
+        def move(stage, motion):
+            self.ladder = {"stage": stage, "step": None, "feet": [None, None]}
+            seen = len(climb.events)
+            while True:
+                try:
+                    next(motion)
+                except StopIteration as stop:
+                    return stop.value
+                self.ladder = {"stage": stage, "step": self.ladder["step"],
+                               "feet": [None if rung is None or rung < 0 else rung+1 for rung in climb.attached[2:]]}
+                for event in climb.events[seen:]:
+                    if stage == "ascending" and event["rungs_advanced"] == 2 and event["latched"]:
+                        self.ladder["step"] = {"limb": event["limb"], "from": event["from_rung"], "to": event["rung"]}
+                seen = len(climb.events)
+                if climb.stats["penetrating_substeps"]:
+                    hit = climb.worst_collision
+                    raise TaskFault(f"登梯碰撞保护 · {hit['robot']} / {hit['surface']}")
+                yield
+
+        # The ladder has its own contact solver at the same plant coordinates.
+        # The plant's G1 body is its sensing and rendering proxy while on the ladder.
+        robot_geoms = self.clearance.owners == 1
+        masks = self.model.geom_contype[robot_geoms].copy(), self.model.geom_conaffinity[robot_geoms].copy()
+        guide_weld = self.id("equality", "g1_guidance")
+        self.model.geom_contype[robot_geoms] = self.model.geom_conaffinity[robot_geoms] = 0
+        self.data.eq_active[guide_weld] = False
+        self.external_g1 = synchronize
+        self.send("g1", "go2", "heat_ladder_start", "一层梯口已就位 · 开始跨档上楼")
+        landed = False
+        try:
+            if not (yield from move("mounting", climb.mount(state, self.ladder_stance))):
+                raise TaskFault("G1 未取得梯下支撑")
+            result = yield from move("ascending", climb.ascent(ladder_policy()))
+            if not result["passed"] or result["policy_calls"] <= 0:
+                raise TaskFault("G1 跨档上梯未完成")
+            landed = yield from move("landing", climb.step_onto_platform())
+            if not landed:
+                raise TaskFault("G1 未取得二层平台双脚支撑")
+            self.metrics["heatLadder"] = dict(result, finished=True, start_floor_m=HEAT_LADDER_ENTRY[2],
+                                               landed_floor_m=UPPER_Z, landing_feet=climb.support.count(PLATFORM_SUPPORT),
+                                               max_ladder_penetration_mm=climb.stats["max_ladder_penetration_mm"])
+        finally:
+            self.external_g1 = None
+            self.ladder = None
+            self.model.geom_contype[robot_geoms], self.model.geom_conaffinity[robot_geoms] = masks
+            self.data.eq_active[guide_weld] = True
+            root = robot["root"]
+            self.data.mocap_pos[self.mocap["g1"]] = self.data.qpos[root:root+3]
+            self.data.mocap_quat[self.mocap["g1"]] = self.data.qpos[root+3:root+7]
+            self.guides["g1"].xyz[:] = (*self.data.qpos[root:root+2], UPPER_Z if landed else HEAT_LADDER_ENTRY[2])
+            self.previous_leg_ref["g1"] = self.data.qpos[robot["q"]:robot["q"]+12].copy()
+
+        self.send("g1", "go2", "heat_ladder_landed", "双脚已踏上二层格栅 · 前往 H2 巡检台", level=UPPER_Z)
+        guide = self.guides["g1"]
+        # Step sideways away from the edge before turning into the walkway.
+        clear = np.array((guide.xyz[0], HEAT_VIEW_STAND[1]+.48, UPPER_Z))
+        yield from self.follow_steps("g1", self.footsteps["g1"].walk(guide.xyz.copy(), clear, guide.yaw, .33))
+        self.focus = "heat_station"
+        yield from self.drive("g1", [HEAT_VIEW_STAND], yaw=-math.pi/2)
+        self.find_color("g1", "heat_high")
+        self.reading = {"name": "二层巡检位号", "value": "H2", "unit": ""}
+        self.send("g1", "go2", "heat_ladder_read", "已在二层巡检台核对 H2 位号 · 准备返回一层")
+        yield from self.pause(.72)
+        yield from self.drive("g1", [(LIFT_XY[0], HEAT_VIEW_STAND[1], UPPER_Z), (*LIFT_XY, UPPER_Z)], yaw=math.pi/2)
+        self.send("g1", "go2", "heat_lift_board", "已进入下行升降台 · 返回一层")
+        yield from self.ride_heat_lift(0.)
+        yield from self.drive("g1", [LIFT_WAIT], yaw=math.pi/2)
 
     def activate_spare(self, request):
         self.part = self.spare_part
@@ -309,7 +441,7 @@ class FactoryRun(Simulation):
         self.phase(0)
         request = self.receipt("go2", "spare_order")["spare"]
         yield from self.drive("go2", [(13.62, 5.15, 0.), (-9.0, 5.15, 0.), (-12.54, 6.43, 0.)])
-        yield from self.drive("g1", [(16.20, 4.64, 0.), (-8.30, 4.64, 0.), (-10.88, 5.28, 0.)])
+        yield from self.drive("g1", [(-8.30, LIFT_WAIT[1], 0.), (-10.88, 5.28, 0.)])
         self.phase(1)
         available = []
         for key, (x, y, _) in SPARE_POINTS.items():
@@ -392,7 +524,13 @@ class FactoryRun(Simulation):
     def packet(self, from_log=0, map_revision=None):
         packet = super().packet(from_log, map_revision)
         packet.update(scene="factory", order=self.order_index, completed=list(self.completed_orders),
-                      portals=dict(self.portals), cargo=self.cargo)
+                      portals=dict(self.portals), cargo=self.cargo, ladder=self.ladder,
+                      liftHeight=round(float(self.data.mocap_pos[self.lift, 2]), 5), liftMoving=self.lift_moving)
+        if self.ladder is not None:
+            g1 = packet["actors"]["g1"]
+            g1["moving"] = True
+            root = self.robot["g1"]["rv"]
+            g1["speed"] = round(float(np.linalg.norm(self.data.qvel[root:root+3])), 3)
         packet["mapping"] = {"stage": self.mapping_stage, "stops": self.survey_stops, "total": len(SURVEY_POSES),
                              "received": self.floor_delivery}
         packet["part"] = self.data.qpos[self.recorder_q:self.recorder_q+7].round(6).tolist()

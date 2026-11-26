@@ -10,18 +10,22 @@ for variable in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
     os.environ[variable] = "1"
 os.environ["MUJOCO_GL"] = "disable"
 
-from factory_layout import FACTORY, FILTER_FOR_PUMP, PORTALS, PUMP_EXTENT
+from factory_layout import FACTORY, FILTER_FOR_PUMP, HEAT_LADDER, PORTALS, PUMP_EXTENT, UPPER_Z
 from factory_mission import FactoryRun
 from gait_policy import load_gait_policy
 from pump_survey import PumpVariant
 from sim import load_policy, np
 from verify_gait import ContactAudit
+from yard_layout import yard_fault
+from yard_mission import YardRun
 
 
 REQUIRED_SEQUENCE = (
     "mapping_start", "floor_map", "floor_ack", "complete",
     "filter_start", "filter_alarm", "filter_verified", "filter_permit", "filter_switch",
-    "filter_isolated", "heat_scout", "heat_map", "heat_route", "gate_clear", "heat_high_ok", "heat_low_ok",
+    "filter_isolated", "heat_scout", "heat_map", "heat_route", "gate_clear",
+    "heat_ladder_clear", "heat_ladder_start", "heat_ladder_landed", "heat_ladder_read", "heat_lift_board",
+    "heat_high_ok", "heat_low_ok",
     "spare_order", "stock_verified", "spare_weighed", "spare_dock", "spare_loaded", "return_dock",
     "return_seated", "return_permit", "return_switch", "return_visual", "factory_complete",
 )
@@ -51,6 +55,8 @@ def run_trial(request):
             guard = sim.g1_floor is None and sim.step == -1 and waited_for_map and not sim.completed_orders
         elif dropped == "heat_map":
             guard = sim.order_index == 2 and sim.step == 2 and metrics["selectedPortal"] is None
+        elif dropped == "heat_ladder_clear":
+            guard = sim.order_index == 2 and sim.step == 3 and metrics["heatLadder"] is None
         else:
             guard = (sim.order_index == 4 and sim.step == 4
                      and "return_check" not in metrics["validatedSwitches"])
@@ -90,6 +96,14 @@ def run_trial(request):
         seen[order["id"]] = int(np.count_nonzero(grid[b:d, a:c]))
     result.update(metrics=metrics, phases=len(observed), stairs=sorted(audit.stair_steps[flight]), portals=sim.portals,
                   lowerObservedCells=seen, upperObservedCells=int(np.count_nonzero(sim.survey.grids["upper"])))
+    climb = metrics["heatLadder"]
+    cross_steps = ["right_toe" if level % 2 == 0 else "left_toe" for level in range(2, HEAT_LADDER.rounds+1)]
+    ladder_passed = (climb is not None and climb["finished"] and climb["passed"] and climb["policy_calls"] > 0
+                     and climb["rounds_completed"] == HEAT_LADDER.rounds and climb["pelvis_rise_m"] > UPPER_Z-.06
+                     and climb["start_floor_m"] == 0. and climb["landed_floor_m"] == UPPER_Z and climb["landing_feet"] == 2
+                     and not climb["penetrating_substeps"] and not climb["foot_swing_support_loss_frames"]
+                     and metrics["heatLiftStops"] == [0.]
+                     and [move["limb"] for move in climb["transfers"] if move["rungs_advanced"] == 2] == cross_steps)
     result["passed"] = bool(
         sim.status == "done" and observed == expected and sim.completed_orders == [order["id"] for order in orders]
         and len(audit.stair_steps[flight]) == 16 and not audit.stair_steps[alternate]
@@ -104,10 +118,24 @@ def run_trial(request):
         and np.linalg.norm(sim.data.qpos[sim.recorder_q:sim.recorder_q+3]-sim.layout["points"][pump.alarm]) < .08
         and sim.seated("return_rest") and metrics["unexpectedContactFrames"] == 0
         and metrics["policyCalls"] > 0 and metrics["gaitPolicyCalls"] > 0
-        and all(seen.values()) and result["upperObservedCells"] > 0 and map_passed
+        and all(seen.values()) and result["upperObservedCells"] > 0 and map_passed and ladder_passed
         and protocol[0] >= 0 and all(a < b for a, b in zip(protocol, protocol[1:]))
     )
     return result
+
+
+def run_yard(seed):
+    sim = YardRun(seed, gait_policy=load_gait_policy())
+    while sim.tick():
+        pass
+    metrics = sim.metrics
+    messages = [event["signal"] for event in sim.log if "signal" in event]
+    passed = (sim.status == "done" and sim.completed_orders == ["tower"] and metrics["tower"] == yard_fault(seed)
+              and metrics["mappedRoute"] == sim.floor_delivery["revision"] and metrics["yardCoverage"] >= .65
+              and metrics["unexpectedContactFrames"] == 0 and metrics["gaitPolicyCalls"] > 0
+              and messages == ["mapping_start", "floor_map", "floor_ack", "yard_alarm", "yard_gauge", "yard_complete"])
+    return {"seed": seed, "passed": passed, "status": sim.status, "seconds": round(sim.time, 2),
+            "metrics": metrics, "last": sim.log[-1]["text"]}
 
 
 def main():
@@ -116,25 +144,30 @@ def main():
     parser.add_argument("--workers", default=4, type=int)
     parser.add_argument("--output", type=Path, default=Path("results/factory-validation.json"))
     parser.add_argument("--skip-faults", action="store_true")
+    parser.add_argument("--yard-seeds", nargs="*", type=int, default=[14, 17])
     args = parser.parse_args()
     requests = [(seed, None) for seed in args.seeds]
     if not args.skip_faults:
-        requests.extend((17, signal) for signal in ("floor_map", "heat_map", "return_permit"))
+        requests.extend((17, signal) for signal in ("floor_map", "heat_map", "heat_ladder_clear", "return_permit"))
     with ProcessPoolExecutor(args.workers) as workers:
+        outdoor = [workers.submit(run_yard, seed) for seed in args.yard_seeds]
         results = []
         for result in workers.map(run_trial, requests):
             results.append(result)
             print(json.dumps(result, ensure_ascii=False), flush=True)
+        yard = [trial.result() for trial in outdoor]
+        for trial in yard:
+            print(json.dumps({"yard": trial}, ensure_ascii=False), flush=True)
     trials = [result for result in results if "dropped" not in result]
     faults = [result for result in results if "dropped" in result]
     report = {"extent": FACTORY["extent"], "floorAreaM2": round(float(np.prod(FACTORY["extent"])), 2),
               "areaMultiple": round(float(np.prod(FACTORY["extent"])/np.prod(PUMP_EXTENT)), 3),
               "orders": len(FACTORY["orders"]), "checkpoints": sum(len(order["steps"]) for order in FACTORY["orders"]),
               "passed": sum(result["passed"] for result in trials), "total": len(trials),
-              "trials": trials, "faultTrials": faults}
+              "trials": trials, "faultTrials": faults, "yardTrials": yard}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False)+"\n", encoding="utf-8")
-    if not all(result["passed"] for result in results):
+    if not all(result["passed"] for result in results + yard):
         raise SystemExit(1)
 
 

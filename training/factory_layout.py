@@ -11,6 +11,7 @@ import mujoco as mj
 import numpy as np
 
 from factory_markings import floor_markings
+from ladder import LADDER_X, RUNG_BOTTOM, Setup as LadderSetup, ladder_boxes
 
 
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[1]))
@@ -23,7 +24,22 @@ FILTER_FOR_PUMP = {"P1": "F1", "P2": "F2", "P3": "F1"}
 PORTALS = {"west": 9.55, "east": 20.35}
 PORTAL_NAMES = {"west": "西门", "east": "东门"}
 GATE_SOUTH, GATE_NORTH = 1.03, 3.78
-HEAT_VIEWS = {"high": (16.20, 6.09, 0.), "low": (13.62, 6.21, 0.)}
+HEAT_VIEWS = {"low": (13.62, 6.21, 0.)}
+UPPER_Z = 2.8
+LIFT_XY = (20.48, 4.49)
+LIFT_WAIT = (LIFT_XY[0], 6.0, 0.)
+HEAT_DECK_EDGE = 3.745
+UPPER_DECKS = ((-.30, .135, 5.80, HEAT_DECK_EDGE), (5.80, -2.05, 22.30, HEAT_DECK_EDGE),
+               (19.75, HEAT_DECK_EDGE, 21.21, 5.235))
+HEAT_LANDING_OFFSET = .31
+HEAT_LADDER_ORIGIN = (16.20, HEAT_DECK_EDGE+HEAT_LANDING_OFFSET, -RUNG_BOTTOM)
+HEAT_LADDER = LadderSetup(gait="skip", floor=RUNG_BOTTOM, rounds=14, rungs=19,
+                          platform=(UPPER_Z-HEAT_LADDER_ORIGIN[2], HEAT_LANDING_OFFSET))
+HEAT_LADDER_ENTRY = (HEAT_LADDER_ORIGIN[0]+.11, HEAT_LADDER_ORIGIN[1], 0.)
+HEAT_LADDER_APPROACH = (HEAT_LADDER_ORIGIN[0]+.93, HEAT_LADDER_ORIGIN[1], 0.)
+HEAT_VIEW_PORT = (16.20, 1.32, UPPER_Z+1.16)
+HEAT_VIEW_STAND = (HEAT_VIEW_PORT[0], 2.18, UPPER_Z)
+HEAT_DOG_WAIT = (18.15, 7.03, 0.)
 SPARE_POINTS = {"seal": (-18.45, 8.68, .72), "screen": (-14.42, 8.68, .72)}
 SPARE_NAMES = {"seal": "S1 密封件包", "screen": "S2 滤网组件"}
 SPARE_SCALE = (-11.60, 7.85, .72)
@@ -38,7 +54,7 @@ RETURN_STATUS = (-16.93, SOUTH_PROCESS_Y-.55, .53)
 SURVEY_POSES = (
     (-6.75, -2.90), (-21.00, .10), (-22.45, 6.70), (-22.45, 11.79), (-11.20, 11.79),
     (0., 10.62), (0., 5.20), (5.10, 5.20), (10.90, 10.62), (21.10, 10.62),
-    (21.15, 5.55), (13.80, 5.55), (7.48, 5.55), (6.72, -.36), (15.00, -.36),
+    (21.15, 5.81), (13.80, 5.55), (7.48, 5.55), (6.72, -.36), (15.00, -.36),
     (22.10, -.36), (22.00, -5.96), (21.02, -9.52), (10.42, -9.52), (4.60, -5.95),
     (4.60, -3.25), (1.03, -3.05), (1.03, -9.52), (-13.50, -9.52), (-21.10, -9.52),
     (-20.50, -5.50), (-9.85, -5.50), (-6.90, -3.45), (-5.98, 2.30), (-5.72, -.62),
@@ -180,6 +196,94 @@ def overhead_lines(plant):
             plant.tube((pipe, y-.027, 2.88), (pipe, y+.027, 2.88), .131, GALV, surface="brushed")
 
 
+def upper_floor(plant):
+    z = UPPER_Z
+    for index, (west, south, east, north) in enumerate(UPPER_DECKS[1:2], 1):
+        plant.box((west+east)/2, (south+north)/2, z-.08, east-west, north-south, .16, GALV,
+                  name=f"deck_upper_{index}", nav=False, surface="grating")
+        for y in (south+.12, north-.12):
+            plant.box((west+east)/2, y, z-.215, east-west, .15, .18, STEEL, nav=False, surface="metal")
+    for x in (6.16, 12.72, 18.50, 22.10):
+        for y in (.28, 2.46):
+            plant.box(x, y, 1.31, .15, .16, 2.62, STEEL, name=f"upper_column_{x}_{y}", surface="metal")
+            anchor_plate(plant, x, y, 0., .28, .26)
+    rails = (((5.80, -2.02), (22.27, -2.02)), ((5.80, 3.72), (15.48, 3.72)),
+             ((16.94, 3.72), (19.71, 3.72)),
+             ((21.25, 3.72), (22.27, 3.72)), ((22.27, -2.02), (22.27, 3.72)),
+             ((5.82, -2.02), (5.82, 1.29)), ((5.82, 2.65), (5.82, 3.72)))
+    for index, (a, b) in enumerate(rails):
+        for height in (.48, 1.03):
+            plant.tube((*a, z+height), (*b, z+height), .025, YELLOW, True,
+                       name=f"upper_rail_{index}_{height}", surface="metal")
+        for step in np.linspace(0., 1., max(2, math.ceil(math.dist(a,b)/1.26)+1)):
+            xy = tuple((1-step)*left+step*right for left, right in zip(a,b))
+            plant.tube((*xy, z), (*xy, z+1.03), .023, YELLOW, True, surface="metal")
+    for y in (1.06, 2.95):
+        plant.box(10.84, y, z+.003, 9.58, .047, .006, YELLOW, collide=False)
+    plant.box(12.65, -.91, z+.48, 1.84, .51, .96, STEEL, surface="panel")
+    plant.box(12.65, -.91, z+.982, 1.93, .61, .044, GALV, surface="brushed")
+    plant.label("二层仪表校验台", 12.65, -.81, z+1.18)
+    plant.label("二层设备检修走道", 10.12, 1.54, z+.78)
+
+
+def add_lift(plant):
+    x, y = LIFT_XY
+    carriage = ET.SubElement(plant.world, "body", name="heat_lift", mocap="true", pos=point_string((x, y, UPPER_Z)))
+    platform = []
+
+    def detail(name, center, size, color, surface, collision=True):
+        half = tuple(value/2 for value in size)
+        platform.append(plant.shape("box", center, half, color, None, surface))
+        if collision:
+            plant.geom("box", center, half, color, parent=carriage, name=name)
+
+    detail("lift_deck", (0, 0, -.047), (1.46, 1.49, .094), GALV, "grating")
+    for side in (-1, 1):
+        for center, size in (((side*.70, 0., .91), (.047, 1.42, .048)),
+                             ((side*.70, 0., .46), (.046, 1.42, .045)),
+                             ((side*.70, .67, .46), (.052, .052, .92)),
+                             ((side*.70, -.67, .46), (.052, .052, .92))):
+            detail(None, center, size, YELLOW, "metal")
+        edge = x+side*.70
+        plant.obstacles.append((edge-.045, y-.72, .15, edge+.045, y+.72, .96))
+        plant.box(x+side*.82, y-.34, 2.32, .121, .131, 4.64, STEEL,
+                  name=f"lift_column_{side}", surface="metal")
+        anchor_plate(plant, x+side*.82, y-.34, 0., .23, .24)
+    for side in (-1, 1):
+        detail(None, (0, side*.713, .002), (1.39, .045, .004), YELLOW, "paint", False)
+    plant.box(x, y-.34, 4.59, 1.75, .135, .16, STEEL, surface="metal")
+    plant.factory_devices["lift"] = {"position": [x, y, UPPER_Z], "shapes": platform}
+    plant.label("检修升降台", x, y+.10, 3.94)
+
+
+def heat_access_ladder(plant):
+    ox, oy, oz = HEAT_LADDER_ORIGIN
+    for name, (x, y, z), (dx, dy, dz) in ladder_boxes(HEAT_LADDER):
+        plant.box(ox-x, oy-y, oz+z, dx*2, dy*2, dz*2, YELLOW, name=f"heat_ladder_{name}",
+                  nav=not name.startswith("rung"), surface="metal")
+    rail_x = ox-LADDER_X
+    for side in (-1, 1):
+        anchor_plate(plant, rail_x, oy+side*.39, 0., .15, .14)
+    for height in (.15, UPPER_Z-.19):
+        plant.box(rail_x-.061, oy-.03, height, .057, .91, .060, STEEL,
+                  nav=False, surface="metal")
+    anchor_plate(plant, rail_x, oy-.39, UPPER_Z, .15, .14)
+    plant.box(ox+.22, HEAT_DECK_EDGE-.071, UPPER_Z+.003, 1.38, .065, .006, YELLOW, collide=False)
+    for y in (oy-.70, oy+.70):
+        plant.box(ox+.49, y, .003, 1.30, .045, .006, YELLOW, collide=False)
+    plant.label("1F → 2F 检修梯", ox+.27, oy+.53, 1.67)
+
+
+def heat_panel(plant):
+    x, y, z = HEAT_VIEW_PORT
+    plant.box(x, y-.17, UPPER_Z+.56, .66, .30, 1.12, GALV, name="heat_monitor_post", surface="metal")
+    anchor_plate(plant, x, y-.17, UPPER_Z, .76, .39)
+    plant.box(x, y-.15, z-.12, .76, .26, .36, STEEL, surface="panel")
+    plant.box(x, y, z, .23, .021, .090, (.32, .61, .66), name="heat_high", nav=False, surface="display")
+    plant.box(x, y-.04, z+.077, .45, .16, .037, STEEL, surface="brushed")
+    plant.label("H2 板换巡检台", x, y+.04, z+.18)
+
+
 def handwheel(plant, x, y, z):
     plant.tube((x, y, z-.155), (x, y, z+.011), .024, GALV, surface="metal")
     rim = [np.array((x+.101*math.cos(i*math.tau/16), y+.101*math.sin(i*math.tau/16), z))
@@ -316,11 +420,9 @@ def exchange(plant):
              .081, .18, color=STEEL)
     for x in (13.41, 15.93, 18.91):
         plant.flange(x, 9.42, 2.49, .112)
-    for name, x, z, color in (("heat_low", 13.62, .42, OCHRE if plant.factory.spare == "seal" else GREEN),
-                               ("heat_high", 16.20, 1.32, (.32, .61, .66))):
-        plant.box(x, 7.73, .34, .14, .13, .68, GALV, surface="metal")
-        plant.tube((x, 7.77, .39), (x, 7.77, z+.05), .035, STEEL, surface="metal")
-        indicator(plant, name, (x, 7.64, z), (.28, .020, .10), color)
+    plant.box(13.62, 7.73, .34, .14, .13, .68, GALV, surface="metal")
+    indicator(plant, "heat_low", (13.62, 7.64, .42), (.28, .020, .10),
+              OCHRE if plant.factory.spare == "seal" else GREEN)
 
 
 def spare_rack(plant, x):
@@ -436,12 +538,17 @@ def add_factory(plant):
     }
     plant.points.update(spare_scale=SPARE_SCALE, spare_dock=SPARE_DOCK, return_dock=RETURN_DOCK,
                         spare_stock=SPARE_POINTS[plant.factory.spare], return_rest=RETURN_REST,
-                        heat_station=(15.05, 7.88, .75), west_gate=(PORTALS["west"], 2.42, .4),
+                        heat_ladder=(*HEAT_LADDER_ENTRY[:2], 1.4), heat_station=HEAT_VIEW_PORT,
+                        west_gate=(PORTALS["west"], 2.42, .4),
                         east_gate=(PORTALS["east"], 2.42, .4))
     plant.floor_markings = floor_markings(PORTALS, plant.points, FACTORY["orders"])
     hall(plant)
     overhead_lines(plant)
     filtration(plant)
     exchange(plant)
+    upper_floor(plant)
+    add_lift(plant)
+    heat_access_ladder(plant)
+    heat_panel(plant)
     return_monitor(plant)
     spares(plant)

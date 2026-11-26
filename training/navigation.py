@@ -16,6 +16,7 @@ class Aisles:
     def __init__(self, layout):
         self.obstacles = np.asarray(layout["obstacles"], dtype=float).reshape(-1, 6)
         self.extent = np.asarray(layout["extent"]) / 2
+        self.decks = layout.get("upperDecks")
 
     @lru_cache(maxsize=8)
     def lanes(self, key, level):
@@ -24,8 +25,17 @@ class Aisles:
         bodies = objects[(objects[:, 5] > level+.035) & (objects[:, 2] < level+height)]
         rectangles = np.c_[bodies[:, :2]-radius, bodies[:, 3:5]+radius]
         if level > 1.:
-            low = np.array((-.30, .135))
-            high = np.array((5.80, 3.745))
+            decks = np.asarray(self.decks or ((-.30, .135, 5.80, 3.745),))
+            low, high = decks[:, :2].min(axis=0), decks[:, 2:].max(axis=0)
+            x, y = np.unique(decks[:, (0, 2)]), np.unique(decks[:, (1, 3)])
+            holes = []
+            for left, right in zip(x[:-1], x[1:]):
+                for south, north in zip(y[:-1], y[1:]):
+                    center = ((left+right)/2, (south+north)/2)
+                    if not np.any(np.all((decks[:, :2] <= center) & (center <= decks[:, 2:]), axis=1)):
+                        holes.append((left-radius, south-radius, right+radius, north+radius))
+            if holes:
+                rectangles = np.vstack((rectangles, holes))
         else:
             low, high = -self.extent, self.extent
         return rectangles, low+radius, high-radius
@@ -102,7 +112,7 @@ class ContactWatch:
         self.labels = tuple(name or model.body(int(model.geom_bodyid[i])).name
                             for i, name in enumerate(self.names))
         self.floor = {i for i, name in enumerate(self.names)
-                      if name in ("slab", "walkway") or name.startswith("tread_")}
+                      if name in ("slab", "walkway", "lift_deck") or name.startswith(("tread_", "deck_upper_"))}
         self.feet = {i for i, (name, label) in enumerate(zip(self.names, self.labels))
                      if name in ("go_FL", "go_FR", "go_RL", "go_RR") or
                      name.startswith(("left_pad_", "right_pad_")) or

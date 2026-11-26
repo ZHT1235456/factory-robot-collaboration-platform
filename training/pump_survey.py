@@ -47,7 +47,7 @@ class PumpSurvey:
     sweep_seconds = 1.15
     probe_seconds = .95
 
-    def __init__(self, model, state, robots, item, extent, compact=False):
+    def __init__(self, model, state, robots, item, extent, compact=False, upper_decks=None):
         self.model, self.state = model, state
         self.sites = {key: model.site(f"survey_{key}").id for key in robots}
         ignored = [robot["body"] for robot in robots.values()] + [item]
@@ -63,6 +63,7 @@ class PumpSurvey:
         self.origin = -np.asarray(extent)*.5
         self.width, self.height = np.ceil(np.asarray(extent)/self.resolution).astype(int)
         self.compact = compact
+        self.upper_decks = upper_decks or ((-.55, .135, 5.80, 3.745),)
         cells = int(self.width*self.height)
         self.empty = f"a{cells:X}" if compact else "0"*cells
         self.grids = {level: np.zeros((self.height, self.width), np.uint8) for level in ("lower", "upper")}
@@ -158,7 +159,9 @@ class PumpSurvey:
             def on_deck(x, y):
                 center_x = self.origin[0]+(x+.5)*self.resolution
                 center_y = self.origin[1]+(y+.5)*self.resolution
-                return (center_x >= -.55) & (center_x <= 5.80) & (center_y >= .135) & (center_y <= 3.745)
+                return np.logical_or.reduce([(left <= center_x) & (center_x <= right) &
+                                             (south <= center_y) & (center_y <= north)
+                                             for left, south, right, north in self.upper_decks])
             clear = on_deck(free_x, free_y)
             obstacle = on_deck(hit_x, hit_y)
             free_y, free_x, hit_y, hit_x = free_y[clear], free_x[clear], hit_y[obstacle], hit_x[obstacle]

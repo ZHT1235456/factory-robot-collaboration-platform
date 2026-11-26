@@ -1,7 +1,9 @@
 import { invoke, isTauri } from '@tauri-apps/api/core';
-import scene from '../scenes/factory.json';
+import factoryScene from '../scenes/factory.json';
+import yardScene from '../scenes/yard.json';
 import { WorkcellView } from './viewport.js';
 import { SurveyMap } from './survey-map.js';
+import { actionCameraActor, recentSpeech } from './action-camera.js';
 import './style.css';
 
 const $ = id => document.getElementById(id);
@@ -10,18 +12,19 @@ const client = crypto.randomUUID();
 const controls = ['run', 'pause', 'step', 'reset', 'new-seed'].map($);
 const stageStates = { ready: '待运行', running: '作业中', paused: '已暂停', done: '已验收', fault: '需复核', review: '回看' };
 const robotNames = { g1: 'G1', go2: 'Go2' };
-const speechSeconds = 6;
 const floorNames = { clear: '通', blocked: '阻', unknown: '待查' };
 const laneNames = { near: '服务通道', far: '南侧回程通道' };
 const portalNames = { west: '换热西门', east: '换热东门' };
-const totalCheckpoints = scene.orders.reduce((count, order) => count+order.steps.length, 0);
+const scenarios = { factory: factoryScene, yard: yardScene };
+const ladderStates = { mounting: '登梯准备', ascending: '跨档上楼', landing: '转移至二层平台' };
+let scene = factoryScene;
 
 let view, ready, latest, displayed, history = [], journal = [], program = [];
 let active = false, resetting = false, busy = false, generation = 0, timer = 0, replayIndex = null;
 let virtualOrigin = 0, wallOrigin = 0, lastEventKey = '';
 let floor = 'lower';
 let scope = 'factory', mapSource = 'g1', inspectedOrder = null, programOrder = null;
-let cameraMode = 'speaker', followedRobot = null;
+let cameraMode = 'action', followedRobot = null;
 const orderControls = [];
 const surveyMap = new SurveyMap($('survey-map'));
 
@@ -59,6 +62,8 @@ async function request(body) {
 
 function showCatalogEntry() {
   $('scene-title').textContent = scene.name + ' · ' + scene.job;
+  orderControls.length = 0;
+  programOrder = null;
   for (const [index, order] of scene.orders.entries()) {
     const button = element('button', '');
     button.type = 'button';
@@ -83,10 +88,12 @@ function showOrders(snapshot) {
     .reduce((count, item) => count+item.steps.length, 0) +
     (finished.includes(scene.orders[activeIndex].id) ? 0 : Math.max(0, snapshot?.step ?? 0));
   $('order-progress').textContent = finished.length+' / '+scene.orders.length+' 工单';
-  $('checkpoint-progress').textContent = stepsDone+' / '+totalCheckpoints+' 节点';
+  const total = scene.orders.reduce((count, item) => count+item.steps.length, 0);
+  $('checkpoint-progress').textContent = stepsDone+' / '+total+' 节点';
   $('zone').textContent = scene.zone+'  /  '+order.area;
   $('active-order').textContent = building && inspectedOrder === null
-    ? 'Go2 下层建图 · G1 等待接图' : order.area+' · '+order.name;
+    ? (scene.id === 'yard' ? 'Go2 室外测绘 · G1 等待接图' : 'Go2 下层建图 · G1 等待接图')
+    : order.area+' · '+order.name;
   for (const [offset, button] of orderControls.entries()) {
     const state = finished.includes(scene.orders[offset].id) ? 'complete' :
       (offset === activeIndex ? (snapshot?.status === 'fault' ? 'fault' : 'current') : 'pending');
@@ -121,21 +128,17 @@ function pickCamera(mode) {
   cameraMode = mode;
   for (const button of $('cameras').children)
     button.setAttribute('aria-pressed', String(button.dataset.camera === mode));
-  if (mode === 'speaker') followAutomaticCamera(displayed, true);
+  if (mode === 'action') followAutomaticCamera(displayed, true);
   else view?.setView(mode);
 }
 
 function followAutomaticCamera(snapshot, recenter = false) {
   const surveying = snapshot?.mapping?.stage === 'surveying' && snapshot.status === 'running';
-  const label = surveying ? '随建图' : '随发言';
+  const label = surveying ? '随建图' : '随行动';
   const button = $('auto-camera');
   if (button.textContent !== label) button.textContent = label;
-  if (cameraMode !== 'speaker') return;
-  let robot = surveying ? 'go2' : null;
-  for (let i = (snapshot?.eventCount ?? 0)-1; i >= 0 && robot === null; i--) {
-    const { sender } = journal[i];
-    if (Object.hasOwn(robotNames, sender)) robot = sender;
-  }
+  if (cameraMode !== 'action') return;
+  const robot = snapshot?.cameraActor ?? null;
   if (robot === followedRobot && !recenter) return;
   followedRobot = robot;
   view?.setView(robot ?? 'overview');
@@ -149,6 +152,7 @@ function controlsState() {
   $('step').disabled = locked || active || busy || latest.status === 'fault' ||
     (latest.status === 'done' && replayIndex === null);
   $('seek').disabled = locked || active || history.length < 2;
+  $('site-select').disabled = resetting;
 }
 
 function showEvents(snapshot) {
@@ -172,17 +176,6 @@ function showEvents(snapshot) {
   $('events').replaceChildren(...(rows.length ? rows : [element('li', '等待 Go2 开始建图', 'message-empty')]));
 }
 
-function recentSpeech({ t, eventCount }) {
-  const messages = {};
-  for (let i = eventCount-1; i >= 0; i--) {
-    const event = journal[i];
-    if (t-event.time >= speechSeconds) break;
-    if (Object.hasOwn(robotNames, event.sender) && !messages[event.sender])
-      messages[event.sender] = event;
-  }
-  return messages;
-}
-
 function showMap(snapshot) {
   const map = snapshot.survey;
   if (!map) return;
@@ -197,13 +190,13 @@ function showMap(snapshot) {
     button.disabled = button.dataset.source === 'g1' && !delivery;
     button.setAttribute('aria-pressed', String(button.dataset.source === (received ? 'g1' : 'go2')));
   }
-  const index = upper ? 0 : inspectedOrder ?? snapshot.order;
+  const index = upper ? (inspectedOrder === 2 || snapshot.order === 2 ? 2 : 0) : inspectedOrder ?? snapshot.order;
   const order = scene.orders[index];
   const known = surveyMap.update(snapshot, view.layout, floor, scope === 'zone' ? order : null, received);
   $('map-version').textContent = 'V'+String(received?.revision ?? map.floorVersions?.[floor] ?? map.revision).padStart(2, '0');
   $('map-location').textContent = scope === 'zone' ? order.area : scene.extent[0]+' × '+scene.extent[1]+' m';
   $('map-coverage').textContent = '已观测 '+known+'%';
-  const fields = upper ? { A: 'A 梯上口', B: 'B 梯上口' } :
+  const fields = upper && index === 0 ? { A: 'A 梯上口', B: 'B 梯上口' } : upper || scene.id === 'yard' ? {} :
     index === 0 ? laneNames : (index === 2 || scope === 'factory') ? portalNames : {};
   const states = upper ? map.gates : index === 0 ? map.lanes : snapshot.portals;
   const rows = Object.entries(fields).map(([key, label]) => {
@@ -226,7 +219,7 @@ function showMap(snapshot) {
     handoff.dataset.stage = stage;
     rows.unshift(handoff);
   }
-  if (upper && snapshot.metrics.selectedFlight)
+  if (upper && index === 0 && snapshot.metrics.selectedFlight)
     rows.push(element('div', 'G1 已选用 '+snapshot.metrics.selectedFlight+' 梯', 'route-picked'));
   const route = surveyMap.route;
   if (!upper && route && (scope === 'factory' || (route.area ?? 'pump') === order.id))
@@ -238,7 +231,7 @@ function showMap(snapshot) {
 function present(snapshot, snap = false) {
   displayed = snapshot;
   view.apply(snapshot, snap);
-  view.setSpeech(recentSpeech(snapshot));
+  view.setSpeech(snapshot.speech);
   showOrders(snapshot);
   followAutomaticCamera(snapshot, snap && !active);
   let state = snapshot.status;
@@ -253,12 +246,16 @@ function present(snapshot, snap = false) {
   $('seek').setAttribute('aria-valuetext', clock(snapshot.t));
   for (const key of ['g1', 'go2']) {
     const moving = snapshot.actors[key].moving;
-    const location = snapshot.actors[key].pose[2] > 2.79 ? '上层' : '下层';
+    const ladder = key === 'g1' && snapshot.ladder;
+    const betweenFloors = ladder && ladder.stage !== 'mounting' || key === 'g1' && snapshot.liftMoving;
+    const location = scene.id === 'yard' ? '室外' : betweenFloors ? '层间' :
+      snapshot.actors[key].pose[2] > 2.79 ? '二层' : '一层';
     const carrying = key === 'g1' ? snapshot.holding : snapshot.cargo === 'spare' &&
       snapshot.metrics.cargoLoads > 0 && snapshot.metrics.basketPickups < 2;
     const detecting = key === 'go2' && snapshot.survey.go2Detection;
     const mapping = snapshot.mapping?.stage;
-    const motion = mapping === 'surveying' ? (key === 'go2' ? '建图' : '待接图')
+    const motion = ladder ? ladderStates[ladder.stage] : key === 'g1' && snapshot.liftMoving ? '乘升降台' :
+      mapping === 'surveying' ? (key === 'go2' ? '建图' : '待接图')
       : mapping === 'sending' ? (key === 'go2' ? '交付地图' : '接图')
       : detecting ? '探测' : carrying ? (moving ? '携件' : '承重') : moving ? '移动' : '驻留';
     $(key + '-state').textContent = location+' · '+motion;
@@ -288,6 +285,9 @@ function present(snapshot, snap = false) {
     telemetry.push(element('div', '备件称重 · '+snapshot.metrics.spareMassG+' g'));
   if (snapshot.metrics.acceptedReturn)
     telemetry.push(element('div', '回水位绿灯已读回 · 托架稳定'));
+  const stride = snapshot.ladder?.step;
+  if (stride) telemetry.push(element('div', (stride.limb === 'left_toe' ? '左脚 ' : '右脚 ') +
+    stride.from+' → '+stride.to+' 档'));
   if (snapshot.door > .025)
     telemetry.push(element('div', '观察盖开度 ' + (snapshot.door*180/Math.PI).toFixed(1) + '°'));
   if (snapshot.status === 'fault' && snapshot.eventCount)
@@ -300,6 +300,9 @@ function present(snapshot, snap = false) {
 
 function receive(snapshot, snap = false) {
   journal.push(...snapshot.events);
+  // Record the automatic target for this frame, including while a manual view is selected.
+  snapshot.speech = recentSpeech(snapshot, journal);
+  snapshot.cameraActor = actionCameraActor(snapshot, latest, snapshot.speech);
   if (!snapshot.survey.floors) snapshot.survey.floors = latest.survey.floors;
   latest = snapshot;
   history.push(snapshot);
@@ -322,11 +325,12 @@ function showError(error) {
   $('viewport-message').textContent = String(error.message || error);
 }
 
-async function reset() {
+async function reset(nextScene = scene) {
   if (resetting) return;
   const input = $('seed');
   if (!input.reportValidity() || input.value === '') return;
   halt();
+  scene = nextScene;
   const token = ++generation;
   resetting = true;
   latest = displayed = null;
@@ -336,6 +340,8 @@ async function reset() {
   lastEventKey = '';
   inspectedOrder = null;
   mapSource = 'g1';
+  showCatalogEntry();
+  setMapView('factory', 'lower');
   showOrders(null);
   $('events').replaceChildren();
   $('viewport-message').hidden = false;
@@ -345,7 +351,8 @@ async function reset() {
     const [, packet] = await Promise.all([ready, request({ op: 'reset', scene: scene.id, seed: Number(input.value) })]);
     if (token !== generation) return;
     view.rebuild(packet.layout, scene.id);
-    pickCamera('speaker');
+    $('floors').querySelector('[data-floor="upper"]').hidden = scene.id !== 'factory';
+    pickCamera('action');
     $('viewport-message').hidden = true;
     system('离线仿真 · ONNX 已加载', 'ok');
     receive(packet, true);
@@ -414,7 +421,7 @@ document.addEventListener('fullscreenchange', () => {
 $('cameras').addEventListener('click', event => {
   const mode = event.target.closest('button')?.dataset.camera;
   if (!mode) return;
-  if (mode === 'zone' || mode === 'overview' || mode === 'speaker') {
+  if (mode === 'zone' || mode === 'overview' || mode === 'action') {
     inspectedOrder = null;
     if (displayed) {
       showOrders(displayed);
@@ -427,7 +434,8 @@ $('orders').addEventListener('click', event => {
   const button = event.target.closest('button[data-order]');
   if (!button || !displayed) return;
   inspectedOrder = Number(button.dataset.order);
-  setMapView('zone', 'lower');
+  setMapView('zone', scene.orders[inspectedOrder].id === 'heat' && displayed.actors.g1.pose[2] > 2.79 ?
+    'upper' : 'lower');
   showOrders(displayed);
   pickCamera('zone');
   showMap(displayed);
@@ -435,6 +443,7 @@ $('orders').addEventListener('click', event => {
 function setMapView(mapScope, mapFloor) {
   scope = mapScope;
   floor = mapFloor;
+  view?.setMapFloor(mapFloor);
   for (const button of $('floors').querySelectorAll('button'))
     button.setAttribute('aria-pressed', String(button.dataset.floor === floor || button.dataset.scope === scope));
 }
@@ -466,6 +475,14 @@ $('step').addEventListener('click', () => {
   } else advance(1, generation);
 });
 $('reset').addEventListener('click', () => reset());
+$('site-select').addEventListener('change', event => {
+  const input = $('seed');
+  if (!input.reportValidity() || input.value === '') {
+    event.target.value = scene.id;
+    return;
+  }
+  reset(scenarios[event.target.value]);
+});
 $('new-seed').addEventListener('click', () => {
   $('seed').value = String(crypto.getRandomValues(new Uint32Array(1))[0] % 2147483648);
   reset();
@@ -494,7 +511,6 @@ window.addEventListener('pagehide', () => {
     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client, op: 'close' }) }).catch(() => {});
 });
 
-showCatalogEntry();
 controlsState();
 try {
   view = new WorkcellView($('viewport'), $('scene-labels'));

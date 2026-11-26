@@ -4,25 +4,29 @@
 
 [下载 Windows 版](https://github.com/ZHT1235456/factory-robot-collaboration-platform/releases/latest) · [软件开发日志 PDF](docs/工厂机器人协同作业平台软件开发日志.pdf) · [LaTeX 源码](docs/工厂机器人协同作业平台软件开发日志.tex)
 
-基于同级「机器狗」项目的 Unitree G1 和 Go2。MuJoCo 求解双机、楼梯、障碍、工具及设备接触。Three.js 显示同一座厂房，Vite 提供开发入口，Tauri 2 生成 Windows x64 单文件程序。
+基于同级「机器狗」项目的 Unitree G1 和 Go2。MuJoCo 求解双机与楼梯、检修升降台、工具及设备的接触。Three.js 渲染室内厂房和室外冷却水站，Vite 提供开发入口，Tauri 2 生成 Windows x64 单文件程序。
 
-下载并双击 `FactoryRobotCollaborationPlatform.exe` 启动。也可下载 ZIP，解压后双击 `工厂机器人协同作业平台.exe`。默认全屏，按 **F11** 切换为窗口。程序使用 Windows 的 Microsoft Edge WebView2。自动镜头开场显示全厂。Go2 建图期间连续跟随 Go2，G1 接图后按发言切换，回看也使用对应时刻的规则。手动选取其他视角后，可点「随建图」或「随发言」恢复自动切换。点击左侧工单可查看对应工区的模型和地图。点「工区」恢复跟随当前工单。长距离转场可用 16× 或 24×，暂停后拖动时间轴可回看动作、栅格和气泡。
+Windows x64 版可双击启动，默认全屏，按 **F11** 切换窗口。程序使用 Microsoft Edge WebView2。当前源码的单文件构建名为 `工厂机器人协同作业平台.exe`，体积 **38.69 MiB**。
+
+「随行动」会在 G1 或 Go2 开始移动或发言时切换镜头。同一帧内发言优先，两台持续同时移动时保持当前跟拍。Go2 停驻测绘时镜头继续跟随，回看会恢复当时的自动镜头。手动选取其他视角后，可点「随建图」或「随行动」恢复自动切换。点击左侧工单可查看对应工区的模型和地图。长距离转场可用 16× 或 24×，暂停后拖动时间轴可回看动作、栅格和气泡。
 
 ## 运行截图
 
-![泵房工区的格栅夹层、双检修梯、管架和检修车](assets/factory-pump-overview.png)
+![G1 沿固定检修梯从一层爬向二层出口](assets/factory-ladder-ascent.png)
 
-[查看 Go2 建图](assets/factory-map-follow-go2.png) · [查看 G1 接收地图](assets/factory-map-handoff.png)
+[室外冷却水站巡检](assets/yard-inspection.png) · [泵房协同开盖](assets/factory-pump-cooperation.png) · [Go2 建图](assets/factory-map-follow-go2.png) · [G1 接收地图](assets/factory-map-handoff.png)
 
-## 厂房和工单
+## 场景和工单
 
-占地 **47.2 × 26 m，共 1,227.2 m²**，是原循环水泵房 122.72 m² 的十倍。原泵房保留夹层和两部 16 级钢梯。四个新增设备区通过厂内通道相连，五张连续工单共有 **30 个步骤**。
+顶部场景选择器可在「两层室内厂房」与「室外冷却水站」之间切换。室内俯视时可用共享地图的楼层按钮查看一层或二层。室外场景布置两座冷却塔，Go2 先测绘并找出低位回水异常，G1 按收到的地图到对应温度表取证，双方复测后联签。
+
+室内占地 **47.2 × 26 m，共 1,227.2 m²**，是原循环水泵房 122.72 m² 的十倍。泵房的二层连通东侧检修走道，换热区设有从一层通往二层的固定检修梯和返回用的下行升降台。室内五张连续工单共有 **30 个步骤**。室外场地为 **24 × 16 m**，冷却塔巡检共有 **5 个步骤**。
 
 | 工单 | 双机分工与验收 |
 | --- | --- |
 | 泵组测振 | Go2 进入 G1 步行无法进入的低位管架取证。G1 确认柜号和梯口后下楼，协同开盖，再从箩筐取记录器布设到异常泵。 |
 | 过滤隔离 | Go2 读取两路低位压差指示，G1 核对对应控制位号。收到清场回执后，G1 操作模拟隔离按钮，由 Go2 核对状态灯。 |
-| 换热复检 | Go2 勘测两处入口，确认托盘占用了哪一处并发图。G1 按地图选择开放入口，通过后复核高位支路编号。Go2 复核低位回流状况，双方联签备件单。 |
+| 换热复检 | Go2 勘测两处入口并确认一层梯口净空。G1 通过检修梯跨档爬升 2.8 m，在梯顶侧移并双脚踏上二层格栅，走到 H2 巡检台核对位号。G1 乘下行升降台返回一层，Go2 复核低位回流指示，双方联签备件单。 |
 | 备件转运 | Go2 核对两处货位并驻车。G1 夹取指定备件，按接触载荷称重。备件落在筐底并稳定后才闭合运输卡扣。 |
 | 回水验收 | Go2 运抵交接位后，G1 卸件并把备件固定在验收托架。收到隔离和位置的复核结果后，G1 操作本地确认按钮，由 Go2 读回状态灯并签收。 |
 
@@ -42,16 +46,20 @@ Go2 在测绘点发出青色扫线，在读表或检查净空时显示定向探�
 
 沿用实验室服务器训练的 SuperMimic 接触和足端 ONNX 策略。G1 步态结合对侧摆臂、脚跟滚动、脚尖蹬离和单脚承重。Go2 使用对角腿交替支撑。仿真由底座引导、逆运动学和限矩伺服执行。机器人模型许可见 [Go2](model/LICENSE) 和 [G1](model/G1-LICENSE)。
 
+H2 检修梯实时加载跨档 ONNX。登梯、跨档、梯顶换握与侧向转移与厂房时钟同步。爬梯使用同一厂房坐标下的局部 MuJoCo 接触模型，抓握采用简化接触约束。双脚获得二层格栅支撑后恢复厂房步行控制，G1 到 H2 巡检台并通过射线检查确认位号可见。
+
+- [检修梯上楼与室内外场景验收](results/ladder-floor-access-validation.json)
 - [扩建厂房工况验收](results/factory-validation.json)
-- [Windows 包验收](results/windows-verification.json)与[实际运行界面](assets/factory-console-implementation.png)
+- [v1.0.1 Windows 包验收](results/windows-verification.json)与[运行界面](assets/factory-console-implementation.png)
 - [G1 接触策略](results/g1-contact-policy.onnx)与[训练记录](results/training.json)
 - [双机足端跟踪策略](results/foot-tracking-policy.onnx)与[训练记录](results/gait-training.json)
+- [G1 跨两档策略](results/g1-ladder-skip-policy.onnx)、[训练记录](results/ladder-skip-training.json)与[独立动作验证](results/ladder-skip-validation.json)
 - [原泵房验收](results/validation.json)与[G1 平地步态对测](results/g1-walk-verification.json)
 
 在项目的 MuJoCo 推理环境可复核默认验收矩阵。
 
 ~~~powershell
-python training/verify_factory.py --seeds 0 11 14 17 --workers 4
+python training/verify_factory.py --seeds 0 11 14 17 --workers 4 --output results/ladder-floor-access-validation.json
 ~~~
 
 ## 设计和构建

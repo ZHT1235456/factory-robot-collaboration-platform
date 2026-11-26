@@ -20,20 +20,24 @@ export class SurveyMap {
     this.route = !received || survey.route?.revision === received.revision ? survey.route : null;
     const grid = this.layer(survey, floor);
     this.draw();
-    if (!order) return Math.round(100*grid.known/grid.values.length);
-    if (grid.coverage.has(order.id)) return grid.coverage.get(order.id);
-    const [startX, startY, endX, endY] = order.bounds;
+    const decks = floor === 'upper' ? layout.upperDecks : null;
+    if (!order && !decks) return Math.round(100*grid.known/grid.values.length);
+    const key = order?.id ?? 'upper-decks';
+    if (grid.coverage.has(key)) return grid.coverage.get(key);
     const [ox, oy] = survey.origin;
     const [cols, rows] = survey.size;
     const res = survey.resolution;
+    const [startX, startY, endX, endY] = order?.bounds ?? [ox, oy, ox+cols*res, oy+rows*res];
     let known = 0, total = 0;
     for (let y = Math.max(0, Math.floor((startY-oy)/res)); y < Math.min(rows, Math.ceil((endY-oy)/res)); y++)
       for (let x = Math.max(0, Math.floor((startX-ox)/res)); x < Math.min(cols, Math.ceil((endX-ox)/res)); x++) {
+        const cellX = ox+(x+.5)*res, cellY = oy+(y+.5)*res;
+        if (decks && !decks.some(([l,b,r,t]) => cellX>=l && cellX<=r && cellY>=b && cellY<=t)) continue;
         if (grid.values[y*cols+x]) known++;
         total++;
       }
     const percent = total ? Math.round(100*known/total) : 0;
-    grid.coverage.set(order.id, percent);
+    grid.coverage.set(key, percent);
     return percent;
   }
 
@@ -105,7 +109,14 @@ export class SurveyMap {
     ctx.clip();
     ctx.drawImage(this.layer(survey, floor).canvas, ...pos(ox, oy+rows*res), cols*res*scale, rows*res*scale);
 
-    if (!order && layout.orders) {
+    if (floor === 'upper' && layout.upperDecks) {
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = '#397568';
+      for (const [l, b, r, t] of layout.upperDecks) {
+        const [px, py] = pos(l, t);
+        ctx.strokeRect(px, py, (r-l)*scale, (t-b)*scale);
+      }
+    } else if (!order && layout.orders) {
       for (const [i, area] of layout.orders.entries()) {
         const [x1, y1, x2, y2] = area.bounds;
         const [x, y] = pos(x1, y2);
@@ -128,7 +139,7 @@ export class SurveyMap {
       ctx.stroke();
       ctx.setLineDash([]);
     }
-    const landmarks = order
+    const landmarks = floor === 'upper' ? layout.surveyLandmarks.upper : order
       ? (order.id === 'pump' ? layout.surveyLandmarks[floor] : layout.zoneLandmarks[order.id])
       : layout.orders?.map(area => [area.area, ...area.center]) ?? layout.surveyLandmarks[floor];
     ctx.font = '600 10px "Segoe UI", "Microsoft YaHei UI", sans-serif';

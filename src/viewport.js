@@ -189,6 +189,16 @@ export class WorkcellView {
     this.basket = new T.Group();
     dog.root.add(this.basket);
     this.jaws = makeGripper(human.root.getObjectByName('right_wrist_yaw_link'));
+    this.ladderPalms = ['left', 'right'].map(side => {
+      const hand = new T.Group();
+      human.root.getObjectByName(side+'_wrist_yaw_link').add(hand);
+      pin(hand, [.022, 0, 0], [.061, 0, 0], .012, anodized);
+      const pad = new T.Mesh(new T.SphereGeometry(.021, 16, 12), softRubber);
+      pad.position.x = .061;
+      hand.add(pad);
+      hand.visible = false;
+      return hand;
+    });
     this.robotLabels = [
       { key: 'g1', name: 'G1', object: human.root, height: .70 },
       { key: 'go2', name: 'Go2', object: dog.root, height: .31 },
@@ -213,6 +223,9 @@ export class WorkcellView {
   rebuild(layout, sceneId) {
     this.sceneId = sceneId;
     this.layout = layout;
+    const outdoor = sceneId === 'yard';
+    this.scene.background.setHex(outdoor ? 0xc8dfed : 0xdce3e7);
+    this.sun.intensity = outdoor ? 2.6 : 2.0;
     this.packet = null;
     this.stationMarker.visible = false;
     this.go2Detection.update();
@@ -225,10 +238,14 @@ export class WorkcellView {
     for (const item of this.areaLabels) item.element.remove();
     this.geometryLabels = [];
     this.areaLabels = [];
-    this.part = this.spare = this.button = this.door = this.cart = null;
+    this.part = this.spare = this.button = this.door = this.cart = this.lift = null;
     this.switchMeshes = {};
     this.indicatorMeshes = {};
-    this.surfaces.batch(this.plant, layout.shapes);
+    this.upperPlant = new T.Group();
+    this.plant.add(this.upperPlant);
+    const upper = shape => !!layout.upperDecks && shape.p[2] >= 2.62;
+    this.surfaces.batch(this.plant, layout.shapes.filter(shape => !upper(shape)));
+    this.surfaces.batch(this.upperPlant, layout.shapes.filter(upper));
     if (layout.floorMarkings) addFloorMarkings(this.plant, layout.floorMarkings, this.surfaces);
     this.basket.position.x = layout.basketX;
     this.surfaces.batch(this.basket, layout.basket);
@@ -250,6 +267,12 @@ export class WorkcellView {
       detailWorkpiece(this.part, tooling, x, y, z, mat, layout.handleZ);
     }
     if (layout.factory) {
+      if (layout.factory.lift) {
+        this.lift = new T.Group();
+        this.lift.position.set(...layout.factory.lift.position);
+        this.surfaces.batch(this.lift, layout.factory.lift.shapes);
+        this.plant.add(this.lift);
+      }
       this.spare = new T.Group();
       this.plant.add(this.spare);
       const spareType = layout.factory.spareType;
@@ -278,6 +301,12 @@ export class WorkcellView {
       this.sun.position.set(-17, -19, 32);
       this.sun.shadow.radius = 1.65;
       this.controls.minZoom = .14;
+    }
+    if (outdoor) {
+      Object.assign(this.sun.shadow.camera, { left: -17, right: 17, top: 15, bottom: -15, far: 50 });
+      this.sun.shadow.camera.updateProjectionMatrix();
+      this.sun.position.set(-9, -9, 18);
+      this.controls.minZoom = .22;
     }
     if (sceneId === 'pack') {
       this.button = new T.Mesh(new T.CylinderGeometry(.042, .042, .028, 24).rotateZ(Math.PI/2),
@@ -338,19 +367,21 @@ export class WorkcellView {
     this.mode = mode;
     this.host.dataset.cameraView = mode;
     const target = this.controls.target;
+    this.updateFloorVisibility();
     const isFactory = this.sceneId === 'factory';
-    const center = this.sceneId === 'pump' ? 1.62 : isFactory ? 1.12 : .79;
+    const outdoor = this.sceneId === 'yard';
+    const center = this.sceneId === 'pump' ? 1.62 : isFactory ? 1.47 : .79;
     target.set(0, 0, center);
     if (mode === 'plan') {
       this.camera.position.set(0, -.012, 19.5);
-      this.camera.zoom = isFactory ? .285 : 1.08;
+      this.camera.zoom = isFactory ? .285 : outdoor ? .52 : 1.08;
     } else if (mode === 'overview') {
       this.camera.position.set(...(isFactory ? [17, -37, 31] : [7.8, -13.6, 9.4]));
-      this.camera.zoom = isFactory ? .257 : this.sceneId === 'pump' ? .85 : .94;
+      this.camera.zoom = isFactory ? .257 : outdoor ? .49 : this.sceneId === 'pump' ? .85 : .94;
     } else if (mode === 'zone' && this.order) {
       target.set(...this.order.center);
       this.camera.position.copy(target).add(new T.Vector3(7.8, -13.6, 10.7));
-      this.camera.zoom = this.order.id === 'pump' ? .83 : .76;
+      this.camera.zoom = outdoor ? .67 : this.order.id === 'pump' ? .83 : .76;
     } else {
       const key = mode === 'g1' || mode === 'go2' ? mode : null;
       const focus = this.layout?.points[this.packet?.focus];
@@ -363,6 +394,17 @@ export class WorkcellView {
     }
     this.camera.updateProjectionMatrix();
     this.controls.update();
+    this.dirty = true;
+  }
+
+  setMapFloor(floor) {
+    this.mapFloor = floor;
+    this.updateFloorVisibility();
+  }
+
+  updateFloorVisibility() {
+    if (!this.upperPlant) return;
+    this.upperPlant.visible = this.mode !== 'go2' && !(this.mode === 'plan' && this.mapFloor === 'lower');
     this.dirty = true;
   }
 
@@ -419,11 +461,14 @@ export class WorkcellView {
     if (!p || !this.robots) return;
     for (const key of ['g1', 'go2']) {
       const robot = this.robots[key], state = p.actors[key], angles = this.angles[key];
-      move(robot.root, state.pose, amount);
-      state.joints.forEach((q, i) => { angles[i] += (q-angles[i])*amount; });
+      const blend = key === 'g1' && p.ladder ? 1 : amount;
+      move(robot.root, state.pose, blend);
+      state.joints.forEach((q, i) => { angles[i] += (q-angles[i])*blend; });
       if (key === 'g1') robot.apply([0, 0, 0, 0, 0, 0, 0, 0, ...angles]);
       else robot.limbs.forEach((limb, i) => limb.apply(angles.subarray(3*i, 3*i+3)));
     }
+    this.jaws[0].parent.visible = !p.ladder;
+    for (const palm of this.ladderPalms) palm.visible = Boolean(p.ladder);
     this.jaws[0].position.y = .048-p.grip[0];
     this.jaws[1].position.y = -.048+p.grip[1];
     if (this.part && p.part) move(this.part, p.part, amount);
@@ -442,6 +487,7 @@ export class WorkcellView {
       poseVector.set(...p.cart);
       this.cart.position.lerp(poseVector, amount);
     }
+    if (this.lift) this.lift.position.z += (p.liftHeight-this.lift.position.z)*amount;
     if (this.button) {
       const [x, y, z] = this.layout.points.button;
       this.button.position.set(x+p.button, y, z);

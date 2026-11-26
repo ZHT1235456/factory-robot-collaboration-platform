@@ -1,0 +1,4787 @@
+{
+  "description": "Held-out simulations with varied rung spacing, grip stance and contact friction",
+  "collision_audit": {
+    "rate_hz": 500.0,
+    "allowed_penetration_mm": 2.5
+  },
+  "seeds": [
+    81,
+    236,
+    498,
+    575,
+    602,
+    651,
+    729,
+    804,
+    933,
+    1120,
+    1224,
+    1449
+  ],
+  "complete": {
+    "baseline": 12,
+    "trained": 12
+  },
+  "demo": {
+    "passed": true,
+    "gait": "skip",
+    "rounds_completed": 3,
+    "pelvis_rise_m": 0.5981,
+    "rung_spacing_m": 0.2,
+    "seconds": 13.32,
+    "policy_calls": 534,
+    "feet_final_rungs": [
+      4,
+      4
+    ],
+    "final_feet_force_n": [
+      784.88,
+      758.45
+    ],
+    "max_hand_force_n": 211.03,
+    "max_feet_force_n": 2405.27,
+    "max_pad_normal_force_n": 1351.38,
+    "unsupported_frames": 0,
+    "foot_swing_support_loss_frames": 0,
+    "max_ladder_penetration_mm": 0.0,
+    "penetrating_substeps": 0,
+    "worst_collision": null,
+    "transfers": [
+      {
+        "limb": "left_grip",
+        "from_rung": 5,
+        "rung": 6,
+        "rungs_advanced": 1,
+        "support": {
+          "right_grip": 5,
+          "left_toe": 1,
+          "right_toe": 1
+        },
+        "gap_m": 0.007,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 1.6
+      },
+      {
+        "limb": "right_grip",
+        "from_rung": 5,
+        "rung": 6,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 6,
+          "left_toe": 1,
+          "right_toe": 1
+        },
+        "gap_m": 0.006,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 2.58
+      },
+      {
+        "limb": "left_toe",
+        "from_rung": 1,
+        "rung": 2,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 6,
+          "right_grip": 6,
+          "right_toe": 1
+        },
+        "gap_m": 0.005,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 3.92
+      },
+      {
+        "limb": "left_grip",
+        "from_rung": 6,
+        "rung": 7,
+        "rungs_advanced": 1,
+        "support": {
+          "right_grip": 6,
+          "left_toe": 2,
+          "right_toe": 1
+        },
+        "gap_m": 0.007,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 4.94
+      },
+      {
+        "limb": "right_grip",
+        "from_rung": 6,
+        "rung": 7,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 7,
+          "left_toe": 2,
+          "right_toe": 1
+        },
+        "gap_m": 0.005,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 5.92
+      },
+      {
+        "limb": "right_toe",
+        "from_rung": 1,
+        "rung": 3,
+        "rungs_advanced": 2,
+        "support": {
+          "left_grip": 7,
+          "right_grip": 7,
+          "left_toe": 2
+        },
+        "gap_m": 0.002,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 7.7
+      },
+      {
+        "limb": "left_grip",
+        "from_rung": 7,
+        "rung": 8,
+        "rungs_advanced": 1,
+        "support": {
+          "right_grip": 7,
+          "left_toe": 2,
+          "right_toe": 3
+        },
+        "gap_m": 0.0089,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 8.68
+      },
+      {
+        "limb": "right_grip",
+        "from_rung": 7,
+        "rung": 8,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 8,
+          "left_toe": 2,
+          "right_toe": 3
+        },
+        "gap_m": 0.0053,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 9.66
+      },
+      {
+        "limb": "left_toe",
+        "from_rung": 2,
+        "rung": 4,
+        "rungs_advanced": 2,
+        "support": {
+          "left_grip": 8,
+          "right_grip": 8,
+          "right_toe": 3
+        },
+        "gap_m": 0.0058,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 11.36
+      },
+      {
+        "limb": "right_toe",
+        "from_rung": 3,
+        "rung": 4,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 8,
+          "right_grip": 8,
+          "left_toe": 4
+        },
+        "gap_m": 0.0062,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 12.7
+      }
+    ]
+  },
+  "trials": [
+    {
+      "seed": 81,
+      "setup": {
+        "spacing": 0.19794581265769012,
+        "friction": 0.8988838956451025,
+        "reach": -0.07949536557378176,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5928,
+        "rung_spacing_m": 0.19794581265769012,
+        "seconds": 13.28,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          611.41,
+          860.16
+        ],
+        "max_hand_force_n": 227.18,
+        "max_feet_force_n": 2410.38,
+        "max_pad_normal_force_n": 1355.99,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.015,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0126,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0059,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.015,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.01,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0088,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0025,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.009,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0096,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0087,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.66
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5923,
+        "rung_spacing_m": 0.19794581265769012,
+        "seconds": 13.48,
+        "policy_calls": 542,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          825.68,
+          815.19
+        ],
+        "max_hand_force_n": 232.65,
+        "max_feet_force_n": 3041.52,
+        "max_pad_normal_force_n": 1631.1,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0069,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.006,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0061,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.94
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0044,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.92
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0021,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.72
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.74
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.72
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0017,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.52
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0054,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.86
+          }
+        ]
+      }
+    },
+    {
+      "seed": 236,
+      "setup": {
+        "spacing": 0.2042421245706687,
+        "friction": 0.9422007067172823,
+        "reach": -0.07936391256168232,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6102,
+        "rung_spacing_m": 0.2042421245706687,
+        "seconds": 13.4,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          567.61,
+          902.17
+        ],
+        "max_hand_force_n": 191.32,
+        "max_feet_force_n": 2345.59,
+        "max_pad_normal_force_n": 1315.92,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0138,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0117,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0063,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0063,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.98
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0077,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 6.04
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0054,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.76
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0089,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.74
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.011,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.72
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0111,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.42
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0056,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.78
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6107,
+        "rung_spacing_m": 0.2042421245706687,
+        "seconds": 13.32,
+        "policy_calls": 534,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          752.99,
+          870.67
+        ],
+        "max_hand_force_n": 193.08,
+        "max_feet_force_n": 2959.58,
+        "max_pad_normal_force_n": 1590.89,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0066,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0034,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0051,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.92
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0048,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.92
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0016,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.7
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0042,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.68
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.005,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.66
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.36
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0051,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.7
+          }
+        ]
+      }
+    },
+    {
+      "seed": 498,
+      "setup": {
+        "spacing": 0.2034388128685562,
+        "friction": 1.1975915616070698,
+        "reach": -0.09499383950972556,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6063,
+        "rung_spacing_m": 0.2034388128685562,
+        "seconds": 13.2,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          733.22,
+          883.43
+        ],
+        "max_hand_force_n": 164.31,
+        "max_feet_force_n": 2868.36,
+        "max_pad_normal_force_n": 1548.28,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0178,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0125,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0066,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0215,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0099,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0076,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0191,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.56
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0132,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.54
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0062,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.24
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0055,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.58
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6079,
+        "rung_spacing_m": 0.2034388128685562,
+        "seconds": 13.2,
+        "policy_calls": 528,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          767.39,
+          714.04
+        ],
+        "max_hand_force_n": 173.91,
+        "max_feet_force_n": 2389.31,
+        "max_pad_normal_force_n": 1339.53,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.008,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0094,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0076,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0072,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0137,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.56
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0044,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.54
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.24
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0065,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.58
+          }
+        ]
+      }
+    },
+    {
+      "seed": 575,
+      "setup": {
+        "spacing": 0.19238230228033504,
+        "friction": 0.9829088443767232,
+        "reach": -0.08375627558814194,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5761,
+        "rung_spacing_m": 0.19238230228033504,
+        "seconds": 13.28,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          806.21,
+          831.36
+        ],
+        "max_hand_force_n": 250.52,
+        "max_feet_force_n": 2990.7,
+        "max_pad_normal_force_n": 1612.27,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0184,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0124,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0058,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0149,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0127,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0072,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.64
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0096,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.62
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.008,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.32
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0079,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.66
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5756,
+        "rung_spacing_m": 0.19238230228033504,
+        "seconds": 13.36,
+        "policy_calls": 536,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          851.14,
+          749.69
+        ],
+        "max_hand_force_n": 253.24,
+        "max_feet_force_n": 2489.83,
+        "max_pad_normal_force_n": 1393.41,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0078,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0061,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0061,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0058,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0039,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0052,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0017,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.4
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0068,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.74
+          }
+        ]
+      }
+    },
+    {
+      "seed": 602,
+      "setup": {
+        "spacing": 0.19534239305256465,
+        "friction": 1.182684966269796,
+        "reach": -0.08100164982757811,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5856,
+        "rung_spacing_m": 0.19534239305256465,
+        "seconds": 13.28,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          753.84,
+          777.7
+        ],
+        "max_hand_force_n": 238.61,
+        "max_feet_force_n": 2428.93,
+        "max_pad_normal_force_n": 1361.99,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0166,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0125,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.015,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0104,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0088,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.64
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0088,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.62
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0093,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.32
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0087,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.66
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.585,
+        "rung_spacing_m": 0.19534239305256465,
+        "seconds": 13.24,
+        "policy_calls": 530,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          767.76,
+          754.14
+        ],
+        "max_hand_force_n": 242.85,
+        "max_feet_force_n": 2434.4,
+        "max_pad_normal_force_n": 1364.87,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0073,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.006,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0071,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0035,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0054,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.28
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0063,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.62
+          }
+        ]
+      }
+    },
+    {
+      "seed": 651,
+      "setup": {
+        "spacing": 0.19265125893388776,
+        "friction": 1.1748379835694682,
+        "reach": -0.08486876092444333,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5772,
+        "rung_spacing_m": 0.19265125893388776,
+        "seconds": 13.28,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          649.27,
+          834.04
+        ],
+        "max_hand_force_n": 251.02,
+        "max_feet_force_n": 3003.26,
+        "max_pad_normal_force_n": 1621.33,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0186,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0125,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0058,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0152,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.013,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0071,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0086,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.64
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0095,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.62
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0081,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.32
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0077,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.66
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5769,
+        "rung_spacing_m": 0.19265125893388776,
+        "seconds": 13.26,
+        "policy_calls": 531,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          815.15,
+          812.59
+        ],
+        "max_hand_force_n": 250.46,
+        "max_feet_force_n": 2916.59,
+        "max_pad_normal_force_n": 1575.9,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0079,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0061,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0049,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0052,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0055,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.64
+          }
+        ]
+      }
+    },
+    {
+      "seed": 729,
+      "setup": {
+        "spacing": 0.20153135642835718,
+        "friction": 1.190573976203469,
+        "reach": -0.0782546596868701,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6018,
+        "rung_spacing_m": 0.20153135642835718,
+        "seconds": 13.32,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          620.28,
+          923.48
+        ],
+        "max_hand_force_n": 211.56,
+        "max_feet_force_n": 2573.12,
+        "max_pad_normal_force_n": 1409.33,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.09,
+        "penetrating_substeps": 0,
+        "worst_collision": {
+          "time_s": 10.478,
+          "robot": "left_knee_link",
+          "surface": "rung_4"
+        },
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.014,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0122,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0061,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0049,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.98
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0106,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.96
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0114,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.66
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0123,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.66
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0106,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.64
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.01,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.34
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0055,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.7
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6016,
+        "rung_spacing_m": 0.20153135642835718,
+        "seconds": 13.34,
+        "policy_calls": 535,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          823.16,
+          851.06
+        ],
+        "max_hand_force_n": 216.42,
+        "max_feet_force_n": 2725.33,
+        "max_pad_normal_force_n": 1483.55,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0066,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0063,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0028,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0073,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.94
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0048,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.92
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0081,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.64
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0084,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0034,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.36
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0048,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.72
+          }
+        ]
+      }
+    },
+    {
+      "seed": 804,
+      "setup": {
+        "spacing": 0.2045052200422604,
+        "friction": 1.1008885760438119,
+        "reach": -0.07846245647839423,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6108,
+        "rung_spacing_m": 0.2045052200422604,
+        "seconds": 13.34,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          542.39,
+          933.68
+        ],
+        "max_hand_force_n": 185.85,
+        "max_feet_force_n": 2341.83,
+        "max_pad_normal_force_n": 1311.85,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.07,
+        "penetrating_substeps": 0,
+        "worst_collision": {
+          "time_s": 10.48,
+          "robot": "left_knee_link",
+          "surface": "rung_4"
+        },
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0137,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0115,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0059,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.96
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0109,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.98
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0043,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.68
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0088,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.66
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0103,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.64
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0119,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.34
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0077,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.72
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.6113,
+        "rung_spacing_m": 0.2045052200422604,
+        "seconds": 13.28,
+        "policy_calls": 532,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          719.3,
+          870.84
+        ],
+        "max_hand_force_n": 191.18,
+        "max_feet_force_n": 2344.4,
+        "max_pad_normal_force_n": 1316.13,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0066,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0064,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0024,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.94
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0052,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.94
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.94
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0054,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.64
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0069,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0052,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.66
+          }
+        ]
+      }
+    },
+    {
+      "seed": 933,
+      "setup": {
+        "spacing": 0.19205403027211793,
+        "friction": 0.9852144242030378,
+        "reach": -0.08964960937128486,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5748,
+        "rung_spacing_m": 0.19205403027211793,
+        "seconds": 13.28,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          693.72,
+          849.92
+        ],
+        "max_hand_force_n": 243.6,
+        "max_feet_force_n": 3153.89,
+        "max_pad_normal_force_n": 1691.27,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0189,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0136,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0059,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.016,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0143,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0052,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0065,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.64
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0101,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.62
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0077,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.32
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0083,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.66
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5747,
+        "rung_spacing_m": 0.19205403027211793,
+        "seconds": 13.34,
+        "policy_calls": 535,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          815.65,
+          828.26
+        ],
+        "max_hand_force_n": 245.5,
+        "max_feet_force_n": 2599.33,
+        "max_pad_normal_force_n": 1407.29,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0078,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0071,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0065,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0033,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.62
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0049,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.66
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0049,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.64
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0033,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.38
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0065,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.72
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1120,
+      "setup": {
+        "spacing": 0.19563546992330377,
+        "friction": 1.0613516133214314,
+        "reach": -0.08534881710786861,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5851,
+        "rung_spacing_m": 0.19563546992330377,
+        "seconds": 13.26,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          703.74,
+          837.31
+        ],
+        "max_hand_force_n": 232.82,
+        "max_feet_force_n": 2913.11,
+        "max_pad_normal_force_n": 1573.36,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0178,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0125,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.006,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0157,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0113,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0074,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0071,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0096,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0076,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0071,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.64
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5859,
+        "rung_spacing_m": 0.19563546992330377,
+        "seconds": 13.26,
+        "policy_calls": 531,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          799.32,
+          759.61
+        ],
+        "max_hand_force_n": 235.88,
+        "max_feet_force_n": 2469.34,
+        "max_pad_normal_force_n": 1372.62,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0077,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0056,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0065,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.005,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.6
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0039,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0051,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0059,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0063,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.64
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1224,
+      "setup": {
+        "spacing": 0.19635889855505245,
+        "friction": 1.2020973230154472,
+        "reach": -0.07976893203174397,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5885,
+        "rung_spacing_m": 0.19635889855505245,
+        "seconds": 13.26,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          611.88,
+          780.47
+        ],
+        "max_hand_force_n": 238.29,
+        "max_feet_force_n": 2412.28,
+        "max_pad_normal_force_n": 1357.95,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0158,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0126,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.015,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.01,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0094,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0048,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0086,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0094,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0079,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.64
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5885,
+        "rung_spacing_m": 0.19635889855505245,
+        "seconds": 13.22,
+        "policy_calls": 529,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          750.73,
+          727.78
+        ],
+        "max_hand_force_n": 239.07,
+        "max_feet_force_n": 2762.24,
+        "max_pad_normal_force_n": 1499.51,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0071,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0059,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0046,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0061,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0045,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0075,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.58
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0055,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.56
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0069,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.26
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0068,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.6
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1449,
+      "setup": {
+        "spacing": 0.19282360760983708,
+        "friction": 1.1761503323070648,
+        "reach": -0.09187357589543399,
+        "rounds": 3,
+        "gait": "skip"
+      },
+      "baseline": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5763,
+        "rung_spacing_m": 0.19282360760983708,
+        "seconds": 13.26,
+        "policy_calls": 0,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          766.63,
+          834.46
+        ],
+        "max_hand_force_n": 235.42,
+        "max_feet_force_n": 3159.88,
+        "max_pad_normal_force_n": 1697.16,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0191,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0139,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0058,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0166,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0148,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0052,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0025,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.62
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0104,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.6
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0057,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.3
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0082,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.64
+          }
+        ]
+      },
+      "trained": {
+        "passed": true,
+        "gait": "skip",
+        "rounds_completed": 3,
+        "pelvis_rise_m": 0.5771,
+        "rung_spacing_m": 0.19282360760983708,
+        "seconds": 13.24,
+        "policy_calls": 530,
+        "feet_final_rungs": [
+          4,
+          4
+        ],
+        "final_feet_force_n": [
+          833.14,
+          779.3
+        ],
+        "max_hand_force_n": 239.14,
+        "max_feet_force_n": 2506.06,
+        "max_pad_normal_force_n": 1402.52,
+        "unsupported_frames": 0,
+        "foot_swing_support_loss_frames": 0,
+        "max_ladder_penetration_mm": 0.0,
+        "penetrating_substeps": 0,
+        "worst_collision": null,
+        "transfers": [
+          {
+            "limb": "left_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 5,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0079,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 1.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 5,
+            "rung": 6,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "left_toe": 1,
+              "right_toe": 1
+            },
+            "gap_m": 0.0053,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 2.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 1,
+            "rung": 2,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 6,
+              "right_grip": 6,
+              "right_toe": 1
+            },
+            "gap_m": 0.0048,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 3.92
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 6,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0075,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 4.9
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 6,
+            "rung": 7,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 7,
+              "left_toe": 2,
+              "right_toe": 1
+            },
+            "gap_m": 0.0066,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 5.88
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 1,
+            "rung": 3,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 7,
+              "right_grip": 7,
+              "left_toe": 2
+            },
+            "gap_m": 0.0056,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 7.58
+          },
+          {
+            "limb": "left_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "right_grip": 7,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0033,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 8.6
+          },
+          {
+            "limb": "right_grip",
+            "from_rung": 7,
+            "rung": 8,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "left_toe": 2,
+              "right_toe": 3
+            },
+            "gap_m": 0.0047,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 9.58
+          },
+          {
+            "limb": "left_toe",
+            "from_rung": 2,
+            "rung": 4,
+            "rungs_advanced": 2,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "right_toe": 3
+            },
+            "gap_m": 0.0056,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 11.28
+          },
+          {
+            "limb": "right_toe",
+            "from_rung": 3,
+            "rung": 4,
+            "rungs_advanced": 1,
+            "support": {
+              "left_grip": 8,
+              "right_grip": 8,
+              "left_toe": 4
+            },
+            "gap_m": 0.0066,
+            "retried": false,
+            "latched": true,
+            "landed_at_s": 12.62
+          }
+        ]
+      }
+    }
+  ],
+  "stepwise_comparison": {
+    "passed": true,
+    "gait": "stepwise",
+    "rounds_completed": 3,
+    "pelvis_rise_m": 0.5974,
+    "rung_spacing_m": 0.2,
+    "seconds": 22.24,
+    "policy_calls": 918,
+    "feet_final_rungs": [
+      4,
+      4
+    ],
+    "final_feet_force_n": [
+      849.6,
+      802.15
+    ],
+    "max_hand_force_n": 252.5,
+    "max_feet_force_n": 2844.74,
+    "max_pad_normal_force_n": 1548.04,
+    "unsupported_frames": 0,
+    "foot_swing_support_loss_frames": 0,
+    "max_ladder_penetration_mm": 0.0,
+    "penetrating_substeps": 0,
+    "worst_collision": null,
+    "transfers": [
+      {
+        "limb": "left_grip",
+        "from_rung": 5,
+        "rung": 6,
+        "rungs_advanced": 1,
+        "support": {
+          "right_grip": 5,
+          "left_toe": 1,
+          "right_toe": 1
+        },
+        "gap_m": 0.0052,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 2.14
+      },
+      {
+        "limb": "right_grip",
+        "from_rung": 5,
+        "rung": 6,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 6,
+          "left_toe": 1,
+          "right_toe": 1
+        },
+        "gap_m": 0.0027,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 3.74
+      },
+      {
+        "limb": "left_toe",
+        "from_rung": 1,
+        "rung": 2,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 6,
+          "right_grip": 6,
+          "right_toe": 1
+        },
+        "gap_m": 0.0023,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 5.64
+      },
+      {
+        "limb": "right_toe",
+        "from_rung": 1,
+        "rung": 2,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 6,
+          "right_grip": 6,
+          "left_toe": 2
+        },
+        "gap_m": 0.0061,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 7.54
+      },
+      {
+        "limb": "left_grip",
+        "from_rung": 6,
+        "rung": 7,
+        "rungs_advanced": 1,
+        "support": {
+          "right_grip": 6,
+          "left_toe": 2,
+          "right_toe": 2
+        },
+        "gap_m": 0.0074,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 9.14
+      },
+      {
+        "limb": "right_grip",
+        "from_rung": 6,
+        "rung": 7,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 7,
+          "left_toe": 2,
+          "right_toe": 2
+        },
+        "gap_m": 0.0018,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 10.74
+      },
+      {
+        "limb": "left_toe",
+        "from_rung": 2,
+        "rung": 3,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 7,
+          "right_grip": 7,
+          "right_toe": 2
+        },
+        "gap_m": 0.0026,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 12.64
+      },
+      {
+        "limb": "right_toe",
+        "from_rung": 2,
+        "rung": 3,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 7,
+          "right_grip": 7,
+          "left_toe": 3
+        },
+        "gap_m": 0.0067,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 14.54
+      },
+      {
+        "limb": "left_grip",
+        "from_rung": 7,
+        "rung": 8,
+        "rungs_advanced": 1,
+        "support": {
+          "right_grip": 7,
+          "left_toe": 3,
+          "right_toe": 3
+        },
+        "gap_m": 0.0074,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 16.14
+      },
+      {
+        "limb": "right_grip",
+        "from_rung": 7,
+        "rung": 8,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 8,
+          "left_toe": 3,
+          "right_toe": 3
+        },
+        "gap_m": 0.0018,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 17.74
+      },
+      {
+        "limb": "left_toe",
+        "from_rung": 3,
+        "rung": 4,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 8,
+          "right_grip": 8,
+          "right_toe": 3
+        },
+        "gap_m": 0.0026,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 19.64
+      },
+      {
+        "limb": "right_toe",
+        "from_rung": 3,
+        "rung": 4,
+        "rungs_advanced": 1,
+        "support": {
+          "left_grip": 8,
+          "right_grip": 8,
+          "left_toe": 4
+        },
+        "gap_m": 0.006,
+        "retried": false,
+        "latched": true,
+        "landed_at_s": 21.54
+      }
+    ]
+  }
+}
